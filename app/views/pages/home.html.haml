@@ -9,17 +9,14 @@
       %h2.text-center
         %span{class: "glyphicon glyphicon-user"}
       Never miss the opportunity to hang out with a friend in a foreign city again! Co:tripping will alert you to any possible overlaps, even if your trip isn't definite.
+
     .col-md-4
       %h2.text-center
         %span{class: "glyphicon glyphicon-tree-deciduous"}
       Need recommendations? See which of your friends have been to your destination recently and benefit from their trustworth advice.
-      %h5 Sign-in/sign-up below
-      %br
-      %input{type: "text", placeholder: "Email"}
-      %br
-      %input{type: "text", placeholder: "Password"}
-      %br
-      %input{type: "button", value: "Go", class: "btn"}
+      %h5 Sign Up Now
+      = render "signup", user: User.new
+
     .col-md-4
       %h2.text-center
         %span{class: "glyphicon glyphicon-heart"}
