@@ -17,3 +17,6 @@
 
 # Ignore secrets
 /config/secrets.yml
+
+# Ignore Envirnment Variables
+.env

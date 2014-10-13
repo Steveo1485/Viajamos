@@ -16,6 +16,7 @@
       Need recommendations? See which of your friends have been to your destination recently and benefit from their trustworth advice.
       %h5 Sign Up Now
       = render "signup", user: User.new
+      == Or #{link_to("Connect with Facebook", user_omniauth_authorize_path(:facebook))}
       .sign-in.text-center
         Already a member?
         = link_to("Sign in!", new_user_session_path)
