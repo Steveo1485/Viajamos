@@ -4,6 +4,7 @@ class PagesController < ApplicationController
   skip_after_action :verify_policy_scoped
 
   def home
+    redirect_to user_root_path if current_user
   end
 
 end

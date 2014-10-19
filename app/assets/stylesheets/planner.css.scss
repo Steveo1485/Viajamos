@@ -1,0 +1,12 @@
+@import "colors";
+
+body.planner-index {
+  #social-invite {
+    background-color: $yellow;
+    padding-bottom: 10px;
+  }
+
+  #map-canvas {
+    height: 300px;
+  }
+}
