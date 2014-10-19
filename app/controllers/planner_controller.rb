@@ -1,7 +1,7 @@
 class PlannerController < ApplicationController
+  skip_after_action :verify_policy_scoped, only: [:index]
 
   def index
-    redirect_to root_path and return unless current_user
     gon.facebook_app_id = ENV['FACEBOOK_APP_ID']
   end
 
