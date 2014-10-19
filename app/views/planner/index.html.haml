@@ -1,4 +1,10 @@
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}"
 = javascript_include_tag "//platform.linkedin.com/in.js"
+
+.row
+  .col-sm-12
+    #map-canvas
+
 
 %div{style: "background-color: #a5d8db; padding: 10px;"}
   %h4.text-center Travel is more fun with friends!
