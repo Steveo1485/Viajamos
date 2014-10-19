@@ -1,11 +1,17 @@
 = javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}"
 
 .row
-  .col-xs-12
-    #map-canvas
+  #map-canvas
+
+.row#social-invite.text-center
+  %h4 Travel is more fun with friends!
+  = link_to("Share on Facebook", "#", id: "fb-share", class: "btn btn-default btn-sm")
+  = link_to("Share on LinkedIn", "https://www.linkedin.com/cws/share?url=http://www.cotripping.com", id: "linkedin-share", class: "btn btn-default btn-sm", target: "_blank")
 
 .row
-  .col-xs-12#social-invite.text-center
-    %h4 Travel is more fun with friends!
-    = link_to("Share on Facebook", "#", id: "fb-share", class: "btn btn-default btn-sm")
-    = link_to("Share on LinkedIn", "https://www.linkedin.com/cws/share?url=http://www.cotripping.com", id: "linkedin-share", class: "btn btn-default btn-sm", target: "_blank")
+  .col-md-3{style: "background-color: gray;"}
+    Left panel
+  .col-md-7
+    Center panel
+  .col-md-2{style: "background-color: gray;"}
+    Right panel
