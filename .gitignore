@@ -20,3 +20,6 @@
 
 # Ignore Envirnment Variables
 .env
+
+# Ignore DS_Stores
+.DS_Store

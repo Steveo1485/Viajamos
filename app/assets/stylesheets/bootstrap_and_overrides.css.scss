@@ -1,2 +1,21 @@
+@import "colors";
+
+$navbar-border-radius: 0px;
+$navbar-default-link-color: $navbar_default_link_color;
+$navbar-default-link-hover-color: $navbar_default_link_hover_color;
+$navbar-default-link-active-color: $navbar_default_link_active_color;
+$navbar-default-brand-color: $navbar_default_brand_color;
+$navbar-default-link-hover-bg: darken($navbar_background, 10%);
+$navbar-default-link-active-bg: darken($navbar_background, 10%);
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.navbar-default {
+    background-color: $navbar_background;
+    border: none;
+}
+
+.navbar-toggle.collapsed {
+  background-color: $white;
+}
