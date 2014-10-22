@@ -4,6 +4,6 @@ class Friendship < ActiveRecord::Base
   validates :type, inclusion: { in: Proc.new{ Friendship.types } }
 
   def self.types
-    ["friend", "travel-buddy", "travel-buddy-of-travel-buddy", "friend-of-friend"]
+    ["friend", "travel_buddy", "buddy_of_buddy", "friend_of_friend"]
   end
 end
