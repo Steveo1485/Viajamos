@@ -2,8 +2,10 @@ class Friendship < ActiveRecord::Base
   belongs_to :user
 
   validates :type, inclusion: { in: Proc.new{ Friendship.types } }
+  validates :user_id, numericality: true
+  validates :friend_id, numericality: true
 
   def self.types
-    ["friend", "travel_buddy", "buddy_of_buddy", "friend_of_friend"]
+    ["Friend", "TravelBuddy"]
   end
 end
