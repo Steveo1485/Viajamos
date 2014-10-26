@@ -25,6 +25,6 @@ class User < ActiveRecord::Base
   end
 
   def friend_requests
-    Friendship.where(friend_id: self.id)
+    Friendship.where(friend_id: self.id, confirmed: false)
   end
 end

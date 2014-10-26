@@ -1,5 +1,6 @@
 class FriendshipsController < ApplicationController
-  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy]
+  before_filter :fetch_friendship, only: [:accept, :destroy]
+  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy, :accept]
 
   def find_friends
     @friendship = Friendship.new
@@ -23,6 +24,12 @@ class FriendshipsController < ApplicationController
   end
 
   def accept
+    @friendship.confirmed = true
+    if @friendship.save
+      redirect_to planner_path, notice: "Friendship confirmed!"
+    else
+      redirect_to planner_path, notice: "Unable to confirm friendship. Please try again."
+    end
   end
 
   def destroy
@@ -38,5 +45,9 @@ class FriendshipsController < ApplicationController
 
   def friendship_params
     params.require(:friendship).permit(:type, :friend_id)
+  end
+
+  def fetch_friendship
+    @friendship = Friendship.find(params[:id])
   end
 end

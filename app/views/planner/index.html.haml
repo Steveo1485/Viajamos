@@ -23,5 +23,5 @@
       - for request in current_user.friend_requests
         == #{request.user.name} wants to be your #{request.type}.
         .friend-btns
-          = link_to("Approve", "#", class: "btn btn-success btn-sm")
+          = link_to("Approve", accept_friendship_path(request), method: :post, class: "btn btn-success btn-sm")
           = link_to("Ignore", friendship_path(request), method: :delete, class: "btn btn-default btn-sm")

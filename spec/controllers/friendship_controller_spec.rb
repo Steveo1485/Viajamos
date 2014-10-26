@@ -72,4 +72,23 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
+  describe "POST #accept" do
+    before :each do
+      @friendship = FactoryGirl.create(:friendship)
+    end
+
+    it "should accept a friendship when found" do
+      post :accept, id: @friendship.id
+      expect(@friendship.reload.confirmed).to eq(true)
+    end
+
+    it "should create a mirror friendship when accepted" do
+      expect{ post :accept, id: @friendship.id }.to change(Friendship, :count).by(1)
+    end
+
+    it "should not create a mirror friendship if already accepted" do
+      accepted_friendship = FactoryGirl.create(:friendship, confirmed: true)
+      expect{ post :accept, id: accepted_friendship.id }.to_not change(Friendship, :count)
+    end
+  end
 end
