@@ -14,4 +14,9 @@
   .col-md-7
     Center panel
   .col-md-2{style: "background-color: gray;"}
-    Right panel
+    %h3 Friends
+    %hr
+    %h5 Find Friends by Email
+    = form_tag find_friends_path do |f|
+      = email_field_tag(:requested_friend_email, nil, placeholder: "Friend's Email", required: true)
+      = submit_tag("Find Friend")
