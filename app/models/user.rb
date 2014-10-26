@@ -29,10 +29,10 @@ class User < ActiveRecord::Base
   end
 
   def travel_buddies
-    friendships.where(type: "TravelBuddy")
+    friendships.where(type: "TravelBuddy", confirmed: true)
   end
 
   def friends
-    friendships.where(type: "Friend")
+    friendships.where(type: "Friend", confirmed: true)
   end
 end
