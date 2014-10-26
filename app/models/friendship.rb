@@ -16,6 +16,10 @@ class Friendship < ActiveRecord::Base
     confirmed ? "Friendship removed." : "Friend request declined."
   end
 
+  def friend_user
+    User.where(id: friend_id).first
+  end
+
   private
 
   def create_mirror_friendship

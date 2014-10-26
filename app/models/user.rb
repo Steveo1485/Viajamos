@@ -27,4 +27,12 @@ class User < ActiveRecord::Base
   def friend_requests
     Friendship.where(friend_id: self.id, confirmed: false)
   end
+
+  def travel_buddies
+    friendships.where(type: "TravelBuddy")
+  end
+
+  def friends
+    friendships.where(type: "Friend")
+  end
 end

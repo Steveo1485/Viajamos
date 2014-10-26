@@ -1,0 +1,3 @@
+%h5== Travel Buddies (#{current_user.travel_buddies.count})
+- for buddy in current_user.travel_buddies
+  = buddy.friend_user.name
