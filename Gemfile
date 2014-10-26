@@ -29,13 +29,15 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'faker'
+  gem 'shoulda-matchers', require: false
+end
+
 group :development, :test do
   gem 'database_cleaner'
+  gem 'did_you_mean'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0.0'
-end
-
-group :test do
-  gem 'faker'
 end
