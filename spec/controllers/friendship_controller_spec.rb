@@ -51,4 +51,25 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
+  describe "DELETE #destroy" do
+    before :each do
+      @friendship = FactoryGirl.create(:friendship)
+    end
+
+    it "should destroy a friendship when found" do
+      expect{ delete :destroy, id: @friendship.id }.to change(Friendship, :count).by(-1)
+    end
+
+    it "should set the correct flash message for declining friendship" do
+      delete :destroy, id: @friendship.id
+      expect(flash[:notice]).to eq("Friend request declined.")
+    end
+
+    it "should set the correct flash message for removing friendship" do
+      confirmed_friendship = FactoryGirl.create(:friendship, confirmed: true)
+      delete :destroy, id: confirmed_friendship.id
+      expect(flash[:notice]).to eq("Friendship removed.")
+    end
+  end
+
 end

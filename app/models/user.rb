@@ -19,4 +19,12 @@ class User < ActiveRecord::Base
   def name
     (first_name or last_name) ? [first_name, last_name].join(" ") : email
   end
+
+  def pending_friend_requests?
+    friend_requests.count > 0
+  end
+
+  def friend_requests
+    Friendship.where(friend_id: self.id)
+  end
 end

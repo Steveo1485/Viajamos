@@ -10,13 +10,18 @@
 
 .row
   .col-md-3{style: "background-color: gray;"}
-    Left panel
+    = current_user.name
   .col-md-7
     Center panel
   .col-md-2{style: "background-color: gray;"}
     %h3 Friends
-    %hr
-    %h5 Find Friends by Email
-    = form_tag find_friends_path do |f|
-      = email_field_tag(:requested_friend_email, nil, placeholder: "Friend's Email", required: true)
-      = submit_tag("Find Friend")
+    = render "add_friend"
+
+
+    - if current_user.pending_friend_requests?
+      %h5 Awaiting Approval
+      - for request in current_user.friend_requests
+        == #{request.user.name} wants to be your #{request.type}.
+        .friend-btns
+          = link_to("Approve", "#", class: "btn btn-success btn-sm")
+          = link_to("Ignore", friendship_path(request), method: :delete, class: "btn btn-default btn-sm")

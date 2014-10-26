@@ -9,4 +9,8 @@ class Friendship < ActiveRecord::Base
   def self.types
     ["Friend", "TravelBuddy"]
   end
+
+  def destroy_flash
+    confirmed ? "Friendship removed." : "Friend request declined."
+  end
 end

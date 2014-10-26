@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-  skip_after_action :verify_authorized, only: [:find_friends, :create]
+  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy]
 
   def find_friends
     @friendship = Friendship.new
@@ -19,6 +19,18 @@ class FriendshipsController < ApplicationController
     else
       @requested_user = User.find(friendship_params[:friend_id])
       render :find_friends
+    end
+  end
+
+  def accept
+  end
+
+  def destroy
+    @friendship = Friendship.find(params[:id])
+    if @friendship.destroy
+      redirect_to planner_path, notice: @friendship.destroy_flash
+    else
+      redirect_to planner_path, notice: "Unable to remove friend request. Please try again."
     end
   end
 

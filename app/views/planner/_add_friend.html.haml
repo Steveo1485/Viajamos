@@ -1,0 +1,6 @@
+%h5 Find Friends by Email
+= form_tag find_friends_path do |f|
+  .form-group
+    = email_field_tag(:requested_friend_email, nil, placeholder: "Friend's Email", required: true, class: "form-control")
+  = submit_tag("Find Friend", class: "btn btn-primary btn-sm")
+

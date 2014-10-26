@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
-  resources :friendships, only: [:create]
+  resources :friendships, only: [:create, :destroy]
   resources :users, only: [:show]
 
   post 'find_friends' => 'friendships#find_friends', as: :find_friends
