@@ -4,7 +4,11 @@ class FriendshipsController < ApplicationController
   def find_friends
     @friendship = Friendship.new
     @requested_user = User.where(email: params[:requested_friend_email]).first
-    redirect_to planner_path, notice: "Sorry, no user was found with that email." unless @requested_user
+    unless @requested_user
+      flash[:notice] = "Sorry, no user was found with that email."
+      redirect_to planner_path and return
+    end
+    redirect_to planner_path, notice: "Sorry, you can't add yourself as a friend." if @requested_user.email == current_user.email
   end
 
   def create

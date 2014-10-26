@@ -4,6 +4,7 @@ class Friendship < ActiveRecord::Base
   validates :type, inclusion: { in: Proc.new{ Friendship.types } }
   validates :user_id, numericality: true
   validates :friend_id, numericality: true
+  validates :user_id, uniqueness: { scope: :friend_id }
 
   def self.types
     ["Friend", "TravelBuddy"]
