@@ -1,5 +1,5 @@
-- if current_user.pending_friend_requests?
-  %h5 Awaiting Approval
+- if current_user.friend_requests.any?
+  %h5== Awaiting Approval (#{current_user.friend_requests.count})
   - for request in current_user.friend_requests
     == #{request.user.name} wants to be your #{request.type}.
     .friend-btns

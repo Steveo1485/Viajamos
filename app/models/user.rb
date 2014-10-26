@@ -20,8 +20,8 @@ class User < ActiveRecord::Base
     (first_name or last_name) ? [first_name, last_name].join(" ") : email
   end
 
-  def pending_friend_requests?
-    friend_requests.count > 0
+  def outstanding_friend_requests
+    friendships.where(confirmed: false)
   end
 
   def friend_requests

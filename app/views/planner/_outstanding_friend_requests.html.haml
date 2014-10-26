@@ -1,0 +1,4 @@
+- if current_user.outstanding_friend_requests.any?
+  %h5== Pending Friend Requests (#{current_user.outstanding_friend_requests.count})
+  - for request in current_user.outstanding_friend_requests
+    == Asked #{request.user.name} to be your #{request.type}.
