@@ -77,7 +77,7 @@ RSpec.describe User, :type => :model do
     end
   end
 
-  context "#friend_of_friends_with?" do
+  context "#friend_of_friend_with?" do
     pending
   end
 

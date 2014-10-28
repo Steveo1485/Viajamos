@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
     travel_buddies.include?(user)
   end
 
-  def friend_of_friends_with?(user)
+  def friend_of_friend_with?(user)
     friends.each do |friend|
       if friend.friends.include?(user)
         return true
