@@ -1,4 +1,4 @@
 - if current_user.outstanding_friend_requests.any?
   %h5== Pending Friend Requests (#{current_user.outstanding_friend_requests.count})
   - for request in current_user.outstanding_friend_requests
-    == Asked #{request.friend_user.name} to be your #{request.type}.
+    == Asked #{link_to(request.friend_user.name, user_path(request.friend_user))} to be your #{request.type}
