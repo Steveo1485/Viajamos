@@ -78,11 +78,35 @@ RSpec.describe User, :type => :model do
   end
 
   context "#friend_of_friend_with?" do
-    pending
+    before :each do
+      FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: @friend_user.id, confirmed: true)
+      @fof_user = FactoryGirl.create(:user)
+    end
+
+    it "should return true if user is friend of a friend with passed user" do
+      FactoryGirl.create(:friendship, type: "Friend", user: @friend_user, friend_id: @fof_user.id, confirmed: true)
+      expect(@user.friend_of_friend_with?(@fof_user)).to eq(true)
+    end
+
+    it "should return false if user is not a friend of a friend with passed user" do
+      expect(@user.friend_of_friend_with?(@fof_user)).to eq(false)
+    end
   end
 
   context "#travel_buddy_of_travel_buddy_with?" do
-    pending
+    before :each do
+      FactoryGirl.create(:friendship, user: @user, friend_id: @friend_user.id, confirmed: true)
+      @tbotb_user = FactoryGirl.create(:user)
+    end
+
+    it "should return true if user is friend of a friend with passed user" do
+      FactoryGirl.create(:friendship, user: @friend_user, friend_id: @tbotb_user.id, confirmed: true)
+      expect(@user.travel_buddy_of_travel_buddy_with?(@tbotb_user)).to eq(true)
+    end
+
+    it "should return false if user is not a friend of a friend with passed user" do
+      expect(@user.travel_buddy_of_travel_buddy_with?(@tbotb_user)).to eq(false)
+    end
   end
 
 end
