@@ -1,1 +1,7 @@
-Placeholder for user public profile page
+%div Public Content
+
+- if current_user.friends_with?(@user)
+  %div Content for Friends
+
+- if current_user.travel_buddies_with?(@user)
+  %div Content for Travel Buddies

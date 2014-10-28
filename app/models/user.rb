@@ -29,10 +29,36 @@ class User < ActiveRecord::Base
   end
 
   def travel_buddies
-    friendships.where(type: "TravelBuddy", confirmed: true)
+    User.where(id: friendships.where(type: "TravelBuddy", confirmed: true).pluck(:friend_id))
   end
 
   def friends
-    friendships.where(type: "Friend", confirmed: true)
+    User.where(id: friendships.where(type: "Friend", confirmed: true).pluck(:friend_id))
+  end
+
+  def friends_with?(user)
+    friends.include?(user) || travel_buddies.include?(user)
+  end
+
+  def travel_buddies_with?(user)
+    travel_buddies.include?(user)
+  end
+
+  def friend_of_friends_with?(user_id)
+    friends.each do |friend|
+      if friend.friend_user.friends.pluck(:friend_id).include?(user_id)
+        return true
+      end
+    end
+    false
+  end
+
+  def travel_buddy_of_travel_buddy_with?(user_id)
+    travel_buddies.each do |travel_buddy|
+      if travel_buddy.friend_user.travel_buddies.pluck(:friend_id).include?(friend_id)
+        return true
+      end
+    end
+    false
   end
 end
