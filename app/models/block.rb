@@ -1,0 +1,2 @@
+class Block < Friendship
+end
