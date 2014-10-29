@@ -10,6 +10,7 @@ gem 'haml'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem "koala", "~> 1.10.0rc"
 gem 'mysql2'
 gem 'omniauth-facebook'
 gem 'pundit'
