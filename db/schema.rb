@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141026055102) do
+ActiveRecord::Schema.define(version: 20141029045232) do
 
   create_table "friendships", force: true do |t|
     t.integer  "user_id",                    null: false
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20141026055102) do
     t.string   "last_name"
     t.string   "provider"
     t.string   "uid"
+    t.string   "oauth_token"
+    t.string   "oauth_token_expires_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
