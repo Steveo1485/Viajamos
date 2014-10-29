@@ -52,15 +52,12 @@ class FriendshipsController < ApplicationController
   end
 
   def block
-    @friendship.transaction do
-      @friendship.type = "Blocked"
-      @friendship.save!
-
-      reverse_friendship = @friendship.reverse_friendship
-      reverse_friendship.type = "Blocked"
-      reverse_friendship.save!
+    @friendship.type = "Blocked"
+    if @friendship.save
+      redirect_to planner_path, notice: "User has been blocked."
+    else
+      redirect_to planner_path, notice: "Sorry, we weren't able to process that. Please try again."
     end
-    redirect_to planner_path, notice: "User has been blocked."
   end
 
   private

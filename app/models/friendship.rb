@@ -7,6 +7,7 @@ class Friendship < ActiveRecord::Base
   validates :user_id, uniqueness: { scope: :friend_id }
 
   after_update :create_reverse_friendship, if: Proc.new { |friendship| friendship.confirmed_changed? && friendship.confirmed }
+  after_update :block_reverse_friendship, if: Proc.new{ |friendship| friendship.type_changed? && friendship.type == "Blocked" }
 
   def self.types
     ["Friend", "TravelBuddy", "Blocked"]
@@ -28,5 +29,9 @@ class Friendship < ActiveRecord::Base
 
   def create_reverse_friendship
     Friendship.create(user_id: self.friend_id, friend_id: self.user_id, type: self.type, confirmed: true)
+  end
+
+  def block_reverse_friendship
+    reverse_friendship.update(type: "Blocked")
   end
 end
