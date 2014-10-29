@@ -91,4 +91,17 @@ RSpec.describe FriendshipsController, :type => :controller do
       expect{ post :accept, id: accepted_friendship.id }.to_not change(Friendship, :count)
     end
   end
+
+  describe "PATCH #block" do
+    before :each do
+      @friendship = FactoryGirl.create(:friendship, confirmed: true)
+      @reverse_friendship = FactoryGirl.create(:friendship, user_id: @friendship.friend_id, friend_id: @friendship.user_id, confirmed: true)
+    end
+
+    it "should update Friendship type to blocked" do
+      patch :block, id: @friendship.id
+      expect(@friendship.reload.type).to eq("Blocked")
+      expect(@reverse_friendship.reload.type).to eq("Blocked")
+    end
+  end
 end

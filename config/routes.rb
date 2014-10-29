@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :friendships, only: [:create, :destroy] do
     post 'accept', on: :member
+    patch 'block', on: :member
   end
   resources :users, only: [:show]
 

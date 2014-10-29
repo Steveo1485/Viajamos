@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
-  before_filter :fetch_friendship, only: [:accept, :destroy]
-  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy, :accept]
+  before_filter :fetch_friendship, only: [:accept, :destroy, :block]
+  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy, :accept, :block]
 
   def find_friends
     @friendship = Friendship.new
@@ -49,6 +49,18 @@ class FriendshipsController < ApplicationController
     else
       redirect_to planner_path, notice: "Unable to remove friend request. Please try again."
     end
+  end
+
+  def block
+    @friendship.transaction do
+      @friendship.type = "Blocked"
+      @friendship.save!
+
+      reverse_friendship = @friendship.reverse_friendship
+      reverse_friendship.type = "Blocked"
+      reverse_friendship.save!
+    end
+    redirect_to planner_path, notice: "User has been blocked."
   end
 
   private

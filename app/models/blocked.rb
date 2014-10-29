@@ -1,0 +1,2 @@
+class Blocked < Friendship
+end
