@@ -6,10 +6,10 @@ class Friendship < ActiveRecord::Base
   validates :friend_id, numericality: true
   validates :user_id, uniqueness: { scope: :friend_id }
 
-  after_update :create_mirror_friendship, if: Proc.new { |friendship| friendship.confirmed_changed? && friendship.confirmed }
+  after_update :create_reverse_friendship, if: Proc.new { |friendship| friendship.confirmed_changed? && friendship.confirmed }
 
   def self.types
-    ["Friend", "TravelBuddy"]
+    ["Friend", "TravelBuddy", "Block"]
   end
 
   def destroy_flash
@@ -20,9 +20,13 @@ class Friendship < ActiveRecord::Base
     User.where(id: friend_id).first
   end
 
+  def reverse_friendship
+    Friendship.where(user_id: self.friend_id, friend_id: self.user_id).first
+  end
+
   private
 
-  def create_mirror_friendship
+  def create_reverse_friendship
     Friendship.create(user_id: self.friend_id, friend_id: self.user_id, type: self.type, confirmed: true)
   end
 end
