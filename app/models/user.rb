@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :friendships, dependent: :destroy
 
+  after_create :check_facebook_friends, if: Proc.new{ |user| user.oauth_token.present? }
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -14,7 +16,7 @@ class User < ActiveRecord::Base
       user.first_name = auth.info.first_name
       user.last_name = auth.info.last_name
       user.oauth_token = auth.credentials.token
-      user.oath_token_expires_at = auth.credentials.expires_at
+      user.oauth_token_expires_at = auth.credentials.expires_at
     end
   end
 
@@ -63,4 +65,16 @@ class User < ActiveRecord::Base
     end
     false
   end
+
+  private
+
+  def check_facebook_friends
+    graph = Koala::Facebook::API.new(self.oauth_token, ENV['FACEBOOK_APP_SECRET'])
+    friends = graph.get_connections("me", "friends")
+    friends.each do |friend|
+      # BUILD FACEBOOK ALERT
+    end
+  end
+  handle_asynchronously :check_facebook_friends
+
 end
