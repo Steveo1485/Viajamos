@@ -10,7 +10,7 @@ class Friendship < ActiveRecord::Base
   after_update :block_reverse_friendship, if: Proc.new{ |friendship| friendship.type_changed? && friendship.type == "Blocked" }
 
   def self.types
-    ["Friend", "TravelBuddy", "Blocked"]
+    ["Friend", "TravelBuddy", "Blocked", "FacebookConnection"]
   end
 
   def destroy_flash
