@@ -1,3 +1,7 @@
-%h5== Friends (#{current_user.friends.count})
+.friend-title= "Friends (#{current_user.friends.count})"
 - for friend in current_user.friends
-  = link_to(friend.name, user_path(friend))
+  .friend-panel-info
+    = link_to(friend.name, user_path(friend))
+
+  - unless current_user.travel_buddies.last == buddy
+    %hr

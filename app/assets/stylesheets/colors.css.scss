@@ -1,9 +1,13 @@
-$blue: #1686d5;
+$blue: #1786d5;
+$red: #ef342d;
+$light_red: #D96459;
+$yellow: #F9F2AE;
+
+
 $white: #fff;
 $gray: #cacdd6;
-$red: #eb3332;
-$yellow: #ffe270;
 
+// Bootstrap
 $brand_primary: $blue;
 
 $navbar_background: $blue;
@@ -11,3 +15,6 @@ $navbar_default_link_color: $gray;
 $navbar_default_link_hover_color: $white;
 $navbar_default_link_active_color: $white;
 $navbar_default_brand_color: $white;
+
+// Custom
+$friend_title_bg: $light_red;

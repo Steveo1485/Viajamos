@@ -6,6 +6,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'delayed_job_active_record'
 gem 'devise'
+gem "font-awesome-rails"
 gem 'gon'
 gem 'haml'
 gem 'haml-rails'

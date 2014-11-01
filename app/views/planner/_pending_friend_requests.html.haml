@@ -1,7 +1,11 @@
 - if current_user.friend_requests.any?
-  %h5== Awaiting Approval (#{current_user.friend_requests.count})
+  .friend-title= "Awaiting approval (#{current_user.friend_requests.count})"
   - for request in current_user.friend_requests
-    == #{link_to(request.user.name, user_path(request.user))} wants to be your #{request.type}
-    .friend-btns
-      = link_to("Approve", accept_friendship_path(request), method: :post, class: "btn btn-success btn-sm")
-      = link_to("Ignore", friendship_path(request), method: :delete, class: "btn btn-default btn-sm")
+    .friend-panel-info
+      == #{link_to(request.user.name, user_path(request.user))} wants to be your #{request.type}
+      .friend-btns
+        = link_to("Approve", accept_friendship_path(request), method: :post, class: "btn btn-success btn-xs")
+        = link_to("Ignore", friendship_path(request), method: :delete, class: "btn btn-default btn-xs")
+
+    - unless current_user.friend_requests.last == request
+      %hr
