@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141030044713) do
+ActiveRecord::Schema.define(version: 20141102062653) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 20141030044713) do
     t.datetime "updated_at"
   end
 
+  create_table "locations", force: true do |t|
+    t.string   "city"
+    t.string   "state_code"
+    t.string   "country_code"
+    t.string   "longitude"
+    t.string   "latitude"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -57,9 +67,11 @@ ActiveRecord::Schema.define(version: 20141030044713) do
     t.string   "uid"
     t.string   "oauth_token"
     t.string   "oauth_token_expires_at"
+    t.integer  "home_location_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["home_location_id"], name: "index_users_on_home_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
