@@ -3,5 +3,5 @@
   .friend-panel-info
     = link_to(friend.name, user_path(friend))
 
-  - unless current_user.travel_buddies.last == buddy
+  - unless current_user.travel_buddies.last == friend
     %hr
