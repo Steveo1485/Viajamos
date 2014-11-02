@@ -9,6 +9,11 @@
 /     = link_to("Share on Facebook", "#", id: "fb-share", class: "btn btn-default btn-sm")
 /     = link_to("Share on LinkedIn", "https://www.linkedin.com/cws/share?url=http://www.cotripping.com", id: "linkedin-share", class: "btn btn-default btn-sm", target: "_blank")
 
+.row
+  .col-md-12.flash-messages
+    - flash.each do |name, msg|
+      = content_tag(:div, msg)
+
 .row#dashboard-content
   .col-md-3{style: "background-color: gray;"}
     = current_user.name
