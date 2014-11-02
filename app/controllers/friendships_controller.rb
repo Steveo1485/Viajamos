@@ -1,9 +1,10 @@
 class FriendshipsController < ApplicationController
   before_filter :fetch_friendship, only: [:accept, :destroy, :block, :facebook_request]
-  skip_after_action :verify_authorized, only: [:find_friends, :create, :destroy, :accept, :block, :facebook_request]
 
   def find_friends
     @friendship = Friendship.new
+    authorize(@friendship)
+
     @requested_user = User.where(email: params[:requested_friend_email]).first
 
     unless @requested_user
@@ -25,6 +26,8 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(friendship_params)
     @friendship.user_id = current_user.id
+    authorize(@friendship)
+
     if @friendship.save
       redirect_to planner_path, notice: "Friends request sent!"
     else
@@ -34,6 +37,7 @@ class FriendshipsController < ApplicationController
   end
 
   def accept
+    authorize(@friendship)
     @friendship.confirmed = true
     if @friendship.save
       redirect_to planner_path, notice: "Friendship confirmed!"
@@ -43,15 +47,17 @@ class FriendshipsController < ApplicationController
   end
 
   def destroy
+    authorize(@friendship)
     @friendship = Friendship.find(params[:id])
     if @friendship.destroy
-      redirect_to planner_path, notice: @friendship.destroy_flash
+      redirect_to planner_path, notice: "Friendship successfully removed."
     else
       redirect_to planner_path, notice: "Unable to remove friend request. Please try again."
     end
   end
 
   def block
+    authorize(@friendship)
     @friendship.type = "Blocked"
     if @friendship.save
       redirect_to planner_path, notice: "User has been blocked."
@@ -61,6 +67,7 @@ class FriendshipsController < ApplicationController
   end
 
   def facebook_request
+    authorize(@friendship)
     if @friendship.update(type: friendship_params[:type])
       @friendship.reverse_friendship.destroy if @friendship.reverse_friendship
       redirect_to planner_path, notice: "Friend request sent!"

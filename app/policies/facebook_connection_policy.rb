@@ -1,0 +1,2 @@
+class FacebookConnectionPolicy < FriendshipPolicy
+end

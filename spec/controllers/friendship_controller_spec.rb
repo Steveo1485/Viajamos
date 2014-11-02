@@ -53,28 +53,17 @@ RSpec.describe FriendshipsController, :type => :controller do
 
   describe "DELETE #destroy" do
     before :each do
-      @friendship = FactoryGirl.create(:friendship)
+      @friendship = FactoryGirl.create(:friendship, user: @user)
     end
 
     it "should destroy a friendship when found" do
       expect{ delete :destroy, id: @friendship.id }.to change(Friendship, :count).by(-1)
     end
-
-    it "should set the correct flash message for declining friendship" do
-      delete :destroy, id: @friendship.id
-      expect(flash[:notice]).to eq("Friend request declined.")
-    end
-
-    it "should set the correct flash message for removing friendship" do
-      confirmed_friendship = FactoryGirl.create(:friendship, confirmed: true)
-      delete :destroy, id: confirmed_friendship.id
-      expect(flash[:notice]).to eq("Friendship removed.")
-    end
   end
 
   describe "POST #accept" do
     before :each do
-      @friendship = FactoryGirl.create(:friendship)
+      @friendship = FactoryGirl.create(:friendship, friend_id: @user.id)
     end
 
     it "should accept a friendship when found" do
@@ -94,8 +83,8 @@ RSpec.describe FriendshipsController, :type => :controller do
 
   describe "PATCH #block" do
     before :each do
-      @friendship = FactoryGirl.create(:friendship, confirmed: true)
-      @reverse_friendship = FactoryGirl.create(:friendship, user_id: @friendship.friend_id, friend_id: @friendship.user_id, confirmed: true)
+      @friendship = FactoryGirl.create(:friendship, confirmed: true, user: @user, friend_id: @friend.id)
+      @reverse_friendship = FactoryGirl.create(:friendship, user_id: @friend.id, friend_id: @user.id, confirmed: true)
     end
 
     it "should update Friendship type to blocked" do
@@ -107,11 +96,11 @@ RSpec.describe FriendshipsController, :type => :controller do
 
   describe "PATCH #facebook_request" do
     before :each do
-      @fb_connection = FactoryGirl.create(:friendship, type: "FacebookConnection")
+      @fb_connection = FactoryGirl.create(:friendship, type: "FacebookConnection", user: @user, friend_id: @friend.id)
       @fb_connection_reverse = FactoryGirl.create(:friendship, 
                                                   type: "FacebookConnection", 
-                                                  user_id: @fb_connection.friend_id,
-                                                  friend_id: @fb_connection.user_id)
+                                                  user_id: @friend.id,
+                                                  friend_id: @user.id)
     end
 
     it "should update type of Friendship to specified type" do

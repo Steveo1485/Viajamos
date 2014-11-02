@@ -17,10 +17,6 @@ class Friendship < ActiveRecord::Base
     ["Friend", "TravelBuddy"]
   end
 
-  def destroy_flash
-    confirmed ? "Friendship removed." : "Friend request declined."
-  end
-
   def friend_user
     User.where(id: friend_id).first
   end
