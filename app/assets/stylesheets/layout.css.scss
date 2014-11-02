@@ -20,10 +20,16 @@ h1, h2, h3, h4, h5, h6 {
   background: image-url('seamless_paper_texture.png') repeat
 }
 
-span.header-icon {
+.flash-messages {
+  text-align: center;
+  font-style: italic;
+  padding: 10px 0px;
+}
+
+.header-icon {
   color: $red;
 }
 
-span.header-title {
+.header-title {
   color: $blue;
 }

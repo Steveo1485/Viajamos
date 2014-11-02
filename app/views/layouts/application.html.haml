@@ -17,6 +17,8 @@
   %body{class: "#{params[:controller]}-#{params[:action]}"}
     = render "layouts/header"
     #content.container-fluid
-      - flash.each do |name, msg|
-        = content_tag(:div, msg)
+      - unless request.path == user_root_path
+        .flash-messages
+          - flash.each do |name, msg|
+            = content_tag(:div, msg)
       = yield
