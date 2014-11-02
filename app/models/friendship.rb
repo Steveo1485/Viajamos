@@ -13,6 +13,10 @@ class Friendship < ActiveRecord::Base
     ["Friend", "TravelBuddy", "Blocked", "FacebookConnection"]
   end
 
+  def self.selectable_types
+    ["Friend", "TravelBuddy"]
+  end
+
   def destroy_flash
     confirmed ? "Friendship removed." : "Friend request declined."
   end
