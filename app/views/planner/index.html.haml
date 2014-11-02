@@ -15,8 +15,20 @@
       = content_tag(:div, msg)
 
 .row#dashboard-content
-  .col-md-3{style: "background-color: gray;"}
-    = current_user.name
+  .col-md-3
+
+    .well#user-panel
+      %h3.header-title= current_user.name
+
+    .well#current-location
+      %h3
+        %span.header-icon= fa_icon("map-marker")
+        %span.header-title Current Location
+
+    .well#add-trip
+      %h3
+        %span.header-icon= fa_icon("plane")
+        %span.header-title Add a trip
 
   .col-md-7
     Center panel
