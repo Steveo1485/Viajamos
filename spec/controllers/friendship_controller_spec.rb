@@ -104,4 +104,24 @@ RSpec.describe FriendshipsController, :type => :controller do
       expect(@reverse_friendship.reload.type).to eq("Blocked")
     end
   end
+
+  describe "PATCH #facebook_request" do
+    before :each do
+      @fb_connection = FactoryGirl.create(:friendship, type: "FacebookConnection")
+      @fb_connection_reverse = FactoryGirl.create(:friendship, 
+                                                  type: "FacebookConnection", 
+                                                  user_id: @fb_connection.friend_id,
+                                                  friend_id: @fb_connection.user_id)
+    end
+
+    it "should update type of Friendship to specified type" do
+      patch :facebook_request, id: @fb_connection.id, friendship: {type: "Friend"}
+      expect(@fb_connection.reload.type).to eq("Friend")
+    end
+
+
+    it "should destroy reverse FacebookConnection" do
+      expect{ patch :facebook_request, id: @fb_connection.id, friendship: {type: "Friend"} }.to change(Friendship, :count).by(-1)
+    end
+  end
 end

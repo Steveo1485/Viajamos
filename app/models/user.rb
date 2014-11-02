@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook]
 
   has_many :friendships, dependent: :destroy
+  has_many :facebook_connections, dependent: :destroy
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -23,11 +24,11 @@ class User < ActiveRecord::Base
   end
 
   def outstanding_friend_requests
-    friendships.where(confirmed: false)
+    friendships.where(type: ["Friend", "TravelBuddy"], confirmed: false)
   end
 
   def friend_requests
-    Friendship.where(friend_id: self.id, confirmed: false)
+    Friendship.where(friend_id: self.id, type: ["Friend", "TravelBuddy"], confirmed: false)
   end
 
   def travel_buddies

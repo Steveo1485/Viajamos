@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create, :destroy] do
     post 'accept', on: :member
     patch 'block', on: :member
+    patch 'facebook_request', on: :member
   end
   resources :users, only: [:show]
 

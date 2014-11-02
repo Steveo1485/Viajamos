@@ -6,7 +6,10 @@ class FacebookConnection < Friendship
     friends.each do |friend|
       uid = friend["id"]
       found_user = User.where(uid: uid).first
-      FacebookConnection.create(user_id: user.id, friend_id: found_user.id) if found_user
+      if found_user
+        FacebookConnection.create(user_id: user.id, friend_id: found_user.id)
+        FacebookConnection.create(user_id: found_user.id, friend_id: user.id)
+      end
     end
   end
 end
