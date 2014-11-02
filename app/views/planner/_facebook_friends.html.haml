@@ -1,0 +1,18 @@
+- if current_user.facebook_connections.any?
+  .friend-title= "Facebook Friends (#{current_user.facebook_connections.count})"
+  Connect with your Facebook friends:
+  .friend-panel-info
+    - for connection in current_user.facebook_connections
+      .friend-name= link_to(connection.friend_user.name, user_path(connection.friend_user))
+
+      .friend-btns
+        .dropdown.facebook-options{style: "margin: 0 auto;"}
+          %button{class: "btn btn-success btn-xs", type: "button", id: "connection-#{connection.id}", data: {toggle: "dropdown"}}
+            Friendship Options
+            %span{class: "caret"}
+
+          %ul.dropdown-menu{role: "menu", aria: {labelledby: "connection-#{connection.id}"}}
+            %li= link_to("Friend", facebook_request_friendship_path(connection, friendship: {type: "Friend"}), method: :patch)
+            %li= link_to("Travel Buddy", facebook_request_friendship_path(connection, friendship: {type: "TravelBuddy"}), method: :patch)
+
+        = link_to("Ignore", friendship_path(connection), method: :delete, class: "btn btn-default btn-xs")

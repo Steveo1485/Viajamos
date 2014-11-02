@@ -1,0 +1,17 @@
+%h2 Add Friend
+
+== Before we notify #{@requested_user.name}, please confirm the friendship level you would like to request:
+
+= form_for @friendship do |f|
+  = render "shared/form_errors", object: @friendship
+
+  .form-group
+    = f.select(:type, options_for_select(Friendship.selectable_types), {prompt: "Friendship Level"}, class: "form-control")
+    %p.help-block
+      Friends can see where you are traveling, but not when.
+      Travel Buddies can see where and when you are traveling.
+
+  = f.hidden_field(:friend_id, value: @requested_user.id)
+
+  = f.submit("Send Friend Request", class: "btn btn-primary")
+

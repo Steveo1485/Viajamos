@@ -4,12 +4,15 @@ gem 'rails', '4.1.0'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'delayed_job_active_record'
 gem 'devise'
+gem "font-awesome-rails"
 gem 'gon'
 gem 'haml'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem "koala", "~> 1.10.0rc"
 gem 'mysql2'
 gem 'omniauth-facebook'
 gem 'pundit'
@@ -29,13 +32,15 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'faker'
+  gem 'shoulda-matchers', require: false
+end
+
 group :development, :test do
   gem 'database_cleaner'
+  gem 'did_you_mean'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0.0'
-end
-
-group :test do
-  gem 'faker'
 end

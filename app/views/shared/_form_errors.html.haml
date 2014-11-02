@@ -1,0 +1,6 @@
+- if defined?(object) and object.errors.any?
+  .errors
+    %h3== Please check the following #{"error".pluralize(object.errors.count)}.
+    %ul
+      - object.errors.full_messages.each do |message|
+        %li= message

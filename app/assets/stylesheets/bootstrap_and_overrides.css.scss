@@ -13,6 +13,12 @@ $navbar-default-brand-color: $navbar_default_brand_color;
 $navbar-default-link-hover-bg: darken($navbar_background, 10%);
 $navbar-default-link-active-bg: darken($navbar_background, 10%);
 
+// Well Overrides
+$well-bg: rgba(255, 255, 255, 0.4);
+
+// Button Overrides
+$btn-font-weight: bold;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -23,4 +29,8 @@ $navbar-default-link-active-bg: darken($navbar_background, 10%);
 
 .navbar-toggle.collapsed {
   background-color: $white;
+}
+
+.well {
+	padding: 10px;
 }

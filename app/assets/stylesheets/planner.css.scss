@@ -9,4 +9,40 @@ body.planner-index {
   #map-canvas {
     height: 300px;
   }
+
+  #dashboard-content {
+    padding-top: 20px;
+  }
+
+  #friend-panel {
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+
+    .friend-title {
+      margin: 0 auto;
+      padding: 5px;
+      margin: 10px 0px;
+      text-align: center;
+      background-color: $friend_title_bg;
+      color: $white;
+    }
+
+    hr {
+      border-color: black;
+      margin: 10px 0px;
+    }
+
+    .friend-panel-info {
+
+      .facebook-options {
+        display: inline-block;
+      }
+
+      .friend-btns {
+        padding-top: 5px;
+        text-align: center;
+      }
+    }
+  } 
 }

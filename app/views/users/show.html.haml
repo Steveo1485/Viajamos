@@ -1,1 +1,13 @@
-Placeholder for user public profile page
+%div Public Content
+
+- if current_user.friend_of_friend_with?(@user)
+  %div Content for Friend of Friend
+
+- if current_user.travel_buddy_of_travel_buddy_with?(@user)
+  %div Content for Travel Buddy of Travel Buddy
+
+- if current_user.friends_with?(@user)
+  %div Content for Friends
+
+- if current_user.travel_buddies_with?(@user)
+  %div Content for Travel Buddies
