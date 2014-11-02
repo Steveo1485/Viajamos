@@ -19,6 +19,7 @@ gem 'pundit'
 gem 'sass-rails', '~> 4.0.3'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
+gem 'unicorn', '~> 4.8.3'
 
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
@@ -29,6 +30,7 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'foreman'
   gem 'spring'
 end
 
