@@ -5,7 +5,3 @@ app.factory 'Location', ['railsResourceFactory', (railsResourceFactory) ->
     url: "/locations",
     name: "location"
 ]
-
-$(document).on('ready page:load', ->
-  angular.bootstrap("body", ['cotrippingApp'])
-)

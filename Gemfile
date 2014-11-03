@@ -14,13 +14,11 @@ gem 'haml'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem 'jquery-turbolinks'
 gem "koala", "~> 1.10.0rc"
 gem 'mysql2'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem 'sass-rails', '~> 4.0.3'
-gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'unicorn', '~> 4.8.3'
 
