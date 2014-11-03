@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem "koala", "~> 1.10.0rc"
 gem 'mysql2'
+gem 'obfuscate_id', :git => 'https://github.com/namick/obfuscate_id.git'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem 'sass-rails', '~> 4.0.3'

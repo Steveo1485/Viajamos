@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/namick/obfuscate_id.git
+  revision: 37fda6c458fe7bca970f6a801f23080ecd88dfb8
+  specs:
+    obfuscate_id (0.0.4)
+      rails (>= 3.2.15)
+      scatter_swap (~> 0.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -189,6 +197,7 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    scatter_swap (0.0.3)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -248,6 +257,7 @@ DEPENDENCIES
   jquery-rails
   koala (~> 1.10.0rc)
   mysql2
+  obfuscate_id!
   omniauth-facebook
   pundit
   rails (= 4.1.0)
