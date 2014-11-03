@@ -6,7 +6,7 @@
     $scope.searchingLocations = false
 
   $scope.search = () ->
-    request = $http.get '/locations/search.json', q: $scope.searchTerms
+    request = $http.get '/locations/search.json', params: { q: $scope.searchTerms }
     request.then(
       (success_result) ->
         $scope.results = success_result.data
