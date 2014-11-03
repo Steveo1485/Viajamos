@@ -12,10 +12,16 @@ class UsersController < ApplicationController
   def update
     authorize(@user)
 
-    if @user.oauth? == false and @user.update_with_password(user_params)
+    parameters = user_params
+    unless parameters[:password].present? and parameters[:password_confirmation].present?
+      parameters.delete(:password)
+      parameters.delete(:password_confirmation)
+    end
+
+    if @user.oauth? == false and @user.update_with_password(parameters)
       sign_in(@user, bypass: true)
       redirect_to edit_user_path(@user), notice: "Account settings successfully updated."
-    elsif @user.oauth? and @user.update_attributes(user_params)
+    elsif @user.oauth? and @user.update_attributes(parameters)
       sign_in(@user, bypass: true)
       redirect_to edit_user_path(@user), notice: "Account settings successfully updated."
     else

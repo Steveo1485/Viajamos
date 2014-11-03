@@ -17,7 +17,26 @@
 
     .form-group
       = f.label(:home_location_id)
-      = f.text_field(:home_location_id, placeholder: "Home location", class: "form-control")
+      
+      %div{ng: {controller: "HomeLocationCtrl", init: "init('#user_home_location_id')"}}
+        .current-home-loction
+          = "Current Home Location: #{user_home_location_name(@user)}"
+          = link_to(fa_icon("edit"), "#", "ng-click" => "displaySearchForm($event)")
+
+        .updated-home-location{ng: {show: "location"}}
+          = f.hidden_field(:home_location_id)
+          New Home Location: {{location.city}} {{location.state_code}} {{location.country_code}}
+        
+        .home-location-search{ng: {show: "searchingLocations"}}
+          = text_field_tag(:home_location, nil, placeholder: "Search by city", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)")
+
+          %ul.search-results{ng: {model: "results", show: "searchTerms"}}
+            %li{ng: {show: "searchTerms.length < 3"}} Please type more
+            
+            %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
+              {{result.city}} {{result.state_code}} {{result.country_code}}
+          
+          = link_to("Cancel", "#", class: "btn btn-xs btn-default", "ng-click" => "cancelSearch($event)")
 
     .form-group
       = f.label(:password, "New password")

@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.1.0'
 
+gem 'angularjs-rails'
+gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'delayed_job_active_record'

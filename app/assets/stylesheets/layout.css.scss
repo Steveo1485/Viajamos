@@ -33,3 +33,10 @@ h1, h2, h3, h4, h5, h6 {
 .header-title {
   color: $blue;
 }
+
+ul.search-results {
+  background-color: $white;
+  border-radius: 5px;
+  list-style-type: none;
+  padding: 10px 5px;
+}
