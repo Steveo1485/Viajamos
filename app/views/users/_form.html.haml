@@ -1,0 +1,36 @@
+.well
+  = form_for @user do |f|
+
+    = render "shared/form_errors", object: @user
+
+    .form-group
+      = f.label(:first_name)
+      = f.text_field(:first_name, placeholder: "First name", class: "form-control")
+
+    .form-group
+      = f.label(:last_name)
+      = f.text_field(:last_name, placeholder: "Last name", class: "form-control")
+
+    .form-group
+      = f.label(:email)
+      = f.email_field(:email, placeholder: "Email", class: "form-control")
+
+    .form-group
+      = f.label(:home_location_id)
+      = f.text_field(:home_location_id, placeholder: "Home location", class: "form-control")
+
+    .form-group
+      = f.label(:password, "New password")
+      = f.password_field(:password, placeholder: "Create new password", class: "form-control", autocomplete: "off")
+
+    .form-group
+      = f.label(:password_confirmation, "Confirm new password")
+      = f.password_field(:password_confirmation, placeholder: "Confirm new password", class: "form-control", autocomplete: "off")
+
+    - unless current_user.oauth?
+      .form-group
+        = f.label(:current_password)
+        = f.password_field(:current_password, placeholder: "Current Password", class: "form-control", autocomplete: "off")
+        %p.help-block Please enter your current password to confirm changes made to your account.
+    
+    = f.submit("Update Account", class: "btn btn-default")

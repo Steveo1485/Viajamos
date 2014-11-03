@@ -67,4 +67,8 @@ class User < ActiveRecord::Base
     false
   end
 
+  def oauth?
+    self.provider.present? and self.uid.present?
+  end
+
 end

@@ -14,9 +14,22 @@ body.planner-index {
     padding-top: 20px;
   }
 
-  #user_home_location {
-    span {
-      font-weight: bold;
+  #user-panel {
+    a.edit-icon {
+      float: right;
+      color: $light_gray;
+    }
+
+    #user-avatar {
+      float: left;
+      font-size: 24pt;
+      margin: 0px 10px;;
+    }
+
+    #user_home_location {
+      span {
+        font-weight: bold;
+      }
     }
   }
 
