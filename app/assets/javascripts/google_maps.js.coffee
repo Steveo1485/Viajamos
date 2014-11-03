@@ -1,4 +1,5 @@
-$ ->
+$(document).on('ready page:load', ->
+
   loadGoogleMap = () ->
     mapOptions =
       center:
@@ -10,3 +11,4 @@ $ ->
 
   if $("#map-canvas").length > 0
     loadGoogleMap()
+)
