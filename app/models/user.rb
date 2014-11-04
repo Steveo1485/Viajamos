@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
 
-  obfuscate_id
-
   has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
 
