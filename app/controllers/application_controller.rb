@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  http_basic_authenticate_with :name => ENV['STAGING_USERNAME'], :password => ENV['STAGING_PASSWORD'] if Rails.env.staging?
+
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
