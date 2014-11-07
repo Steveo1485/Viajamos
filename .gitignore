@@ -18,6 +18,9 @@
 # Ignore secrets
 # /config/secrets.yml
 
+# Ignore Certs
+/config/certs
+
 # Ignore Envirnment Variables
 .env
 
