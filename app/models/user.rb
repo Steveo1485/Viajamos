@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
 
+  belongs_to :home_location, class_name: "Location", foreign_key: :home_location_id
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
@@ -63,6 +65,10 @@ class User < ActiveRecord::Base
       end
     end
     false
+  end
+
+  def oauth?
+    self.provider.present? and self.uid.present?
   end
 
 end

@@ -18,7 +18,12 @@
   .col-md-3
 
     .well#user-panel
+      = link_to(fa_icon("edit"), edit_user_path(current_user), class: "edit-icon")
+      #user-avatar= fa_icon("user")
       %h3.header-title= current_user.name
+      #user_home_location
+        %span Home:
+        = user_home_location_name(current_user)
 
     .well#current-location
       %h3

@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     patch 'block', on: :member
     patch 'facebook_request', on: :member
   end
-  resources :users, only: [:show]
+
+  resources :locations, only: [] do
+    get 'search', on: :collection
+  end
+
+  resources :users, only: [:show, :edit, :update]
 
   post 'find_friends' => 'friendships#find_friends', as: :find_friends
   get 'planner' => 'planner#index', as: :user_root
