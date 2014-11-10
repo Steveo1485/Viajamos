@@ -3,6 +3,7 @@ class Location < ActiveRecord::Base
   validates :country_code, presence: true
   validates :longitude, presence: true
   validates :latitude, presence: true
+  validates :city, uniqueness: {scope: :country_code}
 
   def self.search(query)
     search_term = query.to_s.strip.split
