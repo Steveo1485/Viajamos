@@ -6,6 +6,9 @@ class CreateTrips < ActiveRecord::Migration
       t.date :start_date, null: false
       t.date :end_date, null: false
       t.string :purpose
+      t.string :comments
+      t.string :type
+      t.string :certainty
       t.boolean :private, default: false
       t.boolean :busy, default: false
       t.timestamps

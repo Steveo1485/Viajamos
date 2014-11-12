@@ -54,6 +54,9 @@ ActiveRecord::Schema.define(version: 20141111060438) do
     t.date     "start_date",                  null: false
     t.date     "end_date",                    null: false
     t.string   "purpose"
+    t.string   "comments"
+    t.string   "type"
+    t.string   "certainty"
     t.boolean  "private",     default: false
     t.boolean  "busy",        default: false
     t.datetime "created_at"
