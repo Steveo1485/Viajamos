@@ -12,6 +12,7 @@ body.planner-index {
 
   #dashboard-content {
     padding-top: 20px;
+    margin-bottom:10%;
   }
 
   #user-panel {
@@ -36,17 +37,17 @@ body.planner-index {
   #friend-panel {
     width: 100%;
     padding: 10px;
-    margin: 0 auto;
 
     .friend-title {
       margin: 0 auto;
       padding: 5px;
       margin: 10px 0px;
-      text-align: center;
       background-color: $friend_title_bg;
       color: $white;
     }
-
+    a {
+      color:#fff;
+    }
     hr {
       border-color: black;
       margin: 10px 0px;

@@ -1,0 +1,97 @@
+#addatripmodal.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button{:class => 'close', :type => 'button', "data-dismiss" => "modal"}
+          %span{"aria-hidden" => 'true'} &times;
+          %span.sr-only Close
+        %h4.modal-title#myModalLabel Add a trip
+      .modal-body
+        .input-group
+          %input.form-control{:placeholder => 'Search for a city'}
+            %span.input-group-btn
+              %button.btn.btn-default{:type => 'button'} Search
+        .row
+          .col-md-6.col-xs-6
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} I've been
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} I'm going
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} Wishlist
+          .col-md-6.col-xs-6
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} Booked
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} Likely
+            .radio
+              %label
+                %input{:type => 'radio',:name => 'optradio'} Possible
+        Start date
+        .row
+          .col-md-12.flex
+            .dropdown.nudge-right
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Day
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+            .dropdown.nudge-right
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Month
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+            .dropdown
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Year
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+        End date
+        .row
+          .col-md-12.flex
+            .dropdown.nudge-right
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Day
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+            .dropdown.nudge-right
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Month
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+            .dropdown
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Year
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+        Purpose of trip
+        .row
+          .col-lg-12
+            .dropdown
+              %button#dropdownMenu1.btn.btn-default.dropdown-toggle{:type => 'button','data-toggle' => "dropdown"} 
+                Select a reason
+                %span.caret
+              %ul.dropdown-menu{:role => 'menu','aria-labelledby' => 'dropdownMenu1'}
+        .row
+          .col-lg-12
+            .input-group
+              %input.form-control{:placeholder => 'Comment (optional)'}
+                %span.input-group-btn
+                  %button.btn.btn-default{:type => 'button'} Go!
+
+        .radio
+          %label                
+            %input{:type => 'radio',:name => 'optradio'} Mark trip as private
+        %small Trip will be added to your plans but will only be visible to you
+        .radio
+          %label
+            %input{:type => 'radio',:name => 'optradio'} Mark trip as busy
+        %small Visible to network but marked as busy
+      .modal-footer
+        %button.btn.btn-default{:type => 'button', "data-dismiss" => "modal"} Close
+
+

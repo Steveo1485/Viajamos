@@ -8,6 +8,7 @@
     %meta{property: "og:image", content: "#{image_url("logo-facebook.png")}"}
     %meta{property: "og:description", content: "Whether you travel for business or pleasure, co:tripping makes the world a smaller place by connecting you with friends at every destination."}
     %meta{property: "fb:app_id", content: "#{ENV['FACEBOOK_APP_ID']}"}
+    %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
 
     = stylesheet_link_tag 'application', media: 'all'
     = include_gon
@@ -15,10 +16,11 @@
     = csrf_meta_tags
 
   %body{class: "#{params[:controller]}-#{params[:action]}"}
-    = render "layouts/header"
-    #content.container-fluid
+    #content.container.main.fill
+      = render "layouts/header"
       - unless request.path == user_root_path
         .flash-messages
           - flash.each do |name, msg|
             = content_tag(:div, msg)
       = yield
+      = render "layouts/footer"

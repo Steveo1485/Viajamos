@@ -1,7 +1,9 @@
-.friend-title= "Travel Buddies (#{current_user.travel_buddies.count})"
+%h4.friend-title#headingOne{:role => 'tab'} 
+	%a{'data-toggle' => "collapse", 'data-parent' => "#accordion", :href => "#collapseOne", 'aria-expanded' => "true", 'aria-controls' => "collapseOne"}
+		Travel Buddies
+		%span.badge #{current_user.travel_buddies.count}
 - for buddy in current_user.travel_buddies
-  .friend-panel-info
-    = link_to(buddy.name, user_path(buddy))
-
-  - unless current_user.travel_buddies.last == buddy
-    %hr
+	.friend-panel-info
+		= link_to(buddy.name, user_path(buddy))
+- unless current_user.travel_buddies.last == buddy
+	%hr

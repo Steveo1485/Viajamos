@@ -30,7 +30,39 @@ $btn-font-weight: bold;
 .navbar-toggle.collapsed {
   background-color: $white;
 }
+.navbar-brand {
+	padding:5px;
+}
 
 .well {
 	padding: 10px;
+	background: rgba(255, 255, 255, 0.4);
+}
+ul, li {
+	list-style: none;
+	padding-left:0;
+}
+a {
+ color: $elec_blue;	
+}
+.dropdown {
+	padding-bottom: 5px;
+}
+.positive {
+	background: $red;
+}
+.negative {
+	background: $light-red ;
+}
+.neutral {
+	background: $gray;
+	color: #fff ;
+}
+.btn-neutral, .btn-neutral:active, .btn-neutral:focus {
+	background: $light-blue;
+	color:#F3F3F3;
+}
+.btn-neutral:hover {
+	color:#F3F3F3;
+	background: $blue ;
 }

@@ -29,5 +29,6 @@ module Viajamos
 
     # Autoload lib/ folder including all subdirectories
     config.autoload_paths += Dir["#{config.root}/lib", "#{config.root}/lib/**/**"]
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end

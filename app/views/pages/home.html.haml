@@ -5,13 +5,13 @@
   .row
     .col-md-4
       %h2.text-center
-        %span{class: "glyphicon glyphicon-user"}
+        %span.header-icon= fa_icon("users") 
       Never miss the opportunity to hang out with a friend in a foreign city again! Co:tripping will alert you to any possible overlaps, even if your trip isn't definite.
 
     .col-md-4
       %h2.text-center
-        %span{class: "glyphicon glyphicon-tree-deciduous"}
-      Need recommendations? See which of your friends have been to your destination recently and benefit from their trustworth advice.
+        %span.header-icon= fa_icon("coffee") 
+      Need recommendations? See which of your friends have been to your destination recently and benefit from their trusted advice.
       %h5 Sign Up Now
       = render "signup", user: User.new
       == Or #{link_to("Connect with Facebook", user_omniauth_authorize_path(:facebook))}
@@ -21,5 +21,5 @@
 
     .col-md-4
       %h2.text-center
-        %span{class: "glyphicon glyphicon-heart"}
-      Save all of your favorite travel advice in one convenient place, share it with your friends, and remember it for your next visit.
+        %span.header-icon= fa_icon("heart") 
+      Had an amazing travel experience? Save all of your favorite travel advice in one place, share it with your friends, and remember it for your next visit.
