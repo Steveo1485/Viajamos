@@ -14,6 +14,10 @@ class TripPolicy < ApplicationPolicy
     @user.id = @trip.user_id
   end
 
+  def destroy?
+    @user.id = @trip.user_id
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope.where(user_id: user.id)

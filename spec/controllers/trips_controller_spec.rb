@@ -62,4 +62,10 @@ RSpec.describe TripsController, :type => :controller do
       expect(@trip.reload.location_id).to eq(location_id)
     end
   end
+
+  describe "DELETE #destroy" do
+    it "should destroy a trip" do
+      expect{ delete :destroy, id: @trip.id }.to change(Trip, :count).by(-1)
+    end
+  end
 end

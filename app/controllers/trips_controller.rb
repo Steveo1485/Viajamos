@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_filter :fetch_trip, only: [:edit, :update]
+  before_filter :fetch_trip, only: [:edit, :update, :destroy]
 
   def index
     @trips = policy_scope(Trip)
@@ -30,6 +30,15 @@ class TripsController < ApplicationController
       redirect_to user_root_path
     else
       render :edit
+    end
+  end
+
+  def destroy
+    authorize(@trip)
+    if @trip.destroy
+      redirect_to user_root_path
+    else
+      redirect_to user_root_path
     end
   end
 
