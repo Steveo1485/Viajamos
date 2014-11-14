@@ -33,13 +33,33 @@ RSpec.describe TripsController, :type => :controller do
       @build_trip = FactoryGirl.build(:trip)
     end
 
-    it "should create Trip with valid params" do
+    it "should create Trip with valid attributes" do
       expect{post :create, trip: @build_trip.attributes}.to change(Trip, :count).by(1)
     end
 
-    it "should not create Trip with valid params" do
+    it "should not create Trip with valid attributes" do
       @build_trip.user_id = nil
       expect{post :create, trip: @build_trip.attributes}.to_not change(Trip, :count)
+    end
+  end
+
+  describe "GET #edit" do
+    it "should render the edit template" do
+      get :edit, id: @trip.id
+      expect(response).to render_template(:edit)
+    end
+  end
+
+  describe "PATCH #update" do
+    it "should update a trip with valid attributes" do
+      patch :update, id: @trip.id, trip: {certainty: "likely"}
+      expect(@trip.reload.certainty).to eq("likely")
+    end
+
+    it "should not update trip with invalid attributes" do
+      location_id = @trip.location_id
+      patch :update, id: @trip.id, trip: {location_id: nil }
+      expect(@trip.reload.location_id).to eq(location_id)
     end
   end
 end

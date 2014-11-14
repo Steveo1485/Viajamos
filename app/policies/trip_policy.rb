@@ -10,6 +10,10 @@ class TripPolicy < ApplicationPolicy
     @user
   end
 
+  def update?
+    @user.id = @trip.user_id
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope.where(user_id: user.id)

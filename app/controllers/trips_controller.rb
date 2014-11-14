@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_filter :fetch_trip, only: [:edit, :update]
 
   def index
     @trips = policy_scope(Trip)
@@ -19,6 +20,19 @@ class TripsController < ApplicationController
     end
   end
 
+  def edit
+    authorize(@trip)
+  end
+
+  def update
+    authorize(@trip)
+    if @trip.update(trip_params)
+      redirect_to user_root_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def trip_params
@@ -31,6 +45,10 @@ class TripsController < ApplicationController
                                  :certainty,
                                  :private,
                                  :busy)
+  end
+
+  def fetch_trip
+    @trip = Trip.find(params[:id])
   end
 
 end
