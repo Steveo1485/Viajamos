@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get 'search', on: :collection
   end
 
-  resources :trips, only: [:index]
+  resources :trips, only: [:index, :new, :create]
   resources :users, only: [:show, :edit, :update]
 
   post 'find_friends' => 'friendships#find_friends', as: :find_friends

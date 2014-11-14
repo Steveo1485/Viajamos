@@ -20,4 +20,26 @@ RSpec.describe TripsController, :type => :controller do
       expect(assigns[:trips]).to eq([@trip])
     end
   end
+
+  describe "GET #new" do
+    it "should render the new template" do
+      get :new
+      expect(response).to render_template(:new)
+    end
+  end
+
+  describe "POST #create" do
+    before :each do
+      @build_trip = FactoryGirl.build(:trip)
+    end
+
+    it "should create Trip with valid params" do
+      expect{post :create, trip: @build_trip.attributes}.to change(Trip, :count).by(1)
+    end
+
+    it "should not create Trip with valid params" do
+      @build_trip.user_id = nil
+      expect{post :create, trip: @build_trip.attributes}.to_not change(Trip, :count)
+    end
+  end
 end

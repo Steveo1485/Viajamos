@@ -6,6 +6,10 @@ class TripPolicy < ApplicationPolicy
     @trip = trip
   end
 
+  def create?
+    @user
+  end
+
   class Scope < Struct.new(:user, :scope)
     def resolve
       scope.where(user_id: user.id)
