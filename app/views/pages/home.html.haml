@@ -1,6 +1,5 @@
 .container
-  .page-header
-    %h2.text-center Welcome to co:tripping
+  %h2.text-center.tagline Travel is more fun with friends.
 
   .row
     .col-md-4
@@ -12,14 +11,17 @@
       %h2.text-center
         %span.header-icon= fa_icon("coffee") 
       Need recommendations? See which of your friends have been to your destination recently and benefit from their trusted advice.
-      %h5 Sign Up Now
-      = render "signup", user: User.new
-      == Or #{link_to("Connect with Facebook", user_omniauth_authorize_path(:facebook))}
-      .sign-in.text-center
-        Already a member?
-        = link_to("Sign in!", new_user_session_path)
 
     .col-md-4
       %h2.text-center
         %span.header-icon= fa_icon("heart") 
       Had an amazing travel experience? Save all of your favorite travel advice in one place, share it with your friends, and remember it for your next visit.
+
+  .row
+    .col-md-4.backpanel.col-md-offset-4
+      %h5 Sign Up
+      = render "signup", user: User.new
+      == Or #{link_to("Connect with Facebook", user_omniauth_authorize_path(:facebook))}
+      .sign-in
+        Already a member?
+        = link_to("Sign in!", new_user_session_path)

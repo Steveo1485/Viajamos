@@ -45,6 +45,40 @@ h1, h2, h3, h4, h5, h6 {
 #content {
   background: image-url('seamless_paper_texture.png') repeat
 }
+#pagescontent {
+  background: image-url('travel3.jpg') no-repeat;
+  background-size: cover;
+  background-position: bottom;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  color:#FCFFD1;
+  font-size:1.2em;
+
+  .col-md-4 {
+    margin-top:30px;
+  }
+  a {
+    color:#9FD7FF;
+  }
+}
+.tagline {
+  font-size:3em;
+  font-weight:700;
+  margin: 9% auto 3% auto;
+  color:#FCFFD1;
+}
+.backpanel {
+  padding: 10px;
+background: rgba(0, 0, 0, 0.5);
+color: #fff;
+border: none;
+border-radius:3px;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+
 .jumbotron {
   margin-bottom: 0px;
   margin-left: 0px;
