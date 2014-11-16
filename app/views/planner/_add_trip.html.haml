@@ -1,12 +1,19 @@
-#addatripmodal.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %button{:class => 'close', :type => 'button', "data-dismiss" => "modal"}
-          %span{"aria-hidden" => 'true'} &times;
-          %span.sr-only Close
-        %h4.modal-title#myModalLabel Add a trip
-      .modal-body
-        = render "trips/form"
+.row
+  .col-lg-5.col-md-7
+    %button.btn.btn-neutral.btn-lg.addatrip.btn-block{"data-target" => "#addatripmodal", "data-toggle" => "modal"}
+      %span= fa_icon("plane")
+      Add a trip
+  .col-lg-6
+    You can add trips for the future, places you've been, or ones for the wishlist. You can also add tips for any places you've been to.
+  #addatripmodal.modal.fade{:tabindex => "-1", :role => "dialog", "aria-labelledby" => "myModalLabel", "aria-hidden" => "true"}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:class => 'close', :type => 'button', "data-dismiss" => "modal"}
+            %span{"aria-hidden" => 'true'} &times;
+            %span.sr-only Close
+          %h4.modal-title#myModalLabel Add a trip
+        .modal-body
+          = render "trips/form"
 
 
