@@ -16,11 +16,10 @@
     = csrf_meta_tags
 
   %body{class: "#{params[:controller]}-#{params[:action]}"}
-    #content.container.main.fill
-      = render "layouts/header"
+    #pagescontent.container-fluid.main.fill
+      = render "layouts/pages_header"
       - unless request.path == user_root_path
         .flash-messages
           - flash.each do |name, msg|
             = content_tag(:div, msg)
       = yield
-      = render "layouts/footer"
