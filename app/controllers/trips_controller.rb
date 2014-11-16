@@ -15,7 +15,7 @@ class TripsController < ApplicationController
     @trip.user_id = current_user.id
     authorize(@trip)
     if @trip.save
-      redirect_to user_root_path
+      redirect_to user_root_path, notice: "Successfully added trip!"
     else
       render :new
     end
