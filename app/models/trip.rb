@@ -9,16 +9,28 @@ class Trip < ActiveRecord::Base
   validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
 
+  scope :wishlist, -> { where(certainty: 'wishlist') }
+  scope :past, -> { where(certainty: "been" ) }
+  scope :upcoming, -> { where(certainty: ["going", "booked", "likely", "possible"]) }
+
   def self.certainty_options
-    ["i've been", "i'm going", "wishlist", "booked", "likely", "possible"]
+    ["been", "going", "wishlist", "booked", "likely", "possible"]
   end
 
   def self.purpose_options
     ["business", "vacation", "other"]
   end
 
-  def self.options_for_select
+  def self.purpose_options_for_select
     purpose_options.map { |option| [option.titleize, option] }
+  end
+
+  def date_range
+    if start_date && end_date
+      "#{start_date.strftime('%e %b %Y')} - #{end_date.strftime('%e %b %Y')}"
+    else
+      "No date set for trip"
+    end
   end
 
 end

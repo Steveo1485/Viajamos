@@ -31,11 +31,11 @@
   .form-group
     = f.label :end_date
     .date-select
-      = f.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+      = f.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
 
   .form-group
     = f.label :purpose, "Purpose of trip"
-    = f.select :purpose, options_for_select(Trip.options_for_select, @trip.purpose), {prompt: "Select a reason..."}, class: "form-control"
+    = f.select :purpose, options_for_select(Trip.purpose_options_for_select, @trip.purpose), {prompt: "Select a reason..."}, class: "form-control"
 
   .form-group
     = f.text_field :comments, placeholder: "Comment (optional)", class: "form-control"
