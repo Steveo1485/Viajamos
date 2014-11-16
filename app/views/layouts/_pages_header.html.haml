@@ -12,9 +12,7 @@
     #navbar-collapse.collapse.navbar-collapse
       .navbar-right
         %ul.nav.navbar-nav
-          %li= link_to("Dashboard", "#")
-          %li{"data-target" => "#myModal", "data-toggle" => "modal"}
-            = link_to("Notifications", "#")
+          %li= link_to("About", "#")
 
           = render "layouts/notifications"
           - if current_user
