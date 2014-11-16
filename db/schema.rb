@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113061204) do
+ActiveRecord::Schema.define(version: 20141116090638) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 20141113061204) do
   create_table "trips", force: true do |t|
     t.integer  "location_id",                 null: false
     t.integer  "user_id",                     null: false
-    t.date     "start_date",                  null: false
-    t.date     "end_date",                    null: false
+    t.date     "start_date"
+    t.date     "end_date"
     t.string   "purpose"
     t.string   "comments"
     t.string   "certainty"

@@ -12,6 +12,7 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
+    @trip.user_id = current_user.id
     authorize(@trip)
     if @trip.save
       redirect_to user_root_path

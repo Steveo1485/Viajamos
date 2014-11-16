@@ -3,6 +3,7 @@ class PlannerController < ApplicationController
 
   def index
     gon.facebook_app_id = ENV['FACEBOOK_APP_ID']
+    @trip = Trip.new
   end
 
 end
