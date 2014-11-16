@@ -199,11 +199,14 @@ button.addatrip, button.addatrip:focus, button.addatrip:active {
   color:#F9F9F9;
   background:#2F658E;
   border-top-right-radius: 3px;
-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
 }
 #trips .panel-footer {
   color:#F9F9F9;
   background:#3D91B8;
+  a {
+    color: #fff;
+  }
 }
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {

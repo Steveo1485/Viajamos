@@ -19,7 +19,7 @@
           %span.comments
             = fa_icon("quote-left") 
             = trip.comments
-
+        %span= link_to(raw("#{fa_icon("edit")} Edit Trip"), edit_trip_path(trip))
 - else
   .panel.panel-default
     .panel-body.text-center= "No #{token} trips found."

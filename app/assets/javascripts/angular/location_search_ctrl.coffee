@@ -1,7 +1,8 @@
 @LocationSearchCtrl = ['$scope', '$http', 'Location', ($scope, $http, Location) ->
 
-  $scope.init = (targetField) ->
+  $scope.init = (targetField, existingLocationId) ->
     $scope.targetField = targetField
+    $scope.existingLocationId = existingLocationId
     $scope.searchTerms = ""
     $scope.searchingLocations = false
 
@@ -34,6 +35,7 @@
   $scope.cancelSearch = ($event) ->
     $event.preventDefault()
     $scope.searchingLocations = false
+    $scope.existingLocationId = null
     angular.element($scope.targetField).val("")
     $scope.searchTerms = ""
     $scope.location = ""
