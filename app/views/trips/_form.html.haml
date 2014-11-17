@@ -21,18 +21,19 @@
             {{result.city}} {{result.state_code}} {{result.country_code}}
 
   .form-group
-    .col-xs-6
-      - Trip.time_period_options.each do |time_period_option|
-        .radio
-          %label
-            = f.radio_button :time_period, time_period_option
-            = time_period_option.titleize
-    .col-xs-6
-      - Trip.certainty_options.each do |certainty_option|
-        .radio
-          %label
-            = f.radio_button :certainty, certainty_option
-            = certainty_option.titleize
+    .row
+      .col-xs-6
+        - Trip.time_period_options.each do |time_period_option|
+          .radio
+            %label
+              = f.radio_button :time_period, time_period_option
+              = time_period_option.titleize
+      .col-xs-6
+        - Trip.certainty_options.each do |certainty_option|
+          .radio
+            %label
+              = f.radio_button :certainty, certainty_option
+              = certainty_option.titleize
 
   .form-group
     = f.label :start_date
