@@ -11,8 +11,9 @@
           = trip.date_range
       .panel-footer
         %span.nudge-right
-          %span.label.positive= trip.certainty.titleize
-          %span.label.positive= trip.purpose.titleize
+          %span.label.positive= trip.time_period.try(:titlelize)
+          %span.label.positive= trip.certainty.try(:titleize)
+          %span.label.positive= trip.purpose.try(:titleize)
           / %span.label.positive 0 saved plans
           / %span.label.positive 2 overlaps
         - if trip.comments.present?
