@@ -50,6 +50,7 @@ class TripsController < ApplicationController
                                  :user_id,
                                  :start_date,
                                  :end_date,
+                                 :time_period,
                                  :purpose,
                                  :comments,
                                  :certainty,

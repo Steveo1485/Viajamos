@@ -6,19 +6,24 @@ class Trip < ActiveRecord::Base
   validates :user_id, numericality: true
   validates :start_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
   validates :end_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
-  validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }
+  validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
+  validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
 
-  scope :wishlist, -> { where(certainty: 'wishlist') }
-  scope :past, -> { where(certainty: "been" ) }
-  scope :upcoming, -> { where(certainty: ["going", "booked", "likely", "possible"]) }
+  scope :wishlist, -> { where(time_period: 'wishlist') }
+  scope :past, -> { where(time_period: "past" ) }
+  scope :upcoming, -> { where(time_period: "future") }
+
+  def self.time_period_options
+    ["past", "future", "wishlist"]
+  end
 
   def self.certainty_options
-    ["been", "going", "wishlist", "booked", "likely", "possible"]
+    ["booked", "likely", "possible"]
   end
 
   def self.purpose_options
-    ["business", "vacation", "other"]
+    ["work", "leisure", "other"]
   end
 
   def self.purpose_options_for_select

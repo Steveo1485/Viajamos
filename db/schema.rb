@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141116233322) do
+ActiveRecord::Schema.define(version: 20141117000157) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20141116233322) do
     t.boolean  "busy",        default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "time_period"
   end
 
   add_index "trips", ["location_id"], name: "index_trips_on_location_id", using: :btree
