@@ -5,10 +5,14 @@ $ ->
       if $("#trip_time_period_future:checked").length > 0
         displayTripCertaintyRadio()
       else
-        $("input[name='trip[certainty]']").parents(".radio").hide()
+        handleNonFutureTimePeriod()
 
   displayTripCertaintyRadio = () ->
     $("input[name='trip[certainty]']").parents(".radio").show()
+
+  handleNonFutureTimePeriod = () ->
+    $("input[name='trip[certainty]']").removeAttr("checked")
+    $("input[name='trip[certainty]']").parents(".radio").hide()
 
 
   if $("input[name='trip[time_period]']").length > 0
