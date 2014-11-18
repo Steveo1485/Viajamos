@@ -37,8 +37,8 @@ RSpec.describe TripsController, :type => :controller do
       expect{post :create, trip: @build_trip.attributes}.to change(Trip, :count).by(1)
     end
 
-    it "should not create Trip with valid attributes" do
-      @build_trip.user_id = nil
+    it "should not create Trip with invalid attributes" do
+      @build_trip.time_period = nil
       expect{post :create, trip: @build_trip.attributes}.to_not change(Trip, :count)
     end
   end

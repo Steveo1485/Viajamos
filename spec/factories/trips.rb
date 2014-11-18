@@ -4,7 +4,8 @@ FactoryGirl.define do
     location
     start_date {Faker::Date.forward(7)}
     end_date {Faker::Date.forward(14)}
-    purpose "business"
+    time_period "future"
+    purpose "work"
     certainty "booked"
     private :false
     busy :false
