@@ -1,0 +1,25 @@
+.row
+  .col-sm-9.col-xs-7
+    %h3.sectionhead
+      %span.header-icon= fa_icon("plane") 
+      Your trips
+
+  .col-sm-3.col-xs-5{:style => "text-align:right"}
+    = button_tag("Add new trip", "data-target" => "#addatripmodal", "data-toggle" => "modal", class: "btn btn-neutral btn-sm")
+
+%ul.nav.nav-tabs{:role => 'tablist'}
+  %li.active{:role => 'presentation'}
+    = upcoming_trips_tab
+  %li{:role => 'presentation'}
+    = past_trips_tab
+  %li{:role => 'presentation'}
+    = wishlist_trips_tab
+
+#trips.tab-content
+  #upcoming.tab-pane.fade.in.active{:role => "tabpanel"}
+    = render "trips_panel", token: "upcoming", trips: current_user.trips.upcoming
+  #past-trips.tab-pane.fade.in{:role => "tabpanel"}
+    = render "trips_panel", token: "past", trips: current_user.trips.past
+  #wishlist.tab-pane.fade.in{:role => "tabpanel"}
+    = render "trips_panel", token: "wishlist", trips: current_user.trips.wishlist
+

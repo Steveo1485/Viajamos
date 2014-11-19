@@ -1,0 +1,27 @@
+- if trips.any?
+  - trips.each do |trip|
+    .panel.panel-default
+      .panel-body
+        %span.panel-title
+          = fa_icon("map-marker") 
+          = trip.location.city
+        
+        %span.pull-right
+          = fa_icon("calendar") 
+          = trip.date_range
+      .panel-footer
+        %span.nudge-right
+          %span.label.positive= trip.time_period.try(:titlelize)
+          %span.label.positive= trip.certainty.try(:titleize)
+          %span.label.positive= trip.purpose.try(:titleize)
+          / %span.label.positive 0 saved plans
+          / %span.label.positive 2 overlaps
+        - if trip.comments.present?
+          %span.comments
+            = fa_icon("quote-left") 
+            = trip.comments
+        %span.label= link_to(raw("#{fa_icon("edit")} Edit Trip"), edit_trip_path(trip))
+        %span.label= link_to(raw("#{fa_icon("times-circle")} Delete Trip"), trip_path(trip), method: :delete, data: {confirm: "Please confirm. This action cannot be undone."})
+- else
+  .panel.panel-default
+    .panel-body.text-center= "No #{token} trips found."

@@ -1,7 +1,8 @@
-@HomeLocationCtrl = ['$scope', '$http', 'Location', ($scope, $http, Location) ->
+@LocationSearchCtrl = ['$scope', '$http', 'Location', ($scope, $http, Location) ->
 
-  $scope.init = (targetField) ->
+  $scope.init = (targetField, existingLocationId) ->
     $scope.targetField = targetField
+    $scope.existingLocationId = existingLocationId
     $scope.searchTerms = ""
     $scope.searchingLocations = false
 
@@ -16,14 +17,14 @@
     if $scope.searchTerms.length >= 3
       $scope.search()
 
-  $scope.setHomeLocationId = () ->
+  $scope.setLocationId = () ->
     angular.element($scope.targetField).val($scope.location.id)
     return true
 
   $scope.selectLocation = ($event, location) ->
     $event.preventDefault()
     $scope.location = location
-    $scope.setHomeLocationId()
+    $scope.setLocationId()
     $scope.searchingLocations = false
     $scope.searchTerms = ""
 
@@ -34,6 +35,7 @@
   $scope.cancelSearch = ($event) ->
     $event.preventDefault()
     $scope.searchingLocations = false
+    $scope.existingLocationId = null
     angular.element($scope.targetField).val("")
     $scope.searchTerms = ""
     $scope.location = ""

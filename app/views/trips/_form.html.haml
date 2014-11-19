@@ -1,0 +1,69 @@
+= form_for @trip do |f|
+  = render "shared/form_errors", object: @trip
+
+  .form-group
+    = f.hidden_field :location_id
+    %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_location_id', '#{@trip.location_id}')"}}
+      - if @trip.location
+        %div{ng: {show: "existingLocationId"}}
+          = "Destination: #{@trip.location.name}"
+          = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+
+      %div{ng: {hide: "existingLocationId"}}
+        %div{ng: {show: "location"}}
+          Destination: {{location.city}} {{location.state_code}} {{location.country_code}}
+          = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+
+        = text_field_tag(:location_saerch, nil, placeholder: "Search for a city", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)", "ng-hide" => "location")
+        %ul.search-results{ng: {model: "results", show: "searchTerms"}}
+          %li{ng: {show: "searchTerms.length < 3"}} Please type more
+          %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
+            {{result.city}} {{result.state_code}} {{result.country_code}}
+
+  .form-group
+    .row
+      .col-xs-6
+        - Trip.time_period_options.each do |time_period_option|
+          .radio
+            %label
+              = f.radio_button :time_period, time_period_option
+              = time_period_option.titleize
+      .col-xs-6
+        - Trip.certainty_options.each do |certainty_option|
+          .radio
+            %label
+              = f.radio_button :certainty, certainty_option
+              = certainty_option.titleize
+
+  .form-group
+    = f.label :start_date
+    .date-select
+      = f.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+
+  .form-group
+    = f.label :end_date
+    .date-select
+      = f.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+
+  .form-group
+    = f.label :purpose, "Purpose of trip"
+    = f.select :purpose, options_for_select(Trip.purpose_options_for_select, @trip.purpose), {prompt: "Select a reason..."}, class: "form-control"
+
+  .form-group
+    = f.text_field :comments, placeholder: "Comment (optional)", class: "form-control"
+
+  .form-group.checkbox
+    %label
+      = f.check_box :private
+      Mark trip as private
+      .help-block
+        Trip will be added to your plans but will only be visible to you
+
+  .form-group.checkbox
+    %label
+      = f.check_box :busy
+      Mark trip as busy
+      .help-block
+        Visible to network but marked as busy
+
+  = f.submit( @trip.persisted? ? "Update Trip" : "Save Trip", class: "btn btn-neutral")

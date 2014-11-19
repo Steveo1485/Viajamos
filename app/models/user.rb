@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
+  has_many :trips, dependent: :destroy
 
   belongs_to :home_location, class_name: "Location", foreign_key: :home_location_id
 

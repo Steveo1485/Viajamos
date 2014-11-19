@@ -18,7 +18,7 @@
     .form-group
       = f.label(:home_location_id)
       
-      %div{ng: {controller: "HomeLocationCtrl", init: "init('#user_home_location_id')"}}
+      %div{ng: {controller: "LocationSearchCtrl", init: "init('#user_home_location_id')"}}
         .current-home-loction
           = "Current Home Location: #{user_home_location_name(@user)}"
           = link_to(fa_icon("edit"), "#", "ng-click" => "displaySearchForm($event)")
