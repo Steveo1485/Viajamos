@@ -5,7 +5,9 @@
         %span.panel-title
           = fa_icon("map-marker") 
           = trip.location.city
-        
+
+          = facebook_feed_button("http://yahoo.com", trip_facebook_feed_caption(trip))
+
         %span.pull-right
           = fa_icon("calendar") 
           = trip.date_range
@@ -14,8 +16,6 @@
           %span.label.positive= trip.time_period.try(:titlelize)
           %span.label.positive= trip.certainty.try(:titleize)
           %span.label.positive= trip.purpose.try(:titleize)
-          / %span.label.positive 0 saved plans
-          / %span.label.positive 2 overlaps
         - if trip.comments.present?
           %span.comments
             = fa_icon("quote-left") 
