@@ -1,6 +1,14 @@
 @import "colors";
 
 body.planner-index {
+  .fb-feed-post {
+    font-size: 0.75em;
+  }
+
+  .fb-feed-post:hover {
+    cursor: pointer
+  }
+
   #social-invite {
     background-color: $yellow;
     padding-bottom: 10px;
