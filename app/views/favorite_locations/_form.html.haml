@@ -1,0 +1,22 @@
+= form_for @favorite_location do |f|
+
+  = render "shared/form_errors", object: @favorite_location
+
+  .form-group
+    = f.label(:location_id)
+    = f.hidden_field(:location_id)
+    
+    %div{ng: {controller: "LocationSearchCtrl", init: "init('#favorite_location_location_id')"}}
+      .selected-location{ng: {show: "location"}}
+        {{location.city}} {{location.state_code}} {{location.country_code}}
+        #search-again= link_to("Search Again", "#", "ng-click" => "cancelSearch($event)")
+      .favorite-location-search{ng: {hide: "searchingLocations"}}
+        = text_field_tag(:favorite_location_search, nil, placeholder: "Search by city", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)", "ng-hide" => "location")
+
+        %ul.search-results{ng: {model: "results", show: "searchTerms"}}
+          %li{ng: {show: "searchTerms.length < 3"}} Please type more
+          %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
+            {{result.city}} {{result.state_code}} {{result.country_code}}
+  
+  = f.submit("Add Favorite Location", class: "btn btn-neutral")
+  = link_to("Cancel", user_root_path, class: "btn btn-danger")

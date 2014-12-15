@@ -27,6 +27,7 @@
       #user-fave-cities
         %span.header-icon= fa_icon("heart")
         %small= current_user.favorite_cities.join(", ")
+        .small= link_to(raw("#{fa_icon('plus-circle')} Add Favorite Location"), new_favorite_location_path)
 
     .well#current-location
       %h3

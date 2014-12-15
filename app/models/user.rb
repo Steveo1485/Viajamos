@@ -90,7 +90,9 @@ class User < ActiveRecord::Base
   end
 
   def favorite_cities
-    favorite_locations.map { |favorite_location| favorite_location.location.city }
+    favorites = favorite_locations.map { |favorite_location| favorite_location.location.city }
+    favorites = ["No favorite locations."] if favorites.empty?
+    favorites
   end
 
   private

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: "omniauth_callbacks" }
 
+  resources :favorite_locations, only: [:new, :create, :destroy]
+
   resources :friendships, only: [:create, :destroy] do
     post 'accept', on: :member
     patch 'block', on: :member
