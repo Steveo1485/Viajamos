@@ -59,43 +59,7 @@
 
   .col-lg-9.col-md-9.col-sm-8
     .well.statbox
-      .row
-        .col-md-2.col-sm-2.col-xs-4.borderright
-          %p.title World Coverage
-          %p.stat 36%
-          %p.leaderboard
-            %i= fa_icon("group") 
-            1
-        .col-md-2.col-sm-2.col-xs-4.borderright
-          %p.title Countries
-          %p.stat 45
-          %p.leaderboard
-            %i= fa_icon("group") 
-            2
-        .col-md-2.col-sm-2.col-xs-4.borderright
-          %p.title Cities
-          %p.stat 82
-          %p.leaderboard
-            %i= fa_icon("group") 
-            1
-        .col-md-2.col-sm-2.col-xs-4.borderright
-          %p.title Faves
-          %p.stat 24
-          %p.leaderboard
-            %i= fa_icon("group") 
-            3
-        .col-md-2.col-sm-2.col-xs-4.borderright
-          %p.title Upcoming
-          %p.stat 4
-          %p.leaderboard
-            %i= fa_icon("group") 
-            14
-        .col-md-2.col-sm-2.col-xs-4
-          %p.title Wishlist
-          %p.stat 15
-          %p.leaderboard
-            %i= fa_icon("group") 
-            22
+      = render "statbox"
 
     .well#addatrip
       = render "add_trip"

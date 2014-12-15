@@ -1,4 +1,6 @@
 class Location < ActiveRecord::Base
+  TOTAL_COUNTRIES = 196.0
+
   validates :city, presence: true
   validates :country_code, presence: true
   validates :longitude, presence: true

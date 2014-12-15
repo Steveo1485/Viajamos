@@ -72,4 +72,29 @@ class User < ActiveRecord::Base
     self.provider.present? and self.uid.present?
   end
 
+  def past_trips
+    trips.where(time_period: "past")
+  end
+
+  def city_count
+    past_trip_location_count
+  end
+
+  def country_count
+    past_trip_country_count
+  end
+
+  def world_domination
+    country_count / Location::TOTAL_COUNTRIES
+  end
+
+  private
+
+  def past_trip_location_count
+    past_trips.pluck(:location_id).uniq.count
+  end
+
+  def past_trip_country_count
+    past_trips.joins(:location).pluck(:country_code).uniq.count
+  end
 end
