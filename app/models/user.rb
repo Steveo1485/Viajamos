@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
+  has_many :favorite_locations
   has_many :trips, dependent: :destroy
 
   belongs_to :home_location, class_name: "Location", foreign_key: :home_location_id
@@ -88,10 +89,18 @@ class User < ActiveRecord::Base
     country_count / Location::TOTAL_COUNTRIES
   end
 
+  def favorite_cities
+    favorite_locations.map { |favorite_location| favorite_location.location.city }
+  end
+
   private
 
   def past_trip_location_count
     past_trips.pluck(:location_id).uniq.count
+  end
+
+  def favorite_location_count
+    favorite_locations.count
   end
 
   def past_trip_country_count

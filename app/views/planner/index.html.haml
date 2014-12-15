@@ -26,7 +26,7 @@
         = user_home_location_name(current_user)
       #user-fave-cities
         %span.header-icon= fa_icon("heart")
-        %small Barcelona, Seattle, Norwich, Phnom Penh, Paris, New York City, San Francisco, Medellin, Kigali
+        %small= current_user.favorite_cities.join(", ")
 
     .well#current-location
       %h3

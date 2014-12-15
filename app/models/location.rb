@@ -7,6 +7,9 @@ class Location < ActiveRecord::Base
   validates :latitude, presence: true
   validates :city, uniqueness: {scope: :country_code}
 
+  has_many :favorite_locations
+  has_many :users, through: :favorite_locations
+
   def self.search(query)
     search_term = query.to_s.strip.split
     cached_all.where(['city LIKE ?', "%#{query}%"])

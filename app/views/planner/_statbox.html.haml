@@ -19,7 +19,7 @@
     /   1
   .col-md-2.col-sm-2.col-xs-4.borderright
     %p.title Faves
-    %p.stat ADD!
+    %p.stat= current_user.favorite_locations.count
     / %p.leaderboard
     /   %i= fa_icon("group") 
     /   3
