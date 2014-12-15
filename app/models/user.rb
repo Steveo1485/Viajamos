@@ -78,11 +78,13 @@ class User < ActiveRecord::Base
   end
 
   def city_count
-    past_trip_location_count
+    locations = past_trip_location_ids + favorite_location_ids
+    locations.uniq.count
   end
 
   def country_count
-    past_trip_country_count
+    country_codes = favorite_location_country_codes + past_trip_country_codes
+    country_codes.uniq.count
   end
 
   def world_domination
@@ -97,15 +99,19 @@ class User < ActiveRecord::Base
 
   private
 
-  def past_trip_location_count
-    past_trips.pluck(:location_id).uniq.count
+  def favorite_location_ids
+    favorite_locations.pluck(:location_id)
   end
 
-  def favorite_location_count
-    favorite_locations.count
+  def favorite_location_country_codes
+    favorite_locations.joins(:location).pluck(:country_code)
   end
 
-  def past_trip_country_count
-    past_trips.joins(:location).pluck(:country_code).uniq.count
+  def past_trip_location_ids
+    past_trips.pluck(:location_id)
+  end
+
+  def past_trip_country_codes
+    past_trips.joins(:location).pluck(:country_code)
   end
 end
