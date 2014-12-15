@@ -15,7 +15,7 @@ class TripPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user.id = @trip.user_id
+    @user.id == @trip.user_id
   end
 
   class Scope < Struct.new(:user, :scope)

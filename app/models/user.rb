@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
 
   has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
+  has_many :favorite_locations
   has_many :trips, dependent: :destroy
 
   belongs_to :home_location, class_name: "Location", foreign_key: :home_location_id
@@ -72,4 +73,39 @@ class User < ActiveRecord::Base
     self.provider.present? and self.uid.present?
   end
 
+  def past_trips
+    trips.where(time_period: "past")
+  end
+
+  def city_count
+    past_trip_location_count
+  end
+
+  def country_count
+    past_trip_country_count
+  end
+
+  def world_domination
+    country_count / Location::TOTAL_COUNTRIES
+  end
+
+  def favorite_cities
+    favorites = favorite_locations.map { |favorite_location| favorite_location.location.city }
+    favorites = ["No favorite locations."] if favorites.empty?
+    favorites
+  end
+
+  private
+
+  def past_trip_location_count
+    past_trips.pluck(:location_id).uniq.count
+  end
+
+  def favorite_location_count
+    favorite_locations.count
+  end
+
+  def past_trip_country_count
+    past_trips.joins(:location).pluck(:country_code).uniq.count
+  end
 end

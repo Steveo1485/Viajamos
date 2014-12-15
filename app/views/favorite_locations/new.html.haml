@@ -1,0 +1,18 @@
+%h3.header-title Favorite Locations
+
+.well
+  %h4.header-title Your Favorite Locations
+  - if current_user.favorite_locations.any?
+    - current_user.favorite_locations.each do |favorite_location|
+      .panel.panel-default
+        .panel-body
+          %span.panel-title= favorite_location.location.name
+          %div= link_to(raw("#{fa_icon("times-circle")} Remove"), favorite_location_path(favorite_location), method: :delete, "data-confirm" => "Are you sure you want to remove #{favorite_location.location.name} from your favorites?")
+  - else
+    .panel.panel-default
+      .panel-body
+        %span.panel-title Use the form below to add favorite locations.
+
+.well
+  %h4.header-title Add Favorite Location
+  = render "form"
