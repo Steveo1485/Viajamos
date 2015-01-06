@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105160423) do
+ActiveRecord::Schema.define(version: 20150105161821) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -65,10 +65,7 @@ ActiveRecord::Schema.define(version: 20150105160423) do
   end
 
   create_table "trips", force: true do |t|
-    t.integer  "location_id",                 null: false
     t.integer  "user_id",                     null: false
-    t.date     "start_date"
-    t.date     "end_date"
     t.string   "purpose"
     t.string   "comments"
     t.string   "certainty"
@@ -79,7 +76,6 @@ ActiveRecord::Schema.define(version: 20150105160423) do
     t.string   "time_period"
   end
 
-  add_index "trips", ["location_id"], name: "index_trips_on_location_id", using: :btree
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
