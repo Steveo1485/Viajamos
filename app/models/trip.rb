@@ -5,8 +5,6 @@ class Trip < ActiveRecord::Base
   has_many :locations, through: :destinations
 
   validates :user_id, numericality: true
-  # validates :start_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
-  # validates :end_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
   validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
