@@ -4,12 +4,12 @@
       .panel-body
         %span.panel-title
           = fa_icon("map-marker") 
-          = trip.location.city
+          / = trip.location.city
 
         %span.pull-right
           = fa_icon("calendar") 
-          = trip.date_range
-        = facebook_feed_button("Share Trip on Facebook", user_url(current_user), trip_facebook_feed_caption(trip))
+          / = trip.date_range
+        / = facebook_feed_button("Share Trip on Facebook", user_url(current_user), trip_facebook_feed_caption(trip))
       .panel-footer
         %span.nudge-right
           %span.label.positive= trip.time_period.try(:titlelize)

@@ -108,10 +108,10 @@ class User < ActiveRecord::Base
   end
 
   def past_trip_location_ids
-    past_trips.pluck(:location_id)
+    past_trips.map{ | trip| trip.locations.pluck(:id) }
   end
 
   def past_trip_country_codes
-    past_trips.joins(:location).pluck(:country_code)
+    past_trips.map{ | trip| trip.locations.pluck(:country_code) }
   end
 end
