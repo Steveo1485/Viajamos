@@ -5,3 +5,5 @@ app.factory 'Location', ['railsResourceFactory', (railsResourceFactory) ->
     url: "/locations",
     name: "location"
 ]
+
+app.controller("LocationSearchCtrl", LocationSearchCtrl)
