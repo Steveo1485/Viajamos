@@ -1,8 +1,10 @@
 class Trip < ActiveRecord::Base
   belongs_to :user
 
-  has_many :destinations
+  has_many :destinations, inverse_of: :trip
   has_many :locations, through: :destinations
+
+  accepts_nested_attributes_for :destinations
 
   validates :user_id, numericality: true
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }

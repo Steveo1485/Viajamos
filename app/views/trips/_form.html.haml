@@ -2,9 +2,7 @@
   = render "shared/form_errors", object: @trip
 
   .form-group
-    = fields_for @trip.destinations.build do |ff|
-      = ff.hidden_field :location_id
-    %div{ng: {controller: "LocationSearchCtrl", init: "init('#destination_location_id')"}}
+    %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_0_location_id')"}}
       %div{ng: {hide: "existingLocationId"}}
         %div{ng: {show: "location"}}
           Destination: {{location.city}} {{location.state_code}} {{location.country_code}}
@@ -31,15 +29,18 @@
               = f.radio_button :certainty, certainty_option
               = certainty_option.titleize
 
-  / .form-group
-  /   = f.label :start_date
-  /   .date-select
-  /     = f.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+  = f.fields_for :destinations, @trip.destinations.new do |ff|
+    = ff.hidden_field :location_id
 
-  / .form-group
-  /   = f.label :end_date
-  /   .date-select
-  /     = f.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+    .form-group
+      = ff.label :start_date
+      .date-select
+        = ff.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+
+    .form-group
+      = ff.label :end_date
+      .date-select
+        = ff.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
 
   .form-group
     = f.label :purpose, "Purpose of trip"

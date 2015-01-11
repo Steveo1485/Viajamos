@@ -2,11 +2,10 @@ class Destination < ActiveRecord::Base
   belongs_to :trip
   belongs_to :location
 
-  validates :trip_id, presence: true
+  validates :trip, presence: true
   validates :location_id, presence: true
   validate :start_date_if_booked
   validate :end_date_if_booked
-
 
   private
 
