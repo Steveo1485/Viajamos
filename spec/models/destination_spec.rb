@@ -4,7 +4,7 @@ RSpec.describe Destination, :type => :model do
 
   it { should belong_to(:trip) }
   it { should belong_to(:location) }
-  it { should validate_presence_of(:trip_id) }
+  it { should validate_presence_of(:trip) }
   it { should validate_presence_of(:location_id) }
 
   context "when trip is booked" do
