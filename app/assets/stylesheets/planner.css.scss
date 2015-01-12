@@ -2,7 +2,8 @@
 
 body.planner-index {
   .fb-feed-post {
-    font-size: 0.75em;
+    font-size: 11px;
+    color:#fff;
   }
 
   .fb-feed-post:hover {
@@ -27,6 +28,7 @@ body.planner-index {
     a.edit-icon {
       float: right;
       color: $light_gray;
+      display:inline-flex;
     }
 
     #user-avatar {
@@ -72,5 +74,47 @@ body.planner-index {
         text-align: center;
       }
     }
-  } 
+  }
+  #trips {
+    .panel-body {
+      padding-top:6px;
+      padding-bottom:0px;
+    }
+
+    .fa {
+      padding-right:7px;
+      font-size:1.1em;
+    }
+    .panel-title {
+      display:inline-block;
+      padding:0 20px;
+      text-align:center;
+    }
+    .panel-icons {
+      display:inline-block;
+      padding-right:0px;
+    }
+    .fa-chevron-right {
+      font-size:20px;
+    }
+    .tripdate {
+      font-size:12px;
+      text-align:left;
+    }
+    .panel-footer {
+      color:#444;
+      background:#fff;
+      border:#3D91B8 1px solid;
+
+      a {
+        color: #222;
+      }
+    }
+    .panel-body {
+      color:#F9F9F9;
+      background:#2F658E;
+      border-top-right-radius: 3px;
+      border-top-left-radius: 3px;
+    }
+  }
 }
