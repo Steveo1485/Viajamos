@@ -101,7 +101,12 @@ margin-bottom:20px;
 }
 
 .header-title {
-  color: $blue;
+  color: $elec_blue;
+  font-weight:700;
+}
+.username {
+  color: $elec_blue;
+  font-weight:300;
 }
 
 ul.search-results {
@@ -195,21 +200,9 @@ button.addatrip, button.addatrip:focus, button.addatrip:active {
   color:#fff;
 
  }
- #trips .panel-body {
-  color:#F9F9F9;
-  background:#2F658E;
-  border-top-right-radius: 3px;
-  border-top-left-radius: 3px;
-}
-#trips .panel-footer {
-  color:#F9F9F9;
-  background:#3D91B8;
-  a {
-    color: #fff;
-  }
-}
 
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
   background:#C24E47 ;
   color:#fff; 
 }
+

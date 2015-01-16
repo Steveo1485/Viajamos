@@ -1,6 +1,6 @@
 .row
   .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title World Coverage
+    %p.title World Domination
     %p.stat= number_to_percentage(current_user.world_domination, precision: 2)
     / %p.leaderboard
     /   %i= fa_icon("group") 
@@ -37,4 +37,4 @@
     /   22
 .row
   .col-xs-12
-    .pull-right= facebook_feed_button("Share World Domination On Facebook", user_url(current_user), "I've conquered #{number_to_percentage(current_user.world_domination, precision: 2)} of the world! #cotripping")
+    .pull-right= facebook_feed_button("Share World Domination", user_url(current_user), "I've conquered #{number_to_percentage(current_user.world_domination, precision: 2)} of the world! #cotripping")
