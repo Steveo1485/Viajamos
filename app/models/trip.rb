@@ -31,15 +31,27 @@ class Trip < ActiveRecord::Base
     purpose_options.map { |option| [option.titleize, option] }
   end
 
-  # def set_dates?
-  #   start_date && end_date
-  # end
+  def start_date
+    destinations.minimum(:start_date)
+  end
 
-  # def date_range
-  #   if set_dates?
-  #     "#{start_date.strftime('%e %b %Y')} - #{end_date.strftime('%e %b %Y')}"
-  #   else
-  #     "No date set for trip"
-  #   end
-  # end
+  def end_date
+    destinations.maximum(:end_date)
+  end
+
+  def set_dates?
+    start_date && end_date
+  end
+
+  def date_range
+    if set_dates?
+      "#{start_date.strftime('%e %b %Y')} - #{end_date.strftime('%e %b %Y')}"
+    else
+      "No date set for trip"
+    end
+  end
+
+  def cities
+    locations.pluck(:city).join(", ")
+  end
 end

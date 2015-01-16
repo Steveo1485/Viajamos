@@ -8,7 +8,7 @@
           %p.tripdate= fa_icon("calendar") 
 
         %span.panel-title
-          = trip.location.city
+          = trip.locations.first.try(:city)
           %p.tripdate
             = trip.start_date
 
