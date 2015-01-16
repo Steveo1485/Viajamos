@@ -49,14 +49,20 @@ a {
 	padding-bottom: 5px;
 }
 .positive {
-	background: $red;
+	background: $gray;
+	color:$black;
 }
 .negative {
-	background: $light-red ;
+	background: $light-gray ;
+	color: $black;
 }
 .neutral {
 	background: $gray;
 	color: #fff ;
+}
+.fb {
+	background: #3b5998;
+	color:#fff;
 }
 .btn-neutral, .btn-neutral:active, .btn-neutral:focus {
 	background: $light-blue;

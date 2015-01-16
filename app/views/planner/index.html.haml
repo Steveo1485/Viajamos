@@ -16,11 +16,13 @@
 
 .row#dashboard-content
   .col-lg-3.col-md-3.col-sm-4
-
     .well#user-panel
       = link_to(fa_icon("edit"), edit_user_path(current_user), class: "edit-icon")
-      #user-avatar= fa_icon("user")
-      %h3.header-title= current_user.name
+      .row
+        .col-md-3
+          #user-avatar= fa_icon("user")
+        .col-md-9
+          %h3.username= current_user.name
       #user_home_location
         %span Home:
         = user_home_location_name(current_user)
