@@ -1,6 +1,10 @@
 @import "colors";
 
 body.planner-index {
+  .destination.extra {
+    display: none;
+  }
+
   .fb-feed-post {
     font-size: 11px;
     color:#fff;

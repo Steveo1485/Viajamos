@@ -4,7 +4,7 @@ class Trip < ActiveRecord::Base
   has_many :destinations, inverse_of: :trip
   has_many :locations, through: :destinations
 
-  accepts_nested_attributes_for :destinations
+  accepts_nested_attributes_for :destinations, reject_if: proc { |attributes| attributes['location_id'].blank? }
 
   validates :user_id, numericality: true
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
