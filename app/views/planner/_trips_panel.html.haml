@@ -7,12 +7,13 @@
 
           %p.tripdate= fa_icon("calendar") 
 
-        %span.panel-title
-          = trip.locations.first.try(:city)
-          %p.tripdate
-            = trip.start_date
+        - trip.destinations.each do |destination|
+          %span.panel-title
+            = destination.location.city
+            %p.tripdate
+              = destination.start_date
 
-        = fa_icon("chevron-right")
+          = fa_icon("chevron-right")
         %span.panel-title
           = fa_icon("home")
           %p.tripdate
