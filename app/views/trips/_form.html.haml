@@ -3,7 +3,7 @@
 
   - 3.times do |n|
     %div{class: "#{n > 0 ? 'destination extra' : 'destination'}"}
-      = f.fields_for :destinations, @trip.destinations.new do |ff|
+      = f.fields_for :destinations, @trip.destinations[n] || @trip.destinations.build do |ff|
         = ff.hidden_field :location_id
         
         .destination-block
@@ -11,7 +11,14 @@
             .col-md-12
               .form-group
                 = label_tag(:location_search, "Destination ##{n + 1}")
-                %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id')"}}
+                %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id', '#{@trip.destinations[n].try(:location_id)}')"}}
+
+                  - if @trip.destinations[n].location
+                    %div{ng: {show: "existingLocationId"}}
+                      = "Destination: #{@trip.destinations[n].location.name}"
+                      = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+
+
                   %div{ng: {hide: "existingLocationId"}}
                     %div{ng: {show: "location"}}
                       Destination: {{location.city}} {{location.state_code}} {{location.country_code}}

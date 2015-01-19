@@ -53,7 +53,7 @@ class TripsController < ApplicationController
                                  :certainty,
                                  :private,
                                  :busy,
-                                 destinations_attributes: [:location_id, :start_date, :end_date])
+                                 destinations_attributes: [:id, :location_id, :start_date, :end_date])
   end
 
   def fetch_trip
