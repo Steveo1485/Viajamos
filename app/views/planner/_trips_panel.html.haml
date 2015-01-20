@@ -11,13 +11,13 @@
           %span.panel-title
             = destination.location.city
             %p.tripdate
-              = destination.start_date
+              = destination.start_date.strftime("%e %b, %Y")
 
           = fa_icon("chevron-right")
         %span.panel-title
           = fa_icon("home")
           %p.tripdate
-            = trip.end_date
+            = trip.end_date.strftime("%e %b, %Y")
 
       .panel-footer
         %span.nudge-right
