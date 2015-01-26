@@ -4,20 +4,20 @@
       .panel-body
         %span.panel-icons
           = fa_icon("map-marker") 
-          %p.tripdate
-            = fa_icon("calendar") 
 
-        %span.panel-title
-          = trip.location.city
-          %p.tripdate
-            = trip.start_date
+          %p.tripdate= fa_icon("calendar") 
 
-        = fa_icon("chevron-right")
+        - trip.destinations.each do |destination|
+          %span.panel-title
+            = destination.location.city
+            %p.tripdate
+              = destination.start_date.strftime("%e %b, %Y")
+
+          = fa_icon("chevron-right")
         %span.panel-title
           = fa_icon("home")
           %p.tripdate
-            = trip.end_date
-
+            = trip.end_date.strftime("%e %b, %Y")
 
       .panel-footer
         %span.nudge-right

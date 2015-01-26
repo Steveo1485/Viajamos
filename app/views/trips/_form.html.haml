@@ -1,38 +1,48 @@
 = form_for @trip do |f|
   = render "shared/form_errors", object: @trip
 
-  .row
-    .col-md-6
-      .form-group
-        = f.hidden_field :location_id
-        %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_location_id', '#{@trip.location_id}')"}}
-          - if @trip.location
-            %div{ng: {show: "existingLocationId"}}
-              = "Destination: #{@trip.location.name}"
-              = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+  - 3.times do |n|
+    %div{class: "#{n > 0 ? 'destination extra' : 'destination'}"}
+      = f.fields_for :destinations, @trip.destinations[n] || @trip.destinations.build do |ff|
+        = ff.hidden_field :location_id
+        
+        .destination-block
+          .row
+            .col-md-12
+              .form-group
+                = label_tag(:location_search, "Destination ##{n + 1}")
+                %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id', '#{@trip.destinations[n].try(:location_id)}')"}}
 
-          %div{ng: {hide: "existingLocationId"}}
-            %div{ng: {show: "location"}}
-              Destination: {{location.city}} {{location.state_code}} {{location.country_code}}
-              = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+                  - if @trip.destinations[n].location
+                    %div{ng: {show: "existingLocationId"}}
+                      = "Destination: #{@trip.destinations[n].location.name}"
+                      = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
 
-            = text_field_tag(:location_search, nil, placeholder: "Destination", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)", "ng-hide" => "location")
-            %ul.search-results{ng: {model: "results", show: "searchTerms"}}
-              %li{ng: {show: "searchTerms.length < 3"}} Please type more
-              %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
-                {{result.city}} {{result.state_code}} {{result.country_code}}
-    .col-md-6            
-      .form-group
-        .date-select
-          = f.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+
+                  %div{ng: {hide: "existingLocationId"}}
+                    %div{ng: {show: "location"}}
+                      Destination: {{location.city}} {{location.state_code}} {{location.country_code}}
+                      = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+                    = text_field_tag(:location_search, nil, placeholder: "Destination", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)", "ng-hide" => "location")
+                    %ul.search-results{ng: {model: "results", show: "searchTerms"}}
+                      %li{ng: {show: "searchTerms.length < 3"}} Please type more
+                      %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
+                        {{result.city}} {{result.state_code}} {{result.country_code}}
+          .row
+            .col-md-6            
+              .form-group
+                = ff.label(:start_date, "Arrival Date")
+                .date-select
+                  = ff.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+            .col-md-6
+              .form-group
+                = ff.label(:end_date, "Departure Date (optional)")
+                .date-select
+                  = ff.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+          
   .row
-    .col-md-6
-      .form-group
-        Return date (optional)
-        .date-select
-          = f.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
-    .col-md-6
-      = link_to("Or add another destination")
+    .col-sm-12
+      = link_to("Or add another destination", "#", id: "add-destination")
 
   .form-group
     = f.label :trip_status

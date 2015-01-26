@@ -30,16 +30,29 @@ RSpec.describe TripsController, :type => :controller do
 
   describe "POST #create" do
     before :each do
-      @build_trip = FactoryGirl.build(:trip)
+      @valid_params = FactoryGirl.attributes_for(:trip, destinations_attributes: [FactoryGirl.build(:destination).attributes] )
     end
 
-    it "should create Trip with valid attributes" do
-      expect{post :create, trip: @build_trip.attributes}.to change(Trip, :count).by(1)
+    it "should create a Trip with valid attributes" do
+      expect{post :create, trip: @valid_params}.to change(Trip, :count).by(1)
+    end
+
+    it "should create a Destination for the created Trip with valid attributes" do
+      expect{post :create, trip: @valid_params}.to change(Destination, :count).by(1)
+      expect(Destination.last.trip).to eq(Trip.last)
     end
 
     it "should not create Trip with invalid attributes" do
-      @build_trip.time_period = nil
-      expect{post :create, trip: @build_trip.attributes}.to_not change(Trip, :count)
+      @valid_params.delete(:certainty)
+      expect{post :create, trip: @valid_params}.to_not change(Trip, :count)
+    end
+
+    it "should not create a Trip or Destination with invalid destination attributes" do
+      destination_attributes = FactoryGirl.build(:destination).attributes
+      destination_attributes.delete("location_id")
+      @invalid_params = FactoryGirl.attributes_for(:trip, destinations_attributes: [destination_attributes] )
+      expect{post :create, trip: @invalid_params}.to_not change(Trip, :count)
+      expect{post :create, trip: @invalid_params}.to_not change(Destination, :count)
     end
   end
 
@@ -57,9 +70,9 @@ RSpec.describe TripsController, :type => :controller do
     end
 
     it "should not update trip with invalid attributes" do
-      location_id = @trip.location_id
-      patch :update, id: @trip.id, trip: {location_id: nil }
-      expect(@trip.reload.location_id).to eq(location_id)
+      time_period = @trip.time_period
+      patch :update, id: @trip.id, trip: {time_period: nil }
+      expect(@trip.reload.time_period).to eq(time_period)
     end
   end
 

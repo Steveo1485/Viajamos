@@ -1,11 +1,12 @@
 class Trip < ActiveRecord::Base
-  belongs_to :location
   belongs_to :user
 
-  validates :location_id, numericality: true
+  has_many :destinations, inverse_of: :trip
+  has_many :locations, through: :destinations
+
+  accepts_nested_attributes_for :destinations, reject_if: proc { |attributes| attributes['location_id'].blank? }
+
   validates :user_id, numericality: true
-  validates :start_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
-  validates :end_date, presence: true, if: Proc.new { |trip| trip.certainty == 'booked'}
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
   validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
@@ -30,6 +31,14 @@ class Trip < ActiveRecord::Base
     purpose_options.map { |option| [option.titleize, option] }
   end
 
+  def start_date
+    destinations.minimum(:start_date)
+  end
+
+  def end_date
+    destinations.maximum(:end_date)
+  end
+
   def set_dates?
     start_date && end_date
   end
@@ -40,5 +49,9 @@ class Trip < ActiveRecord::Base
     else
       "No date set for trip"
     end
+  end
+
+  def cities
+    locations.pluck(:city).join(", ")
   end
 end
