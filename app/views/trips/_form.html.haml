@@ -8,7 +8,7 @@
         
         .destination-block
           .row
-            .col-md-12
+            .col-md-6
               .form-group
                 = label_tag(:location_search, "Destination ##{n + 1}")
                 %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id', '#{@trip.destinations[n].try(:location_id)}')"}}
@@ -28,20 +28,20 @@
                       %li{ng: {show: "searchTerms.length < 3"}} Please type more
                       %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
                         {{result.city}} {{result.state_code}} {{result.country_code}}
-          .row
+
             .col-md-6            
               .form-group
                 = ff.label(:start_date, "Arrival Date")
                 .date-select
-                  = ff.date_select :start_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
-            .col-md-6
-              .form-group
-                = ff.label(:end_date, "Departure Date (optional)")
-                .date-select
-                  = ff.date_select :end_date, { order: [:day, :month, :year], prompt: true }, class: "form-control"
+                  = ff.date_select :start_date, { order: [:day, :month, :year], prompt: true}, class: "form-control"
           
   .row
-    .col-sm-12
+    .col-md-6
+      .form-group
+        = label_tag :end_date, "End Date"
+        .date-select
+          = date_select Date.today, :end_date, { order: [:day, :month, :year], prompt: true}, class: "form-control"
+    .col-sm-6
       = link_to("Or add another destination", "#", id: "add-destination")
 
   .form-group
