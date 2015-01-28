@@ -52,6 +52,6 @@ class Trip < ActiveRecord::Base
   end
 
   def cities
-    locations.pluck(:city).join(", ")
+    locations.pluck(:city)
   end
 end
