@@ -16,7 +16,7 @@ class TripsController < ApplicationController
       if @trip.destinations[index + 1]
         destination.end_date = @trip.destinations[index + 1].start_date
       else
-        destination.end_date = params[:end_date]
+        destination.end_date = params[:end_date].map{|k,v| v}.join("-").to_date
       end
     end
     @trip.user_id = current_user.id
