@@ -3,7 +3,7 @@ $ ->
     $("#add-destination").click (e) ->
       e.preventDefault()
       $(".destination.extra:hidden").first().slideDown()
-      if $(".destination.extra:visible").length >= 2
+      if $(".destination.extra:visible").length == $(".destination.extra").length
         $("#add-destination").hide()
 
 
