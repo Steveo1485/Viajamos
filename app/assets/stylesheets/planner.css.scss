@@ -59,9 +59,6 @@ body.planner-index {
       background-color: $friend_title_bg;
       color: $white;
     }
-    a {
-      color:#fff;
-    }
     hr {
       border-color: black;
       margin: 10px 0px;
@@ -77,6 +74,9 @@ body.planner-index {
         padding-top: 5px;
         text-align: center;
       }
+    }
+    #new-friend {
+      margin-top: 1em;
     }
   }
   #trips {

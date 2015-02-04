@@ -1,9 +1,5 @@
-%h4.friend-title#headingTwo{:role => 'tab'} 
-	%a{'data-toggle' => "collapse", 'data-parent' => "#accordion", :href => "#collapseTwo", 'aria-expanded' => "true", 'aria-controls' => "collapseTwo"}
-		Friends
-		%span.badge #{current_user.travel_buddies.count}
+%h4.friend-title#headingTwo
+	Friends
+	%span.badge #{current_user.friends.count}
 - for friend in current_user.friends
-	.friend-panel-info
-		= link_to(friend.name, user_path(friend))
-- unless current_user.travel_buddies.last == friend
-	%hr
+	.friend-panel-info= link_to(friend.name, user_path(friend))

@@ -1,39 +1,21 @@
 class FriendshipsController < ApplicationController
   before_filter :fetch_friendship, only: [:accept, :destroy, :block, :facebook_request]
 
-  def find_friends
-    @friendship = Friendship.new
-    authorize(@friendship)
-
-    @requested_user = User.where(email: params[:requested_friend_email]).first
-
-    unless @requested_user
-      flash[:notice] = "Sorry, no user was found with that email."
-      redirect_to planner_path and return
-    end
-
-    if @requested_user.email == current_user.email
-      flash[:notice] = "Sorry, you can't add yourself as a friend."
-      redirect_to planner_path and return
-    end
-
-    if current_user.friendships.where(friend_id: @requested_user.id).first
-      flash[:notice] = "There is alraedy an existing friendship or request for that user."
-      redirect_to planner_path and return
-    end
-  end
-
   def create
-    @friendship = Friendship.new(friendship_params)
-    @friendship.user_id = current_user.id
+    @friendship = Friendship.new(user_id: current_user.id, type: "Friend")
     authorize(@friendship)
-
-    if @friendship.save
-      redirect_to planner_path, notice: "Friends request sent!"
-    else
-      @requested_user = User.find(friendship_params[:friend_id])
-      render :find_friends
+    friend_user = User.where(email: params[:friend_email]).first
+    unless friend_user
+      flash[:notice] = "Sorry, we weren't able to find your friend."
+      redirect_to planner_path and return
     end
+    @friendship.friend_id = friend_user.id
+    if @friendship.save
+      flash_notice = "Friend request sent!"
+    else
+      flash_notice = "Unable to send friend request. Please try again."
+    end
+    redirect_to planner_path, notice: flash_notice
   end
 
   def accept
