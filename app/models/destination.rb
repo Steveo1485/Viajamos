@@ -7,6 +7,15 @@ class Destination < ActiveRecord::Base
   validate :start_date_if_booked
   validate :end_date_if_booked
 
+  def set_end_date
+    self_index = trip.destinations.find_index(self)
+    if trip.destinations[self_index + 1]
+      end_date = trip.destinations[self_index + 1].start_date
+    else
+      self.end_date = trip.departure_date
+    end
+  end
+
   private
 
   def start_date_if_booked

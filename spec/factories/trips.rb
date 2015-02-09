@@ -6,5 +6,6 @@ FactoryGirl.define do
     certainty "booked"
     private :false
     busy :false
+    departure_date {Faker::Date.forward(14)}
   end
 end

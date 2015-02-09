@@ -38,16 +38,17 @@ RSpec.describe TripsController, :type => :controller do
     end
 
     it "should create a Destination for the created Trip with valid attributes" do
-      expect{post :create, trip: @valid_params}.to change(Destination, :count).by(1)
+      expect{post :create, trip: @valid_params, end_date: @end_date}.to change(Destination, :count).by(1)
       expect(Destination.last.trip).to eq(Trip.last)
     end
 
     it "should not create Trip with invalid attributes" do
       @valid_params.delete(:certainty)
-      expect{post :create, trip: @valid_params}.to_not change(Trip, :count)
+      expect{post :create, trip: @valid_params, end_date: @end_date}.to_not change(Trip, :count)
     end
 
     it "should not create a Trip or Destination with invalid destination attributes" do
+      pending("Don't save trip if destinations not saved")
       destination_attributes = FactoryGirl.build(:destination).attributes
       destination_attributes.delete("location_id")
       @invalid_params = FactoryGirl.attributes_for(:trip, destinations_attributes: [destination_attributes] )

@@ -1,4 +1,6 @@
 class Trip < ActiveRecord::Base
+  attr_accessor :departure_date
+
   belongs_to :user
 
   has_many :destinations, inverse_of: :trip
