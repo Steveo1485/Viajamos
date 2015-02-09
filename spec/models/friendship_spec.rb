@@ -4,14 +4,10 @@ RSpec.describe Friendship, :type => :model do
 
   it { should belong_to(:user) }
   it { should validate_numericality_of(:friend_id) }
-  it { should ensure_inclusion_of(:type).in_array(["Friend", "TravelBuddy"]) }
+  it { should validate_inclusion_of(:type).in_array(["Friend", "Blocked"]) }
 
   before :each do
     @friendship = FactoryGirl.create(:friendship, confirmed: true)
-  end
-
-  context "#destroy_flash" do
-    pending "Should be a decorator?"
   end
 
   context "#friend_user" do
