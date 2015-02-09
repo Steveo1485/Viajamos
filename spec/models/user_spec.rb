@@ -36,14 +36,6 @@ RSpec.describe User, :type => :model do
     end
   end
 
-  context "#travel_buddies" do
-    it "should return travel buddy user objects for user" do
-      @confirmed_tb = FactoryGirl.create(:friendship, type: "TravelBuddy", user: @user, friend_id: @friend_user.id, confirmed: true)
-      @unconfirmed_tb = FactoryGirl.create(:friendship, type: "TravelBuddy", user: @user, friend_id: FactoryGirl.create(:user).id)
-      expect(@user.travel_buddies).to eq([@friend_user])
-    end
-  end
-
   context "#friends" do
     it "should return friend user objects for user" do
       @confirmed_friend = FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: @friend_user.id, confirmed: true)
@@ -67,48 +59,4 @@ RSpec.describe User, :type => :model do
       expect(@user.friends_with?(@friend_user)).to eq(true)
     end
   end
-
-  context "#travel_buddies_with?" do
-    it "should return true if user is travel buddy with passed user" do
-      FactoryGirl.create(:friendship, user: @user, friend_id: @friend_user.id, confirmed: true)
-      expect(@user.travel_buddies_with?(@friend_user)).to eq(true)
-    end
-
-    it "should return false if user is not travel buddies with passed user" do
-      expect(@user.travel_buddies_with?(@friend_user)).to eq(false)
-    end
-  end
-
-  context "#friend_of_friend_with?" do
-    before :each do
-      FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: @friend_user.id, confirmed: true)
-      @fof_user = FactoryGirl.create(:user)
-    end
-
-    it "should return true if user is friend of a friend with passed user" do
-      FactoryGirl.create(:friendship, type: "Friend", user: @friend_user, friend_id: @fof_user.id, confirmed: true)
-      expect(@user.friend_of_friend_with?(@fof_user)).to eq(true)
-    end
-
-    it "should return false if user is not a friend of a friend with passed user" do
-      expect(@user.friend_of_friend_with?(@fof_user)).to eq(false)
-    end
-  end
-
-  context "#travel_buddy_of_travel_buddy_with?" do
-    before :each do
-      FactoryGirl.create(:friendship, user: @user, friend_id: @friend_user.id, confirmed: true)
-      @tbotb_user = FactoryGirl.create(:user)
-    end
-
-    it "should return true if user is friend of a friend with passed user" do
-      FactoryGirl.create(:friendship, user: @friend_user, friend_id: @tbotb_user.id, confirmed: true)
-      expect(@user.travel_buddy_of_travel_buddy_with?(@tbotb_user)).to eq(true)
-    end
-
-    it "should return false if user is not a friend of a friend with passed user" do
-      expect(@user.travel_buddy_of_travel_buddy_with?(@tbotb_user)).to eq(false)
-    end
-  end
-
 end

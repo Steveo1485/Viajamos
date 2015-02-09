@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def friends_with?(user)
-    friends.include?(user) || travel_buddies.include?(user)
+    friends.include?(user)
   end
 
   def oauth?
