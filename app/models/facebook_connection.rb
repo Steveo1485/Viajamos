@@ -16,4 +16,8 @@ class FacebookConnection < ActiveRecord::Base
       end
     end
   end
+
+  def reverse_connection
+    FacebookConnection.where(user_id: self.friend_user_id, friend_user_id: self.user_id).first
+  end
 end
