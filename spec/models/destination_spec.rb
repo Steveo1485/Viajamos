@@ -9,18 +9,18 @@ RSpec.describe Destination, :type => :model do
 
   context "when trip is booked" do
     before :each do
-      @destination = FactoryGirl.build(:destination)
+      @built_trip = FactoryGirl.create(:trip, :with_destination)
+      @destination = FactoryGirl.build(:destination, trip: @built_trip)
+      @destination.set_end_date
     end
 
     it "should validate start_date" do
-      pending
       expect(@destination).to be_valid
       @destination.start_date = nil
       expect(@destination).to_not be_valid
     end
 
     it "should validate end_date" do
-      pending
       expect(@destination).to be_valid
       @destination.end_date = nil
       expect(@destination).to_not be_valid
@@ -29,7 +29,7 @@ RSpec.describe Destination, :type => :model do
 
   context "when trip is not booked" do
     before :each do
-      @trip = FactoryGirl.create(:trip, certainty: "likely")
+      @trip = FactoryGirl.create(:trip, :with_destination, certainty: "likely")
       @destination = FactoryGirl.build(:destination, trip: @trip)
     end
 

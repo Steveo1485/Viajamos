@@ -12,6 +12,7 @@ class Trip < ActiveRecord::Base
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
   validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
+  validates :destinations, presence: true
 
   scope :wishlist, -> { where(time_period: 'wishlist') }
   scope :past, -> { where(time_period: "past" ) }
