@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   devise :omniauthable, omniauth_providers: [:facebook]
 
   has_many :friendships, dependent: :destroy
+  has_many :facebook_connections, dependent: :destroy
   has_many :favorite_locations
   has_many :trips, dependent: :destroy
 
@@ -68,6 +69,10 @@ class User < ActiveRecord::Base
     favorites = favorite_locations.map { |favorite_location| favorite_location.location.city }
     favorites = ["No favorite locations."] if favorites.empty?
     favorites
+  end
+
+  def facebook_friends
+    User.where(id: facebook_connections.pluck(:friend_user_id))
   end
 
   private
