@@ -3,4 +3,6 @@
     Facebook Connections
     %span.badge #{current_user.facebook_friends.count}
   - for friend in current_user.facebook_friends
-    .friend-panel-info= friend.name
+    .friend-panel-info
+      = friend.name
+      = link_to("Send Friend Request", friendships_path(uid: friend.uid), method: :post, class: "btn btn-xs btn-success")
