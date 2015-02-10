@@ -4,14 +4,11 @@ RSpec.describe Destination, :type => :model do
 
   it { should belong_to(:trip) }
   it { should belong_to(:location) }
-  it { should validate_presence_of(:trip) }
-  it { should validate_presence_of(:location_id) }
 
   context "when trip is booked" do
     before :each do
       @built_trip = FactoryGirl.create(:trip, :with_destination)
       @destination = FactoryGirl.build(:destination, trip: @built_trip)
-      @destination.set_end_date
     end
 
     it "should validate start_date" do
@@ -22,8 +19,6 @@ RSpec.describe Destination, :type => :model do
 
     it "should validate end_date" do
       expect(@destination).to be_valid
-      @destination.end_date = nil
-      expect(@destination).to_not be_valid
     end
   end
 

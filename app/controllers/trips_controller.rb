@@ -14,7 +14,6 @@ class TripsController < ApplicationController
     @trip = Trip.new(trip_params)
     @trip.user_id = current_user.id
     authorize(@trip)
-    @trip.destinations.each { |d| d.set_end_date }
     if @trip.save
       redirect_to user_root_path, notice: "Successfully added trip!"
     else

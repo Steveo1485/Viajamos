@@ -1,5 +1,6 @@
 class Trip < ActiveRecord::Base
   attr_accessor :departure_date
+  columns_hash["departure_date"] = ActiveRecord::ConnectionAdapters::Column.new("departure_date", nil, "date")
 
   belongs_to :user
 
