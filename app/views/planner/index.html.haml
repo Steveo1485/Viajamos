@@ -3,12 +3,6 @@
 .row
   #map-canvas.jumbotron
 
-/ - if current_user.sign_in_count <= 5
-/   .row#social-invite.text-center
-/     %h4 Travel is more fun with friends!
-/     = link_to("Share on Facebook", "#", id: "fb-share", class: "btn btn-default btn-sm")
-/     = link_to("Share on LinkedIn", "https://www.linkedin.com/cws/share?url=http://www.cotripping.com", id: "linkedin-share", class: "btn btn-default btn-sm", target: "_blank")
-
 .row
   .col-md-12.flash-messages
     - flash.each do |name, msg|
@@ -31,33 +25,16 @@
         %small= current_user.favorite_cities.join(", ")
         .small= link_to(raw("#{fa_icon('plus-circle')} Add Favorite Location"), new_favorite_location_path)
 
-    .well#current-location
-      %h3
-        %span.header-icon= fa_icon("location-arrow")
-        %span.header-title Current Location
-      %p
-        Last confirmed
-        %span.label.label-primary Norwich, UK
-        %button.btn.btn-neutral.btn-xs Update
-      %p
-        Last unconfirmed
-        %span.label.label-default London, UK
-        %span.header-icon= fa_icon("check-circle")
-        %span.header-icon= fa_icon("times-circle")      
-      %p.small We've based this on your co:tripping plans and your recent Facebook checkins. Feel free to confirm or correct us.
-
     .well#friend-panel
       %h3
         %span.header-icon= fa_icon("users")
         %span.header-title Friends
       #accordion.panel-group{:role => 'tablist', 'aria-multiselectable' => 'true'}
         %h4.f_sec_head#headingOne{:role => 'tab'}
-      / = render "add_friend"
       = render "pending_friend_requests"
-      = render "facebook_friends"
-      = render "travel_buddies"
       = render "friends"
-      / = render "outstanding_friend_requests"
+      = render "facebook_friends"
+      = render "add_friend"
 
 
   .col-lg-9.col-md-9.col-sm-8

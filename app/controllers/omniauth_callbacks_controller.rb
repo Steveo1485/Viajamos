@@ -3,7 +3,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def facebook
     @user = User.from_omniauth(request.env["omniauth.auth"])
     if @user.persisted?
-      FacebookConnection.delay.create_connections(@user) if @user.sign_in_count == 0 and @user.oauth_token
+      FacebookConnection.create_connections!(@user)
       if @user.oauth_token.blank? or Time.at(@user.oauth_token_expires_at.to_i) <= (Time.now - 1.week)
         update_oauth_token(@user, request.env["omniauth.auth"].credentials)
       end

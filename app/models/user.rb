@@ -28,15 +28,11 @@ class User < ActiveRecord::Base
   end
 
   def outstanding_friend_requests
-    friendships.where(type: ["Friend", "TravelBuddy"], confirmed: false)
+    friendships.where(type: "Friend", confirmed: false)
   end
 
   def friend_requests
-    Friendship.where(friend_id: self.id, type: ["Friend", "TravelBuddy"], confirmed: false)
-  end
-
-  def travel_buddies
-    User.where(id: friendships.where(type: "TravelBuddy", confirmed: true).pluck(:friend_id))
+    Friendship.where(friend_id: self.id, type: "Friend", confirmed: false)
   end
 
   def friends
@@ -44,29 +40,7 @@ class User < ActiveRecord::Base
   end
 
   def friends_with?(user)
-    friends.include?(user) || travel_buddies.include?(user)
-  end
-
-  def travel_buddies_with?(user)
-    travel_buddies.include?(user)
-  end
-
-  def friend_of_friend_with?(user)
-    friends.each do |friend|
-      if friend.friends.include?(user)
-        return true
-      end
-    end
-    false
-  end
-
-  def travel_buddy_of_travel_buddy_with?(user)
-    travel_buddies.each do |travel_buddy|
-      if travel_buddy.travel_buddies.include?(user)
-        return true
-      end
-    end
-    false
+    friends.include?(user)
   end
 
   def oauth?
@@ -95,6 +69,10 @@ class User < ActiveRecord::Base
     favorites = favorite_locations.map { |favorite_location| favorite_location.location.city }
     favorites = ["No favorite locations."] if favorites.empty?
     favorites
+  end
+
+  def facebook_friends
+    User.where(id: facebook_connections.where(request_sent: false).pluck(:friend_user_id))
   end
 
   private

@@ -4,8 +4,8 @@ RSpec.describe TripsController, :type => :controller do
 
   before :each do
     @user = FactoryGirl.create(:user)
-    @trip = FactoryGirl.create(:trip, user: @user)
-    @other_trip = FactoryGirl.create(:trip)
+    @trip = FactoryGirl.create(:trip, :with_destination, user: @user)
+    @other_trip = FactoryGirl.create(:trip, :with_destination)
     sign_in @user
   end
 
@@ -30,29 +30,29 @@ RSpec.describe TripsController, :type => :controller do
 
   describe "POST #create" do
     before :each do
-      @valid_params = FactoryGirl.attributes_for(:trip, destinations_attributes: [FactoryGirl.build(:destination).attributes] )
+      @built_trip = FactoryGirl.build(:trip)
+      @built_destination = FactoryGirl.build(:destination, trip: @built_trip)
+      @trip_params = @built_trip.attributes.merge(departure_date: Faker::Date.forward(7), destinations_attributes: [@built_destination.attributes])
     end
 
     it "should create a Trip with valid attributes" do
-      expect{post :create, trip: @valid_params}.to change(Trip, :count).by(1)
+      expect{post :create, trip: @trip_params}.to change(Trip, :count).by(1)
     end
 
     it "should create a Destination for the created Trip with valid attributes" do
-      expect{post :create, trip: @valid_params}.to change(Destination, :count).by(1)
+      expect{post :create, trip: @trip_params}.to change(Destination, :count).by(1)
       expect(Destination.last.trip).to eq(Trip.last)
     end
 
     it "should not create Trip with invalid attributes" do
-      @valid_params.delete(:certainty)
-      expect{post :create, trip: @valid_params}.to_not change(Trip, :count)
+      @trip_params[:certainty] = nil
+      expect{post :create, trip: @trip_params}.to_not change(Trip, :count)
     end
 
     it "should not create a Trip or Destination with invalid destination attributes" do
-      destination_attributes = FactoryGirl.build(:destination).attributes
-      destination_attributes.delete("location_id")
-      @invalid_params = FactoryGirl.attributes_for(:trip, destinations_attributes: [destination_attributes] )
-      expect{post :create, trip: @invalid_params}.to_not change(Trip, :count)
-      expect{post :create, trip: @invalid_params}.to_not change(Destination, :count)
+      @trip_params[:destinations_attributes].first[:start_date] = nil
+      expect{post :create, trip: @trip_params}.to_not change(Trip, :count)
+      expect{post :create, trip: @trip_params}.to_not change(Destination, :count)
     end
   end
 

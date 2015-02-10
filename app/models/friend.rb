@@ -1,3 +1,3 @@
 class Friend < Friendship
-  
+
 end

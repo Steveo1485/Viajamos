@@ -12,13 +12,6 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
-    @trip.destinations.each_with_index do |destination, index|
-      if @trip.destinations[index + 1]
-        destination.end_date = @trip.destinations[index + 1].start_date
-      else
-        destination.end_date = params[:end_date].map{|k,v| v}.join("-").to_date
-      end
-    end
     @trip.user_id = current_user.id
     authorize(@trip)
     if @trip.save
@@ -60,7 +53,8 @@ class TripsController < ApplicationController
                                  :certainty,
                                  :private,
                                  :busy,
-                                 destinations_attributes: [:id, :location_id, :start_date, :end_date])
+                                 :departure_date,
+                                 destinations_attributes: [:id, :location_id, :start_date])
   end
 
   def fetch_trip

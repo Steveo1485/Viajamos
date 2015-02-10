@@ -7,7 +7,18 @@ class Destination < ActiveRecord::Base
   validate :start_date_if_booked
   validate :end_date_if_booked
 
+  before_validation :set_end_date
+
   private
+
+  def set_end_date
+    self_index = trip.destinations.find_index(self) || 0
+    if trip.destinations[self_index + 1]
+      end_date = trip.destinations[self_index + 1].start_date
+    else
+      self.end_date = trip.departure_date
+    end
+  end
 
   def start_date_if_booked
     if self.trip and self.trip.certainty == "booked" and start_date.blank?

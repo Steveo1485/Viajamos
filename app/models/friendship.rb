@@ -6,15 +6,13 @@ class Friendship < ActiveRecord::Base
   validates :friend_id, numericality: true
   validates :user_id, uniqueness: { scope: :friend_id }
 
+  after_create :update_facebook_connections
+
   after_update :create_reverse_friendship, if: Proc.new { |friendship| friendship.confirmed_changed? && friendship.confirmed }
   after_update :block_reverse_friendship, if: Proc.new{ |friendship| friendship.type_changed? && friendship.type == "Blocked" }
 
   def self.types
-    ["Friend", "TravelBuddy", "Blocked", "FacebookConnection"]
-  end
-
-  def self.selectable_types
-    ["Friend", "TravelBuddy"]
+    ["Friend", "Blocked"]
   end
 
   def friend_user
@@ -26,6 +24,13 @@ class Friendship < ActiveRecord::Base
   end
 
   private
+
+  def update_facebook_connections
+    if connection = FacebookConnection.where(user_id: self.user_id, friend_user_id: self.friend_id).first
+      connection.update(request_sent: true)
+      connection.reverse_connection.update(request_sent: true)
+    end
+  end
 
   def create_reverse_friendship
     Friendship.create(user_id: self.friend_id, friend_id: self.user_id, type: self.type, confirmed: true)

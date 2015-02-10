@@ -1,2 +1,0 @@
-class TravelBuddy < Friendship
-end
