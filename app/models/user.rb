@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
   end
 
   def facebook_friends
-    User.where(id: facebook_connections.where(request_sent: false).pluck(:friend_user_id))
+    User.where(id: facebook_connections.where(request_sent: false, ignore: false).pluck(:friend_user_id))
   end
 
   private

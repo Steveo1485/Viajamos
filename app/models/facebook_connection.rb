@@ -5,6 +5,8 @@ class FacebookConnection < ActiveRecord::Base
   validates :friend_user_id, numericality: true
   validates :friend_user_id, uniqueness: { scope: :user_id, message: "already a Facebook Connection." }
 
+  scope :active, -> { where(request_sent: false, ignore: false) }
+
   def self.create_connections!(user)
     graph = Koala::Facebook::API.new(user.oauth_token, ENV['FACEBOOK_APP_SECRET'])
     friends = graph.get_connections("me", "friends")
@@ -19,5 +21,13 @@ class FacebookConnection < ActiveRecord::Base
 
   def reverse_connection
     FacebookConnection.where(user_id: self.friend_user_id, friend_user_id: self.user_id).first
+  end
+
+  def friend_user
+    User.where(id: friend_user_id).first
+  end
+
+  def ignored?
+    ignore
   end
 end

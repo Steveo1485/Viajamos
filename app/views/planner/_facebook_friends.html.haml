@@ -1,8 +1,10 @@
-- if current_user.facebook_friends.any?
+- if current_user.facebook_connections.active.any?
   %h4.friend-title#headingTwo
     Facebook Connections
     %span.badge #{current_user.facebook_friends.count}
-  - for friend in current_user.facebook_friends
+  - for connection in current_user.facebook_connections.active
     .friend-panel-info
-      = friend.name
-      = link_to("Send Friend Request", friendships_path(uid: friend.uid), method: :post, class: "btn btn-xs btn-success")
+      = connection.friend_user.try(:name)
+      .friend-btns
+        = link_to("Send Friend Request", friendships_path(uid: connection.friend_user.uid), method: :post, class: "btn btn-xs btn-success")
+        = link_to("Ignore", facebook_connection_path(connection, facebook_connection: {ignore: true}), method: :patch, class: "btn btn-danger btn-xs")
