@@ -43,36 +43,30 @@ RSpec.describe FriendshipsController, :type => :controller do
     end
   end
 
-  describe "POST #accept" do
+  describe "PATCH #update" do
     before :each do
       @friendship = FactoryGirl.create(:friendship, friend_id: @user.id)
     end
 
-    it "should accept a friendship when found" do
-      post :accept, id: @friendship.id
+    it "should update to an accepted friendship" do
+      patch :update, id: @friendship.id, friendship: {confirmed: true}
       expect(@friendship.reload.confirmed).to eq(true)
     end
 
     it "should create a mirror friendship when accepted" do
-      expect{ post :accept, id: @friendship.id }.to change(Friendship, :count).by(1)
+      expect{ post :update, id: @friendship.id, friendship: {confirmed: true} }.to change(Friendship, :count).by(1)
     end
 
     it "should not create a mirror friendship if already accepted" do
       accepted_friendship = FactoryGirl.create(:friendship, confirmed: true)
-      expect{ post :accept, id: accepted_friendship.id }.to_not change(Friendship, :count)
-    end
-  end
-
-  describe "PATCH #block" do
-    before :each do
-      @friendship = FactoryGirl.create(:friendship, confirmed: true, user: @user, friend_id: @friend.id)
-      @reverse_friendship = FactoryGirl.create(:friendship, user_id: @friend.id, friend_id: @user.id, confirmed: true)
+      expect{ post :update, id: accepted_friendship.id, friendship: {confirmed: true} }.to_not change(Friendship, :count)
     end
 
-    it "should update Friendship type to blocked" do
-      patch :block, id: @friendship.id
+    it "should update friendship and reverse friendship to blocked" do
+      @friendship.update(confirmed: true)
+      reverse_friendship = FactoryGirl.create(:friendship, user_id: @friend.id, friend_id: @user.id, confirmed: true)
+      patch :update, id: @friendship.id, friendship: {type: "Blocked"}
       expect(@friendship.reload.type).to eq("Blocked")
-      expect(@reverse_friendship.reload.type).to eq("Blocked")
     end
   end
 end
