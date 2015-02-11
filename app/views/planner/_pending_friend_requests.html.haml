@@ -7,5 +7,5 @@
     .friend-panel-info
       == #{link_to(request.user.name, user_path(request.user))} wants to be your #{request.type}
       .friend-btns
-        = link_to("Approve", accept_friendship_path(request), method: :post, class: "btn btn-success btn-xs")
+        = link_to("Approve", friendship_path(request, friendship: {confirmed: true}), method: :patch, class: "btn btn-success btn-xs")
         = link_to("Ignore", friendship_path(request), method: :delete, class: "btn btn-danger btn-xs")
