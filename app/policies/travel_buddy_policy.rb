@@ -1,2 +1,0 @@
-class TravelBuddyPolicy < FriendshipPolicy
-end
