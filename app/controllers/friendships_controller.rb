@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-  before_filter :fetch_friendship, only: [:accept, :destroy, :block, :facebook_request]
+  before_filter :fetch_friendship, only: [:update, :destroy, :facebook_request]
 
   def create
     @friendship = Friendship.new(user_id: current_user.id, type: "Friend")
@@ -15,13 +15,12 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  def accept
+  def update
     authorize(@friendship)
-    @friendship.confirmed = true
-    if @friendship.save
-      redirect_to planner_path, notice: "Friendship confirmed!"
+    if @friendship.update(friendship_params)
+      redirect_to planner_path, notice: "#{@friendship.type == 'Blocked' ? 'User has been blocked' : 'Friendship confirmed!'}"
     else
-      redirect_to planner_path, notice: "Unable to confirm friendship. Please try again."
+      redirect_to planner_path, notice: "Unable to process. Please try again."
     end
   end
 
@@ -35,20 +34,10 @@ class FriendshipsController < ApplicationController
     end
   end
 
-  def block
-    authorize(@friendship)
-    @friendship.type = "Blocked"
-    if @friendship.save
-      redirect_to planner_path, notice: "User has been blocked."
-    else
-      redirect_to planner_path, notice: "Sorry, we weren't able to process that. Please try again."
-    end
-  end
-
   private
 
   def friendship_params
-    params.require(:friendship).permit(:type, :friend_id)
+    params.require(:friendship).permit(:type, :friend_id, :confirmed)
   end
 
   def fetch_friendship
