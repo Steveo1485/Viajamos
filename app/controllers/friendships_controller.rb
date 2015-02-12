@@ -7,6 +7,7 @@ class FriendshipsController < ApplicationController
     friend_user = @friendship.find_friend(params[:friend_email], params[:uid])
     redirect_to planner_path, notice: "Sorry, unable to find find." and return unless @friendship.friend_id
     if @friendship.save
+      FriendshipMailer.delay.friend_request(@friendship)
       redirect_to planner_path, notice: "Friend request sent!"
     else
       redirect_to planner_path, notice: "Unable to send friend request. Please try again."
