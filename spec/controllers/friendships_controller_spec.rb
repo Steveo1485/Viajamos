@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe FriendshipsController, :type => :controller do
 
   before :each do
+    Delayed::Worker.delay_jobs = false
+    ActionMailer::Base.deliveries.clear
     @user = FactoryGirl.create(:user)
     @friend = FactoryGirl.create(:user)
     sign_in @user
@@ -30,6 +32,12 @@ RSpec.describe FriendshipsController, :type => :controller do
     it "should redirect to planner if creation not successful" do
       post :create, friend_email: "wrong@email.com"
       expect(response).to redirect_to(planner_path)
+    end
+
+    it "should send friendship notification email" do
+      post :create, friend_email: @friend.email
+      expect(ActionMailer::Base.deliveries.count). to eq(1)
+      expect(ActionMailer::Base.deliveries.last.to). to eq([@friend.email])
     end
   end
 
