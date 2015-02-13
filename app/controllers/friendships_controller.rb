@@ -4,11 +4,10 @@ class FriendshipsController < ApplicationController
   def create
     @friendship = Friendship.new(user_id: current_user.id, type: "Friend")
     authorize(@friendship)
-    friend_user = User.where(email: params[:friend_email]).first if params[:friend_email].present?
-    friend_user = User.where(uid: params[:uid]).first if params[:uid].present?
-    redirect_to planner_path, notice: "Sorry, unable to find find." and return unless friend_user
-    @friendship.friend_id = friend_user.id
+    friend_user = @friendship.find_friend(params[:friend_email], params[:uid])
+    redirect_to planner_path, notice: "Sorry, unable to find find." and return unless @friendship.friend_id
     if @friendship.save
+      FriendshipMailer.delay.friend_request(@friendship)
       redirect_to planner_path, notice: "Friend request sent!"
     else
       redirect_to planner_path, notice: "Unable to send friend request. Please try again."

@@ -80,4 +80,9 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Configure email
+  config.action_mailer.default_url_options = { host: 'staging.cotripping.com' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
 end
