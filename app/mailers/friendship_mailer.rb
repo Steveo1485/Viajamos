@@ -1,5 +1,5 @@
 class FriendshipMailer < ActionMailer::Base
-  default from: "Co:tripping <do-not-reply@cotripping.com>"
+  default from: "Cotripping <do-not-reply@cotripping.com>"
 
   def friend_request(friendship)
     @user = User.find(friendship.friend_id)
