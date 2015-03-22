@@ -23,3 +23,6 @@
 
 # Ignore DS_Stores
 .DS_Store
+
+# Ignore DB Seeds when not needed
+/db/seeds
