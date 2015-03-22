@@ -3,7 +3,8 @@ ruby "2.1.3"
 
 gem 'rails', '4.1.8'
 
-gem 'angularjs-rails', '~> 1.3.8'
+gem 'airbrake'
+gem 'angularjs-rails'
 gem 'angularjs-rails-resource'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'coffee-rails', '~> 4.0.0'
