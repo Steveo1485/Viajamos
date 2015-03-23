@@ -18,6 +18,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem "koala", "~> 1.10.0rc"
 gem 'mysql2'
+gem 'newrelic_rpm'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem 'sass-rails', '~> 4.0.3'
