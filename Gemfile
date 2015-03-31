@@ -44,6 +44,7 @@ group :test do
 end
 
 group :development, :test do
+  gem 'capybara'
   gem 'database_cleaner'
   gem 'did_you_mean'
   gem 'dotenv-rails'
