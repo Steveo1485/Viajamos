@@ -49,5 +49,6 @@ group :development, :test do
   gem 'did_you_mean'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'poltergeist'
   gem 'rspec-rails', '~> 3.0.0'
 end
