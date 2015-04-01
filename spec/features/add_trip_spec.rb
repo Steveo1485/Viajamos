@@ -15,4 +15,19 @@ describe "Adding a trip" do
     expect(page).to have_content(@location.city)
   end
 
+  context "with friend overlap" do
+    before :each do
+      @friendship = FactoryGirl.create(:friendship, user: @user, confirmed: true)
+      @friend = @friendship.friend_user
+      @trip = FactoryGirl.create(:trip, :with_destination, user: @friend)
+      @location = @trip.locations.first
+    end
+
+    it "should notify the user of the overlap" do
+      click_button('Add a trip')
+      fill_in_trip_form(@location)
+      click_button("Save Trip")
+      expect(page).to have_content('Trip overlap with friend!')
+    end
+  end
 end
