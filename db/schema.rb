@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211043908) do
+ActiveRecord::Schema.define(version: 20150402004423) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -72,6 +72,16 @@ ActiveRecord::Schema.define(version: 20150211043908) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notifications", force: true do |t|
+    t.integer "user_id",                         null: false
+    t.integer "notifiable_id",                   null: false
+    t.string  "notifiable_type",                 null: false
+    t.boolean "read",            default: false
+  end
+
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
 
   create_table "trips", force: true do |t|
     t.integer  "user_id",                     null: false

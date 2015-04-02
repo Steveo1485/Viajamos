@@ -17,6 +17,7 @@ describe "Adding a trip" do
 
   context "with friend overlap" do
     before :each do
+      Delayed::Worker.delay_jobs = false
       @friendship = FactoryGirl.create(:friendship, user: @user, confirmed: true)
       @friend = @friendship.friend_user
       @trip = FactoryGirl.create(:trip, :with_destination, user: @friend)

@@ -54,6 +54,22 @@ RSpec.describe TripsController, :type => :controller do
       expect{post :create, trip: @trip_params}.to_not change(Trip, :count)
       expect{post :create, trip: @trip_params}.to_not change(Destination, :count)
     end
+
+    context "with trip overlap" do
+      before :each do
+        Delayed::Worker.delay_jobs = false
+        @friendship = FactoryGirl.create(:friendship, user: @user, confirmed: true)
+        @trip = FactoryGirl.create(:trip, :with_destination, user: @friendship.friend_user)
+        destination_attributes = [{location_id: @trip.destinations.first.location_id,
+                                    start_date: @trip.destinations.first.start_date,
+                                    end_date: @trip.destinations.first.end_date}]
+        @trip_params = @trip.attributes.merge(certainty: 'possible', destinations_attributes: destination_attributes)
+      end
+
+      it "should create new trip notification" do
+        expect{post :create, trip: @trip_params}.to change(Notification, :count).by(2)
+      end
+    end
   end
 
   describe "GET #edit" do
