@@ -6,7 +6,7 @@ FactoryGirl.define do
     certainty "booked"
     private :false
     busy :false
-    departure_date {Faker::Date.forward(14)}
+    departure_date {Date.today + 14.days}
 
     trait :with_destination do
       before(:create) do |trip|
