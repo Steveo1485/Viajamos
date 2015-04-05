@@ -8,7 +8,6 @@ class Destination < ActiveRecord::Base
   validate :end_date_if_booked
 
   before_validation :set_end_date
-  # after_save :create_notifications if: :any_overlaps?
 
   def user
     trip.user
