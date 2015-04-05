@@ -14,11 +14,11 @@ RSpec.describe Trip, :type => :model do
 
     it 'should return true if friend trips overlap' do
       create_friend_overlap(@trip)
-      expect(@trip.send(:any_overlaps?)).to eq(true)
+      expect(@trip.any_overlaps?).to eq(true)
     end
 
     it 'should return false if no friend trip overlaps' do
-      expect(@trip.send(:any_overlaps?)).to eq(false)
+      expect(@trip.any_overlaps?).to eq(false)
     end
   end
 
@@ -37,15 +37,4 @@ RSpec.describe Trip, :type => :model do
       expect(@trip.friend_overlaps).to eq([])
     end
   end
-end
-
-def create_friend_overlap(trip, days_ahead = 1)
-  friend = FactoryGirl.create(:friendship, user: trip.user, confirmed: true).friend_user
-  overlap_trip = FactoryGirl.create(:trip, :with_destination, user: friend)
-  destination = overlap_trip.destinations.last
-  destination.location_id = trip.locations.first.id
-  destination.start_date = trip.start_date + days_ahead.days
-  destination.end_date = trip.end_date + days_ahead.days
-  destination.save
-  return overlap_trip
 end

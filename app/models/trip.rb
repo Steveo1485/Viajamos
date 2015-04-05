@@ -63,8 +63,6 @@ class Trip < ActiveRecord::Base
     @friend_overlaps ||= destinations.map { |d| d.friend_overlaps }.flatten.map { |d| d.trip }.uniq
   end
 
-  private
-
   def any_overlaps?
     friend_overlaps.any?
   end

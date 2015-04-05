@@ -8,15 +8,20 @@ class Destination < ActiveRecord::Base
   validate :end_date_if_booked
 
   before_validation :set_end_date
+  # after_save :create_notifications if: :any_overlaps?
 
   def user
     trip.user
   end
 
   def friend_overlaps
-    Destination.joins(:trip).where('destinations.location_id': self.location.id,
-                                   'destinations.start_date': start_date..end_date,
-                                   'trips.user_id': user.friends.pluck(:id))
+    @friend_overlaps ||= Destination.joins(:trip).where('destinations.location_id': self.location.id,
+                                                        'destinations.start_date': start_date..end_date,
+                                                        'trips.user_id': user.friends.pluck(:id))
+  end
+
+  def any_overlaps?
+    friend_overlaps.any?
   end
 
   private
