@@ -22,19 +22,19 @@ RSpec.describe Trip, :type => :model do
     end
   end
 
-  context 'trip_overlaps' do
+  context 'friend_overlaps' do
     before :each do
       @trip = FactoryGirl.create(:trip, :with_destination)
     end
 
     it 'should return overlap trips from friends when present' do
       overlap_trip = create_friend_overlap(@trip)
-      expect(@trip.trip_overlaps).to eq([overlap_trip])
+      expect(@trip.friend_overlaps).to eq([overlap_trip])
     end
 
     it 'should return no trips when no overlaps with friends' do
       overlap_trip = create_friend_overlap(@trip, 10)
-      expect(@trip.trip_overlaps).to eq([])
+      expect(@trip.friend_overlaps).to eq([])
     end
   end
 end

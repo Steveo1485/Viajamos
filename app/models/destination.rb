@@ -9,7 +9,11 @@ class Destination < ActiveRecord::Base
 
   before_validation :set_end_date
 
-  def friend_overlaps(user)
+  def user
+    trip.user
+  end
+
+  def friend_overlaps
     Destination.joins(:trip).where('destinations.location_id': self.location.id,
                                    'destinations.start_date': start_date..end_date,
                                    'trips.user_id': user.friends.pluck(:id))

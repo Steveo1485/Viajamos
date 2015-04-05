@@ -41,4 +41,32 @@ RSpec.describe Destination, :type => :model do
     end
   end
 
+  context "#find_overlaps" do
+    before :each do
+      @destination = FactoryGirl.create(:trip, :with_destination).destinations.first
+    end
+
+    it "should return overlaps with friends when found" do
+      @overlap_destination = create_friend_overlap(@destination.trip).destinations.first
+      expect(@destination.friend_overlaps).to eq([@overlap_destination])
+    end
+
+    it "should return empty collection when no overlaps with friends found" do
+      @friend_destination = create_friend_overlap(@destination.trip, 14).destinations.first
+      expect(@destination.friend_overlaps).to eq([])
+    end
+  end
+
+end
+
+
+def create_friend_overlap(trip, days_ahead = 1)
+  friend = FactoryGirl.create(:friendship, user: trip.user, confirmed: true).friend_user
+  overlap_trip = FactoryGirl.create(:trip, :with_destination, user: friend)
+  destination = overlap_trip.destinations.last
+  destination.location_id = trip.locations.first.id
+  destination.start_date = trip.start_date + days_ahead.days
+  destination.end_date = trip.end_date + days_ahead.days
+  destination.save
+  return overlap_trip
 end

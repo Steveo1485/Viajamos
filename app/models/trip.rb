@@ -59,14 +59,13 @@ class Trip < ActiveRecord::Base
     locations.pluck(:city)
   end
 
-  def trip_overlaps
-    overlap_destinations = destinations.map { |destination| destination.friend_overlaps(self.user) }.flatten
-    overlap_destinations.map { |destination| destination.trip }
+  def friend_overlaps
+    @friend_overlaps ||= destinations.map { |d| d.friend_overlaps }.flatten.map { |d| d.trip }.uniq
   end
 
   private
 
   def any_overlaps?
-    trip_overlaps.any?
+    friend_overlaps.any?
   end
 end
