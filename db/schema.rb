@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402004423) do
+ActiveRecord::Schema.define(version: 20150406150738) do
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
@@ -32,10 +32,9 @@ ActiveRecord::Schema.define(version: 20150402004423) do
   create_table "destinations", force: true do |t|
     t.integer  "trip_id"
     t.integer  "location_id"
-    t.date     "start_date"
-    t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "day_offset",  default: 0
   end
 
   create_table "facebook_connections", force: true do |t|
@@ -93,6 +92,8 @@ ActiveRecord::Schema.define(version: 20150402004423) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "time_period"
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   add_index "trips", ["user_id"], name: "index_trips_on_user_id", using: :btree

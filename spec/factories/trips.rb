@@ -6,12 +6,7 @@ FactoryGirl.define do
     certainty "booked"
     private :false
     busy :false
-    departure_date {Date.today + 14.days}
-
-    trait :with_destination do
-      before(:create) do |trip|
-        trip.destinations << create(:destination, trip: trip, end_date: trip.departure_date)
-      end
-    end
+    start_date {Date.today + 7.days}
+    end_date {Date.today + 14.days}
   end
 end

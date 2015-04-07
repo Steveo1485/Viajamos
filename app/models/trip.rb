@@ -1,7 +1,4 @@
 class Trip < ActiveRecord::Base
-  attr_accessor :departure_date
-  columns_hash["departure_date"] = ActiveRecord::ConnectionAdapters::Column.new("departure_date", nil, "date")
-
   belongs_to :user
 
   has_many :destinations, inverse_of: :trip
@@ -13,7 +10,8 @@ class Trip < ActiveRecord::Base
   validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
   validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
   validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
-  validates :destinations, presence: true
+  validates :start_date, presence: true, if: :booked?
+  validates :end_date, presence: true, if: :booked?
 
   scope :wishlist, -> { where(time_period: 'wishlist') }
   scope :past, -> { where(time_period: "past" ) }
@@ -35,16 +33,8 @@ class Trip < ActiveRecord::Base
     purpose_options.map { |option| [option.titleize, option] }
   end
 
-  def start_date
-    destinations.minimum(:start_date)
-  end
-
-  def end_date
-    destinations.maximum(:end_date)
-  end
-
   def set_dates?
-    start_date && end_date
+    start_date.present? && end_date.present?
   end
 
   def date_range
@@ -65,5 +55,9 @@ class Trip < ActiveRecord::Base
 
   def any_overlaps?
     friend_overlaps.any?
+  end
+
+  def booked?
+    certainty == 'booked'
   end
 end
