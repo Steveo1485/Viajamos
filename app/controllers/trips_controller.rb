@@ -47,14 +47,15 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:user_id,
-                                 :time_period,
                                  :purpose,
                                  :comments,
                                  :certainty,
                                  :private,
                                  :busy,
-                                 :departure_date,
-                                 destinations_attributes: [:id, :location_id, :start_date])
+                                 :time_period,
+                                 :start_date,
+                                 :end_date,
+                                 destinations_attributes: [:id, :location_id, :day_offset])
   end
 
   def fetch_trip
