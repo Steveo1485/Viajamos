@@ -14,6 +14,10 @@ class Destination < ActiveRecord::Base
     trip.user
   end
 
+  def friend_destinations
+    @friend_destinations ||= Destination.joins(:trip).where("trips.user_id": user.friends.pluck(:id))
+  end
+
   def start_date
     @start_date ||= trip.start_date + day_offset.days
   end
@@ -28,9 +32,7 @@ class Destination < ActiveRecord::Base
   end
 
   def friend_overlaps
-    @friend_overlaps ||= Destination.joins(:trip).where('destinations.location_id': self.location.id,
-                                                        'destinations.start_date': start_date..end_date,
-                                                        'trips.user_id': user.friends.pluck(:id))
+    @friend_overlaps ||= friend_destinations.select { |d| (self.start_date..self.end_date).include?(d.start_date) }
   end
 
   def any_overlaps?

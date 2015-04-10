@@ -51,35 +51,47 @@ RSpec.describe Destination, :type => :model do
     end
   end
 
-  # context "#find_overlaps" do
-  #   before :each do
-  #     @destination = FactoryGirl.create(:trip, :with_destination).destinations.first
-  #   end
+  context "#friend_destinations" do
+    before :each do
+      @friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
+    end
 
-  #   it "should return overlaps with friends when found" do
-  #     @overlap_destination = create_friend_overlap(@destination.trip).destinations.first
-  #     expect(@destination.friend_overlaps).to eq([@overlap_destination])
-  #   end
+    it "should return destinations for user's friend" do
+      friend_trip = FactoryGirl.create(:trip_with_destinations, user: @friend)
+      expect(@first_destination.friend_destinations).to eq(friend_trip.destinations)
+    end
 
-  #   it "should return empty collection when no overlaps with friends found" do
-  #     @friend_destination = create_friend_overlap(@destination.trip, 14).destinations.first
-  #     expect(@destination.friend_overlaps).to eq([])
-  #   end
-  # end
+    it "should return empty collection if no destinations for friends" do
+      expect(@first_destination.friend_destinations).to be_empty
+    end
+  end
 
-  # context "#any_overlaps?" do
-  #   before :each do
-  #     @destination = FactoryGirl.create(:trip, :with_destination).destinations.first
-  #   end
+  context "#find_overlaps" do
+    before :each do
+      @friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
+    end
 
-  #   it "should return true if friend overlaps exists" do
-  #     @overlap_destination = create_friend_overlap(@destination.trip).destinations.first
-  #     expect(@destination.any_overlaps?).to eq(true)
-  #   end
+    it "should return overlaps with friends when found" do
+      @friend_trip = FactoryGirl.create(:trip, user: @friend, start_date: Date.today + 10.days, end_date: Date.today + 20.days)
+      @overlap_destination = FactoryGirl.create(:destination, trip: @friend_trip)
+      expect(@first_destination.friend_overlaps).to eq([@overlap_destination])
+    end
 
-  #   it "should return false if no friend overlaps exists" do
-  #     @friend_destination = create_friend_overlap(@destination.trip, 14).destinations.first
-  #     expect(@destination.any_overlaps?).to eq(false)
-  #   end
-  # end
+    it "should return empty collection when no overlap with friends found" do
+      FactoryGirl.create(:trip_with_destinations, user: @friend, start_date: Date.today + 1.month, end_date: Date.today + 2.months)
+      expect(@first_destination.friend_overlaps).to be_empty
+    end
+  end
+
+  context "#any_overlaps?" do
+    it "should return true if any friend overlaps exist" do
+      friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
+      FactoryGirl.create(:trip_with_destinations, user: friend)
+      expect(@first_destination.any_overlaps?).to eq(true)
+    end
+
+    it "should return false if no friend overlaps exist" do
+      expect(@first_destination.any_overlaps?).to eq(false)
+    end
+  end
 end
