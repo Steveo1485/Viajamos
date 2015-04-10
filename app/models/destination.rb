@@ -32,7 +32,7 @@ class Destination < ActiveRecord::Base
   end
 
   def friend_overlaps
-    @friend_overlaps ||= friend_destinations.select { |d| (self.start_date..self.end_date).include?(d.start_date) }
+    @friend_overlaps ||= friend_destinations.where(location_id: self.location_id).select { |d| (self.start_date..self.end_date).include?(d.start_date) }
   end
 
   def any_overlaps?

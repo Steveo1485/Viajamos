@@ -72,9 +72,9 @@ RSpec.describe Destination, :type => :model do
     end
 
     it "should return overlaps with friends when found" do
-      @friend_trip = FactoryGirl.create(:trip, user: @friend, start_date: Date.today + 10.days, end_date: Date.today + 20.days)
-      @overlap_destination = FactoryGirl.create(:destination, trip: @friend_trip)
-      expect(@first_destination.friend_overlaps).to eq([@overlap_destination])
+      friend_trip = FactoryGirl.create(:trip, user: @friend, start_date: Date.today + 10.days, end_date: Date.today + 20.days)
+      overlap_destination = FactoryGirl.create(:destination, trip: friend_trip, location: @trip.locations.first)
+      expect(@first_destination.friend_overlaps).to eq([overlap_destination])
     end
 
     it "should return empty collection when no overlap with friends found" do
@@ -86,7 +86,8 @@ RSpec.describe Destination, :type => :model do
   context "#any_overlaps?" do
     it "should return true if any friend overlaps exist" do
       friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
-      FactoryGirl.create(:trip_with_destinations, user: friend)
+      friend_trip = FactoryGirl.create(:trip, user: friend)
+      friend_trip.destinations << FactoryGirl.create(:destination, trip: friend_trip, location: @trip.locations.first)
       expect(@first_destination.any_overlaps?).to eq(true)
     end
 
