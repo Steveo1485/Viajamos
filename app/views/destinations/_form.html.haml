@@ -1,0 +1,29 @@
+%div{class: "#{n > 0 ? 'destination extra' : 'destination'}"}
+  = f.fields_for :destinations, @trip.destinations[n] || @trip.destinations.build do |ff|
+    = ff.hidden_field :location_id
+    
+    .destination-block
+      .row
+        .col-md-6.form-group
+          = label_tag(:location_search, "Destination ##{n + 1}")
+          %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id', '#{@trip.destinations[n].try(:location_id)}')"}}
+
+            - if @trip.destinations[n].location
+              %div{ng: {show: "existingLocationId"}}
+                = "Destination: #{@trip.destinations[n].location.name}"
+                = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+
+
+            %div{ng: {hide: "existingLocationId"}}
+              %div{ng: {show: "location"}}
+                Destination: {{location.city}} {{location.state_code}} {{location.country_code}}
+                = link_to(fa_icon("edit"), "#", "ng-click" => "cancelSearch($event)")
+              = text_field_tag(:location_search, nil, placeholder: "Destination", class: "form-control", "ng-model" => "searchTerms", "ng-keyup" => "onKeyUp($event)", "ng-hide" => "location")
+              %ul.search-results{ng: {model: "results", show: "searchTerms"}}
+                %li{ng: {show: "searchTerms.length < 3"}} Please type more
+                %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
+                  {{result.city}} {{result.state_code}} {{result.country_code}}
+
+        .col-md-6.form-group
+          = ff.label(:day_offset, 'Day of arrival')
+          = ff.select(:day_offset, (0..10), {include_blank: 'Day of arrival...'}, class: 'form-control day-offset')

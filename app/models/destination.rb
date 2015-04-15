@@ -23,7 +23,7 @@ class Destination < ActiveRecord::Base
   end
 
   def end_date
-    index =trip.destinations.day_order.index(self)
+    index = trip.destinations.day_order.index(self)
     if trip.destinations[index + 1]
       trip.destinations[index + 1].start_date
     else
