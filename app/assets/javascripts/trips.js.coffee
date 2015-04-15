@@ -9,7 +9,6 @@ $ ->
   loadDayOffsetOptions = ->
     $(".trip-date").change ->
       difference = (endDate() - startDate()) / 1000 / 60 / 60 / 24
-      console.log(difference)
       if difference > 0
         $(".day-offset").empty()
         for n in [0..difference]
