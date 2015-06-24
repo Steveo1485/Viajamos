@@ -1,23 +1,24 @@
-%nav.navbar.navbar-default{role: "navigation"}
-  .container
-    .navbar-header
-      %button.navbar-toggle.collapsed{type: "button", data: {toggle: "collapse", target: "#navbar-collapse"}}
-        %span.sr-only Toggle Navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      .navbar-brand
-        =link_to(image_tag('cotrippinglogo.png'), root_path)
+%header
+  %nav.navbar.navbar-default{role: "navigation"}
+    .container
+      .navbar-header
+        %button.navbar-toggle.collapsed{type: "button", data: {toggle: "collapse", target: "#navbar-collapse"}}
+          %span.sr-only Toggle Navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        .navbar-brand
+          =link_to(image_tag('cotrippinglogo.png'), root_path)
 
-    #navbar-collapse.collapse.navbar-collapse
-      .navbar-right
-        %ul.nav.navbar-nav
-          %li= link_to("Dashboard", user_root_path)
-          %li{"data-target" => "#myModal", "data-toggle" => "modal"}
-            = link_to("Notifications", "#")
+      #navbar-collapse.collapse.navbar-collapse
+        .navbar-right
+          %ul.nav.navbar-nav
+            %li= link_to("Dashboard", user_root_path)
+            %li{"data-target" => "#myModal", "data-toggle" => "modal"}
+              = link_to("Notifications", "#")
 
-          = render "layouts/notifications"
-          - if current_user
-            %li= link_to("Sign Out", destroy_user_session_path, method: :delete)
-          - else
-            %li= link_to("Sign In", new_user_session_path)
+            = render "layouts/notifications"
+            - if current_user
+              %li= link_to("Sign Out", destroy_user_session_path, method: :delete)
+            - else
+              %li= link_to("Sign In", new_user_session_path)

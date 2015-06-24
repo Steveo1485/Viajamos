@@ -1,0 +1,13 @@
+body.pages-home {
+  background: image-url('travel3.jpg') no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  color:#FCFFD1;
+
+  .container#content {
+    background: transparent;
+  }
+}
