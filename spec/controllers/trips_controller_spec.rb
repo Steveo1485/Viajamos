@@ -53,14 +53,12 @@ RSpec.describe TripsController, :type => :controller do
       before :each do
         Delayed::Worker.delay_jobs = false
         @friendship = FactoryGirl.create(:friendship, user: @user, confirmed: true)
-        @trip = FactoryGirl.create(:trip, :with_destination, user: @friendship.friend_user)
-        destination_attributes = [{location_id: @trip.destinations.first.location_id,
-                                    start_date: @trip.destinations.first.start_date,
-                                    end_date: @trip.destinations.first.end_date}]
+        @trip = FactoryGirl.create(:trip_with_destinations, user: @friendship.friend_user)
+        destination_attributes = [{location_id: @trip.destinations.first.location_id, day_offset: 2}]
         @trip_params = @trip.attributes.merge(certainty: 'possible', destinations_attributes: destination_attributes)
       end
 
-      xit "should create new trip notification" do
+      it "should create new trip notification" do
         expect{post :create, trip: @trip_params}.to change(Notification, :count).by(2)
       end
     end
