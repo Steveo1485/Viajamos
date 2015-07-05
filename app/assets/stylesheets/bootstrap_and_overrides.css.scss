@@ -19,6 +19,8 @@ $well-bg: rgba(255, 255, 255, 0.4);
 // Button Overrides
 $btn-font-weight: bold;
 
+$link-color: $link_color;
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
@@ -30,9 +32,7 @@ $btn-font-weight: bold;
 // 	list-style: none;
 // 	padding-left:0;
 // }
-// a {
-//  color: $elec_blue;	
-// }
+
 // .dropdown {
 // 	padding-bottom: 5px;
 // }
