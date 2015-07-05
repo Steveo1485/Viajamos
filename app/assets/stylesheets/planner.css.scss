@@ -1,124 +1,124 @@
-@import "colors";
+// @import "colors";
 
-body.planner-index {
-  .destination.extra {
-    display: none;
-  }
+// body.planner-index {
+//   .destination.extra {
+//     display: none;
+//   }
 
-  .fb-feed-post {
-    font-size: 11px;
-    color:#fff;
-  }
+//   .fb-feed-post {
+//     font-size: 11px;
+//     color:#fff;
+//   }
 
-  .fb-feed-post:hover {
-    cursor: pointer
-  }
+//   .fb-feed-post:hover {
+//     cursor: pointer
+//   }
 
-  #social-invite {
-    background-color: $yellow;
-    padding-bottom: 10px;
-  }
+//   #social-invite {
+//     background-color: $yellow;
+//     padding-bottom: 10px;
+//   }
 
-  #map-canvas {
-    height: 300px;
-  }
+//   #map-canvas {
+//     height: 300px;
+//   }
 
-  #dashboard-content {
-    padding-top: 20px;
-    margin-bottom:10%;
-  }
+//   #dashboard-content {
+//     padding-top: 20px;
+//     margin-bottom:10%;
+//   }
 
-  #user-panel {
-    a.edit-icon {
-      float: right;
-      color: $light_gray;
-      display:inline-flex;
-    }
+//   #user-panel {
+//     a.edit-icon {
+//       float: right;
+//       color: $light_gray;
+//       display:inline-flex;
+//     }
 
-    #user-avatar {
-      float: left;
-      font-size: 24pt;
-      margin: 0px 10px;;
-    }
+//     #user-avatar {
+//       float: left;
+//       font-size: 24pt;
+//       margin: 0px 10px;;
+//     }
 
-    #user_home_location {
-      span {
-        font-weight: bold;
-      }
-    }
-  }
+//     #user_home_location {
+//       span {
+//         font-weight: bold;
+//       }
+//     }
+//   }
 
-  #friend-panel {
-    width: 100%;
-    padding: 10px;
+//   #friend-panel {
+//     width: 100%;
+//     padding: 10px;
 
-    .friend-title {
-      margin: 0 auto;
-      padding: 5px;
-      margin: 10px 0px;
-      background-color: $friend_title_bg;
-      color: $white;
-    }
-    hr {
-      border-color: black;
-      margin: 10px 0px;
-    }
+//     .friend-title {
+//       margin: 0 auto;
+//       padding: 5px;
+//       margin: 10px 0px;
+//       background-color: $friend_title_bg;
+//       color: $white;
+//     }
+//     hr {
+//       border-color: black;
+//       margin: 10px 0px;
+//     }
 
-    .friend-panel-info {
+//     .friend-panel-info {
 
-      .facebook-options {
-        display: inline-block;
-      }
+//       .facebook-options {
+//         display: inline-block;
+//       }
 
-      .friend-btns {
-        padding-top: 5px;
-        text-align: center;
-      }
-    }
-    #new-friend {
-      margin-top: 1em;
-    }
-  }
-  #trips {
-    .panel-body {
-      padding-top:6px;
-      padding-bottom:0px;
-    }
+//       .friend-btns {
+//         padding-top: 5px;
+//         text-align: center;
+//       }
+//     }
+//     #new-friend {
+//       margin-top: 1em;
+//     }
+//   }
+//   #trips {
+//     .panel-body {
+//       padding-top:6px;
+//       padding-bottom:0px;
+//     }
 
-    .fa {
-      padding-right:7px;
-      font-size:1.1em;
-    }
-    .panel-title {
-      display:inline-block;
-      padding:0 20px;
-      text-align:center;
-    }
-    .panel-icons {
-      display:inline-block;
-      padding-right:0px;
-    }
-    .fa-chevron-right {
-      font-size:20px;
-    }
-    .tripdate {
-      font-size:12px;
-      text-align:left;
-    }
-    .panel-footer {
-      color:#444;
-      background:#fff;
-      border:#3D91B8 1px solid;
+//     .fa {
+//       padding-right:7px;
+//       font-size:1.1em;
+//     }
+//     .panel-title {
+//       display:inline-block;
+//       padding:0 20px;
+//       text-align:center;
+//     }
+//     .panel-icons {
+//       display:inline-block;
+//       padding-right:0px;
+//     }
+//     .fa-chevron-right {
+//       font-size:20px;
+//     }
+//     .tripdate {
+//       font-size:12px;
+//       text-align:left;
+//     }
+//     .panel-footer {
+//       color:#444;
+//       background:#fff;
+//       border:#3D91B8 1px solid;
 
-      a {
-        color: #222;
-      }
-    }
-    .panel-body {
-      color:#F9F9F9;
-      background:#2F658E;
-      border-top-right-radius: 3px;
-      border-top-left-radius: 3px;
-    }
-  }
-}
+//       a {
+//         color: #222;
+//       }
+//     }
+//     .panel-body {
+//       color:#F9F9F9;
+//       background:#2F658E;
+//       border-top-right-radius: 3px;
+//       border-top-left-radius: 3px;
+//     }
+//   }
+// }

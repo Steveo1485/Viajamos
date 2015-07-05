@@ -1,3 +1,16 @@
-header {
+@import 'colors';
 
+header {
+  .navbar-default {
+    background-color: $navbar_background;
+    border: none;
+  }
+
+  .navbar-toggle.collapsed {
+    background-color: $white;
+  }
+
+  .navbar-brand {
+    padding:5px;
+  }
 }

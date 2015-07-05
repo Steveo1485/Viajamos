@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   def home
     render :file => 'public/landing.html' and return if Rails.env.production?
     redirect_to user_root_path if current_user
+    @user = User.new
   end
 
 end

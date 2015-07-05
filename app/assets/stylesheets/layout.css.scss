@@ -2,16 +2,9 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,500,700,900);
 
 // NEW STYLES //
-#content {
-  padding: 2em 0;
-}
-
-
-// OLD STYLES //
-
 html, body {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
@@ -19,143 +12,140 @@ body {
   background: #2C2C2C;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 10px 10px 10px;
-}
-
-.nudge-right {
-  margin-right: 2%;
-}
-.flex {
-  display:flex;
-}
-.fill {
-  min-height: 100%;
-  position:relative;
-    } 
-
-.borderright {
-  background: image-url('verticaldivider.gif') right repeat-y;
-}
-.bordertop {
-  background: image-url('horizontaldivider.gif') top repeat-x;
-}
 #content {
   background: image-url('seamless_paper_texture.png') repeat
-}
-
-.backpanel {
-  padding: 10px;
-background: rgba(0, 0, 0, 0.5);
-color: #fff;
-border: none;
-border-radius:3px;
-margin-top:20px;
-margin-bottom:20px;
-}
-
-
-.jumbotron {
-  margin-bottom: 0px;
-  margin-left: 0px;
-  margin-right: 0px;
-  border-radius: 0 !important;  
-  -webkit-border-radius: 0 !important;
-  -moz-border-radius: 0 !important;
-  border-radius: 0 !important;
-  box-shadow: inset 1px -4px 9px -6px;
-}
-
-.flash-messages {
-  text-align: center;
-  font-style: italic;
-  padding: 0px 0px;
 }
 
 .header-icon {
   color: $light_red;
 }
 
-.header-title {
-  color: $elec_blue;
-  font-weight:700;
-}
-.username {
-  color: $elec_blue;
-  font-weight:300;
-}
 
-ul.search-results {
-  background-color: $white;
-  border-radius: 5px;
-  list-style-type: none;
-  padding: 10px 5px;
-}
+// OLD STYLES //
+
+// h1, h2, h3, h4, h5, h6 {
+//   margin: 0 10px 10px 10px;
+// }
 
 
-@media(max-width: 3000px) {
-.statbox .title {
-    font-size: 1em;
-  }
-.statbox .stat {
-  font-size: 2.9em;
-}
-}
-
-@media(max-width: 1200px) {
-.statbox .title {
-    font-size: 0.9em;
-  }
-.statbox .stat {
-  font-size: 2.7em;
-}
-}
-@media(max-width: 1000px) {
-.statbox .title {
-    font-size: 0.75em;
-  }
-.statbox .stat {
-  font-size: 1.6em;
-}
-#trips .nav > li > a{
-  padding:5px;
-}
-
-}
-.statbox {
-  text-align: center;
-}
-.statbox p {
-  margin-bottom: 0;
-}
-.statbox p.title {
-  font-weight: 700;
-  height: 35px;
-}
-.statbox .stat {
-  font-weight: bold;
-  color: #C24E47 ;
-  text-shadow: white 0px 1px 0px;
-}
-.leaderboard {
-  color: #9A9A9A;
-}
+// .borderright {
+//   background: image-url('verticaldivider.gif') right repeat-y;
+// }
+// .bordertop {
+//   background: image-url('horizontaldivider.gif') top repeat-x;
+// }
 
 
-button.addatrip, button.addatrip:focus, button.addatrip:active {
-  font-size:1.7em;
-  background-color:#C24E47 ;
-  border-color:#C24E47 ;
-}
- button.addatrip:hover {
-  background-color:#AC3D39;
-  border-color:#DB2F2F;
-  color:#fff;
+// .backpanel {
+//   padding: 10px;
+//   background: rgba(0, 0, 0, 0.5);
+//   color: #fff;
+//   border: none;
+//   border-radius:3px;
+//   margin-top:20px;
+//   margin-bottom:20px;
+// }
 
- }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-  background:#C24E47 ;
-  color:#fff; 
-}
+// .jumbotron {
+//   margin-bottom: 0px;
+//   margin-left: 0px;
+//   margin-right: 0px;
+//   border-radius: 0 !important;  
+//   -webkit-border-radius: 0 !important;
+//   -moz-border-radius: 0 !important;
+//   border-radius: 0 !important;
+//   box-shadow: inset 1px -4px 9px -6px;
+// }
+
+// .flash-messages {
+//   text-align: center;
+//   font-style: italic;
+//   padding: 0px 0px;
+// }
+
+
+
+// .header-title {
+//   color: $elec_blue;
+//   font-weight:700;
+// }
+// .username {
+//   color: $elec_blue;
+//   font-weight:300;
+// }
+
+// ul.search-results {
+//   background-color: $white;
+//   border-radius: 5px;
+//   list-style-type: none;
+//   padding: 10px 5px;
+// }
+
+
+// @media(max-width: 3000px) {
+// .statbox .title {
+//     font-size: 1em;
+//   }
+// .statbox .stat {
+//   font-size: 2.9em;
+// }
+// }
+
+// @media(max-width: 1200px) {
+// .statbox .title {
+//     font-size: 0.9em;
+//   }
+// .statbox .stat {
+//   font-size: 2.7em;
+// }
+// }
+// @media(max-width: 1000px) {
+// .statbox .title {
+//     font-size: 0.75em;
+//   }
+// .statbox .stat {
+//   font-size: 1.6em;
+// }
+// #trips .nav > li > a{
+//   padding:5px;
+// }
+
+// }
+// .statbox {
+//   text-align: center;
+// }
+// .statbox p {
+//   margin-bottom: 0;
+// }
+// .statbox p.title {
+//   font-weight: 700;
+//   height: 35px;
+// }
+// .statbox .stat {
+//   font-weight: bold;
+//   color: #C24E47 ;
+//   text-shadow: white 0px 1px 0px;
+// }
+// .leaderboard {
+//   color: #9A9A9A;
+// }
+
+
+// button.addatrip, button.addatrip:focus, button.addatrip:active {
+//   font-size:1.7em;
+//   background-color:#C24E47 ;
+//   border-color:#C24E47 ;
+// }
+//  button.addatrip:hover {
+//   background-color:#AC3D39;
+//   border-color:#DB2F2F;
+//   color:#fff;
+
+//  }
+
+// .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+//   background:#C24E47 ;
+//   color:#fff; 
+// }
 

@@ -8,14 +8,14 @@
           %span.icon-bar
           %span.icon-bar
         .navbar-brand
-          =link_to(image_tag('cotrippinglogo.png'), root_path)
+          =link_to(image_tag('logos/cotripping-logo-155.png'), root_path)
 
       #navbar-collapse.collapse.navbar-collapse
         .navbar-right
           %ul.nav.navbar-nav
-            %li= link_to("Dashboard", user_root_path)
-            %li{"data-target" => "#myModal", "data-toggle" => "modal"}
-              = link_to("Notifications", "#")
+            / %li= link_to("Dashboard", user_root_path)
+            / %li{"data-target" => "#myModal", "data-toggle" => "modal"}
+            /   = link_to("Notifications", "#")
 
             = render "layouts/notifications"
             - if current_user
