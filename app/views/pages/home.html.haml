@@ -2,22 +2,22 @@
 
 .row
   .col-xs-12.col-sm-4
-    %h2.text-center.header-icon= fa_icon("users")
+    %h2.text-center.header-icon= fa_icon('users')
     Never miss the opportunity to hang out with a friend in a foreign city again! Co:tripping will alert you to any possible overlaps, even if your trip isn't definite.
 
   .col-xs-12.col-sm-4
-    %h2.text-center.header-icon= fa_icon("coffee")
+    %h2.text-center.header-icon= fa_icon('coffee')
     Need recommendations? See which of your friends have been to your destination recently and benefit from their trusted advice.
 
   .col-xs-12.col-sm-4
-    %h2.text-center.header-icon= fa_icon("heart")
+    %h2.text-center.header-icon= fa_icon('heart')
     Had an amazing travel experience? Save all of your favorite travel advice in one place, share it with your friends, and remember it for your next visit.
 
 .row
   .col-sm-12.col-md-4.col-md-offset-4.backpanel
     %h5 Sign Up
-    = render "signup", user: @user
+    = render 'signup', user: @user
     == Or #{link_to("Connect with Facebook", user_omniauth_authorize_path(:facebook))}
     .sign-in
       Already a member?
-      = link_to("Sign in!", new_user_session_path)
+      = link_to('Sign in!', new_user_session_path)

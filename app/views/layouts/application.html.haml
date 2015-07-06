@@ -15,8 +15,8 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
 
-  %body{class: "#{params[:controller]}-#{params[:action]}"}
-    = render "layouts/header"
+  %body{class: body_classes}
+    = render 'layouts/header'
     #content.container-fluid.main
       = yield
-    = render "layouts/footer"
+    = render 'layouts/footer'
