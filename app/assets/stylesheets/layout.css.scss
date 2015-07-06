@@ -25,13 +25,18 @@ body {
   text-align: center;
   font-weight: bold;
   padding: 1em;
+  margin-bottom: 2em;
+  color: #fff;
   background: $transparent_black;
   color: $white;
-  .flash-alert {
-    color: $red;
+  &.flash-alert,
+  &.flash-error {
+    background-color: $red;
+    border-color: $red;
   }
-  .flash-notice {
-    color: $elec_blue;
+  &.flash-notice {
+    background-color: $green;
+    border-color: $green;
   }
 }
 
