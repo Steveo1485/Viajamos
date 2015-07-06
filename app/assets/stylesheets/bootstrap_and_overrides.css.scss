@@ -1,5 +1,9 @@
 @import "colors";
 
+// Scaffolding
+$body-bg: $body_bg;
+$link-color: $link_color;
+
 // Brand Overrides
 $brand-primary: $brand_primary;
 
@@ -19,7 +23,6 @@ $well-bg: rgba(255, 255, 255, 0.4);
 // Button Overrides
 $btn-font-weight: bold;
 
-$link-color: $link_color;
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
