@@ -1,19 +1,6 @@
-.row#dashboard-content
-  .col-lg-3.col-md-3.col-sm-4
-    .well#user-panel
-      = link_to(fa_icon("edit"), edit_user_path(current_user), class: "edit-icon")
-      .row
-        .col-md-3
-          #user-avatar= fa_icon("user")
-        .col-md-9
-          %h3.username= current_user.name
-      #user_home_location
-        %span Home:
-        = user_home_location_name(current_user)
-      #user-fave-cities
-        %span.header-icon= fa_icon("heart")
-        %small= current_user.favorite_cities.join(", ")
-        .small= link_to(raw("#{fa_icon('plus-circle')} Add Favorite Location"), new_favorite_location_path)
+.row
+  .col-sm-4.col-md-3
+    = render 'planner/user_panel'
 
     .well#friend-panel
       %h3
@@ -27,7 +14,7 @@
       = render "add_friend"
 
 
-  .col-lg-9.col-md-9.col-sm-8
+  .col-sm-8.col-md-9
     .well.statbox
       = render "statbox"
 

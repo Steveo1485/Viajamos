@@ -75,6 +75,10 @@ class User < ActiveRecord::Base
     User.where(id: facebook_connections.where(request_sent: false, ignore: false).pluck(:friend_user_id))
   end
 
+  def home_name
+    home_location.try(:name) || 'No home location set'
+  end
+
   private
 
   def favorite_location_ids

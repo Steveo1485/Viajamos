@@ -1,0 +1,8 @@
+.well#user-panel
+  .row
+    .col-sm-12
+      %h3.username= current_user.name
+      .edit-profile= link_to('Edit Profile', edit_user_path(current_user))
+      .home-location
+        %strong Home:
+        = current_user.home_name
