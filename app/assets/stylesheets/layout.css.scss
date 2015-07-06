@@ -21,6 +21,20 @@ body {
   color: $light_red;
 }
 
+.flash-messages {
+  text-align: center;
+  font-weight: bold;
+  padding: 1em;
+  background: $transparent_black;
+  color: $white;
+  .flash-alert {
+    color: $red;
+  }
+  .flash-notice {
+    color: $elec_blue;
+  }
+}
+
 
 // OLD STYLES //
 
@@ -58,13 +72,6 @@ body {
 //   border-radius: 0 !important;
 //   box-shadow: inset 1px -4px 9px -6px;
 // }
-
-// .flash-messages {
-//   text-align: center;
-//   font-style: italic;
-//   padding: 0px 0px;
-// }
-
 
 
 // .header-title {
