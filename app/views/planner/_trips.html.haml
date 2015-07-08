@@ -1,22 +1,23 @@
-.row
-  .col-sm-9.col-xs-7
-    %h3.sectionhead.header-title
-      %span.header-icon= fa_icon("plane") 
-      Your trips
+.well#trips
+  .row
+    .col-xs-12
+      %h3
+        %span.header-icon= fa_icon("plane") 
+        Your trips
 
-%ul.nav.nav-tabs{:role => 'tablist'}
-  %li.active{:role => 'presentation'}
-    = upcoming_trips_tab
-  %li{:role => 'presentation'}
-    = past_trips_tab
-  %li{:role => 'presentation'}
-    = wishlist_trips_tab
+    %ul.nav.nav-tabs{:role => 'tablist'}
+      %li.active{:role => 'presentation'}
+        = upcoming_trips_tab
+      %li{:role => 'presentation'}
+        = past_trips_tab
+      %li{:role => 'presentation'}
+        = wishlist_trips_tab
 
-#trips.tab-content
-  #upcoming.tab-pane.fade.in.active{:role => "tabpanel"}
-    = render "trips_panel", token: "upcoming", trips: current_user.trips.upcoming
-  #past-trips.tab-pane.fade.in{:role => "tabpanel"}
-    = render "trips_panel", token: "past", trips: current_user.trips.past
-  #wishlist.tab-pane.fade.in{:role => "tabpanel"}
-    = render "trips_panel", token: "wishlist", trips: current_user.trips.wishlist
+    .tab-content
+      #upcoming.tab-pane.fade.in.active{:role => "tabpanel"}
+        = render "trips_panel", token: "upcoming", trips: current_user.trips.upcoming
+      #past-trips.tab-pane.fade.in{:role => "tabpanel"}
+        = render "trips_panel", token: "past", trips: current_user.trips.past
+      #wishlist.tab-pane.fade.in{:role => "tabpanel"}
+        = render "trips_panel", token: "wishlist", trips: current_user.trips.wishlist
 

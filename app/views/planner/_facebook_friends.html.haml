@@ -1,5 +1,5 @@
 - if current_user.facebook_connections.active.any?
-  %h4.friend-title#headingTwo
+  %h4
     Facebook Connections
     %span.badge #{current_user.facebook_friends.count}
   - for connection in current_user.facebook_connections.active

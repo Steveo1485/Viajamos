@@ -1,7 +1,7 @@
 %div{class: "#{n > 0 ? 'destination extra' : 'destination'}"}
   = f.fields_for :destinations, @trip.destinations[n] || @trip.destinations.build do |ff|
     = ff.hidden_field :location_id
-    
+
     .destination-block
       .row
         .col-md-6.form-group

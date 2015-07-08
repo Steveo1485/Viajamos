@@ -1,5 +1,6 @@
-%h4.friend-title#headingTwo
+%h4
 	Friends
 	%span.badge #{current_user.friends.count}
+
 - for friend in current_user.friends
 	.friend-panel-info= link_to(friend.name, user_path(friend))

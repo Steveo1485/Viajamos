@@ -1,25 +1,12 @@
 .row
   .col-sm-4.col-md-3
     = render 'planner/user_panel'
-
-    .well#friend-panel
-      %h3
-        %span.header-icon= fa_icon("users")
-        %span.header-title Friends
-      #accordion.panel-group{:role => 'tablist', 'aria-multiselectable' => 'true'}
-        %h4.f_sec_head#headingOne{:role => 'tab'}
-      = render "pending_friend_requests"
-      = render "friends"
-      = render "facebook_friends"
-      = render "add_friend"
+    = render 'planner/friend_panel'
 
 
   .col-sm-8.col-md-9
-    .well.statbox
-      = render "statbox"
+    = render "statbox"
+    = render "add_trip"
 
-    .well#addatrip
-      = render "add_trip"
-
-    .well#trips
-      = render "trips"
+    / CLEAN UP BELOW PARTIALS
+    = render "trips"

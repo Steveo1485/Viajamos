@@ -1,40 +1,29 @@
-.row
-  .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title World Domination
-    %p.stat= number_to_percentage(current_user.world_domination, precision: 2)
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   1
-  .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title Countries
-    %p.stat= current_user.country_count
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   2
-  .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title Cities
-    %p.stat= current_user.city_count
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   1
-  .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title Faves
-    %p.stat= current_user.favorite_locations.count
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   3
-  .col-md-2.col-sm-2.col-xs-4.borderright
-    %p.title Upcoming
-    %p.stat= current_user.trips.upcoming.count
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   14
-  .col-md-2.col-sm-2.col-xs-4
-    %p.title Wishlist
-    %p.stat= current_user.trips.wishlist.count
-    / %p.leaderboard
-    /   %i= fa_icon("group") 
-    /   22
-.row
-  .col-xs-12
-    .pull-right= facebook_feed_button("Share World Domination", user_url(current_user), "I've conquered #{number_to_percentage(current_user.world_domination, precision: 2)} of the world! #cotripping")
+.well.statbox
+  .row
+    .col-xs-6.col-sm-4
+      %h5 World Domination
+      .stat= number_to_percentage(current_user.world_domination, precision: 2)
+
+    .col-xs-6.col-sm-4
+      %h5 Countries
+      .stat= current_user.country_count
+
+    .col-xs-6.col-sm-4
+      %h5 Cities
+      .stat= current_user.city_count
+
+    .col-xs-6.col-sm-4
+      %h5 Faves
+      .stat= current_user.favorite_locations.count
+
+    .col-xs-6.col-sm-4
+      %h5 Upcoming
+      .stat= current_user.trips.upcoming.count
+
+    .col-xs-6.col-sm-4
+      %h5 Wishlist
+      .stat= current_user.trips.wishlist.count
+
+  .row
+    .col-xs-12.text-center
+      = facebook_feed_button("Share World Domination", user_url(current_user), "I've conquered #{number_to_percentage(current_user.world_domination, precision: 2)} of the world! #cotripping")

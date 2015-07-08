@@ -1,0 +1,9 @@
+.well#friend-panel
+  %h3
+    %span.header-icon= fa_icon("users")
+    %span.header-title Friends
+
+  = render "pending_friend_requests"
+  = render "friends"
+  = render "facebook_friends"
+  = render "add_friend"
