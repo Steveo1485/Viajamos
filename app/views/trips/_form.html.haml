@@ -21,11 +21,11 @@
         = render 'destinations/form', f: f, n: n
 
       = link_to("Add another destination", "#", id: "add-destination")
-  
+
   .row
     .col-md-12
       = f.label :trip_status
-  
+
   .row
     .col-sm-6.form-goup
       - Trip.time_period_options.each do |time_period_option|
