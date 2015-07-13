@@ -13,12 +13,7 @@
       #navbar-collapse.collapse.navbar-collapse
         .navbar-right
           %ul.nav.navbar-nav
-            / %li= link_to("Dashboard", user_root_path)
-            / %li{"data-target" => "#myModal", "data-toggle" => "modal"}
-            /   = link_to("Notifications", "#")
-
-            = render "layouts/notifications"
             - if current_user
-              %li= link_to("Sign Out", destroy_user_session_path, method: :delete)
+              = render 'layouts/user_menu'
             - else
-              %li= link_to("Sign In", new_user_session_path)
+              = render 'layouts/public_menu'

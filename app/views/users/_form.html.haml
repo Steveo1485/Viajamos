@@ -20,7 +20,7 @@
       
       %div{ng: {controller: "LocationSearchCtrl", init: "init('#user_home_location_id')"}}
         .current-home-loction
-          = "Current Home Location: #{user_home_location_name(@user)}"
+          = "Current Home Location: #{@user.home_name}"
           = link_to(fa_icon("edit"), "#", "ng-click" => "displaySearchForm($event)")
 
         .updated-home-location{ng: {show: "location"}}
