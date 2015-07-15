@@ -3,17 +3,17 @@
 
 
   .row
-    .col-xs-12
-
+    .col-xs-12.col-sm-6
       .form-group
         = f.label :start_date
         .date-select
-          = f.date_select :start_date, { order: [:day, :month, :year], prompt: true}, class: "form-control trip-date"
+          = f.text_field(:start_date, class: 'form-control datepicker')
 
+    .col-xs-12.col-sm-6
       .form-group
         = f.label :end_date
         .date-select
-          = f.date_select :end_date, { order: [:day, :month, :year], prompt: true}, class: "form-control trip-date"
+          = f.text_field(:end_date, class: 'form-control datepicker')
 
   .row
     .col-md-12

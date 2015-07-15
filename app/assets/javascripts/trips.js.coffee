@@ -1,41 +1,21 @@
 $ ->
-  bindAddDestinationLink = () ->
-    $("#add-destination").click (e) ->
-      e.preventDefault()
-      $(".destination.extra:hidden").first().slideDown()
-      if $(".destination.extra:visible").length == $(".destination.extra").length
-        $("#add-destination").hide()
 
-  loadDayOffsetOptions = ->
-    $(".trip-date").change ->
-      difference = (endDate() - startDate()) / 1000 / 60 / 60 / 24
-      if difference > 0
-        $(".day-offset").empty()
-        for n in [0..difference]
-          option = $("<option></option>").attr("value", n).text(n)
-          $(".day-offset").append(option)
+  class Trip
+    constructor: ->
+      @bindAddDestinationLink()
+      @initDatepicker()
 
-  startDate = ->
-    day = $("#trip_start_date_3i").val()
-    month = $("#trip_start_date_2i").val()
-    year = $("#trip_start_date_1i").val()
-    if day && month && year
-      return new Date(year, (month - 1), day)
-    else
-      return new Date()
+    bindAddDestinationLink: ->
+      $("#add-destination").click (e) ->
+        e.preventDefault()
+        $(".destination.extra:hidden").first().slideDown()
+        if $(".destination.extra:visible").length == $(".destination.extra").length
+          $("#add-destination").hide()
 
-  endDate = ->
-    day = $("#trip_end_date_3i").val()
-    month = parseInt($("#trip_end_date_2i").val())
-    year = $("#trip_end_date_1i").val()
-    if day && month && year
-      return new Date(year, (month - 1), day)
-    else
-      today = new Date()
-      return new Date(today.setDate(today.getDate() + 10))
+    initDatepicker: ->
+      $('input.datepicker').each ->
+        $(this).datepicker()
 
-  if $("#add-destination").length > 0
-    bindAddDestinationLink()
 
-  if $(".trip-date").length > 0
-    loadDayOffsetOptions()
+  if $('form.new_trip').length > 0
+    new Trip()
