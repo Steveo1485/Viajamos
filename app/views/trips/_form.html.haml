@@ -7,13 +7,13 @@
       .form-group
         = f.label :start_date
         .date-select
-          = f.text_field(:start_date, class: 'form-control datepicker')
+          = f.text_field(:start_date, placeholder: 'Select start date...', class: 'form-control datepicker')
 
     .col-xs-12.col-sm-6
       .form-group
         = f.label :end_date
         .date-select
-          = f.text_field(:end_date, class: 'form-control datepicker')
+          = f.text_field(:end_date, placeholder: 'Select end date...', class: 'form-control datepicker')
 
   .row
     .col-md-12

@@ -25,5 +25,5 @@
                   {{result.city}} {{result.state_code}} {{result.country_code}}
 
         .col-sm-12.col-md-6.form-group
-          = ff.label(:day_offset, "Destination #{n + 1} - Day of arrival")
-          = ff.select(:day_offset, (0..10), {include_blank: 'Day of arrival...'}, class: 'form-control day-offset')
+          = ff.label(:start_day, "Destination #{n + 1} - Day of arrival")
+          = ff.text_field(:start_day, placeholder: 'Destination arrival...', class: 'datepicker form-control', disabled: n == 0 ? true : false)

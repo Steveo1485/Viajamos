@@ -14,9 +14,16 @@ $ ->
     $("input[name='trip[certainty]']").removeAttr("checked")
     $("input[name='trip[certainty]']").parents(".radio").hide()
 
+  initDatepicker = ->
+    $('input.datepicker').each ->
+      $(this).datepicker()
+
 
   if $("input[name='trip[time_period]']").length > 0
     bindTripTimePeriod()
 
   if $("#trip_time_period_future:checked").length > 0
     displayTripCertaintyRadio()
+
+  if $('input.datepicker').length > 0
+    initDatepicker()

@@ -6,6 +6,10 @@ class Destination < ActiveRecord::Base
   validates :location, presence: true
   validates :day_offset, presence: true
 
+  before_validation :set_day_offset
+
+  attr_accessor :start_day
+
   def self.day_order
     order(day_offset: :asc)
   end
@@ -37,5 +41,12 @@ class Destination < ActiveRecord::Base
 
   def any_overlaps?
     friend_overlaps.any?
+  end
+
+  private
+
+  def set_day_offset
+    return unless start_day.present?
+    self.day_offset = (start_day.to_date - trip.start_date.to_date).to_i
   end
 end
