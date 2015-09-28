@@ -24,38 +24,38 @@ RSpec.describe User, :type => :model do
 
   context "#outstanding_friend_requests" do
     it "should return unconfirmed friendships" do
-      @request = FactoryGirl.create(:friendship, user: @user, friend_id: @friend_user.id)
+      @request = create_unconfirmed_friendship(@user, @friend_user)
       expect(@user.outstanding_friend_requests.pluck(:id)).to eq([@request.id])
     end
   end
 
   context "#friend_requests" do
     it "should return unconfirmed friendships from other users" do
-      @request = FactoryGirl.create(:friendship, user: @friend_user, friend_id: @user.id)
+      @request = create_unconfirmed_friendship(@friend_user, @user)
       expect(@user.friend_requests.pluck(:id)).to eq([@request.id])
     end
   end
 
   context "#friends" do
     it "should return friend user objects for user" do
-      @confirmed_friend = FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: @friend_user.id, confirmed: true)
-      @unconfirmed_friend = FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: FactoryGirl.create(:user).id)
+      create_confirmed_friendship(@user, @friend_user)
+      create_unconfirmed_friendship(@user, FactoryGirl.create(:user))
       expect(@user.friends).to eq([@friend_user])
     end
   end
 
   context "#friends_with?" do
     it "should return true if user is friends with passed user" do
-      FactoryGirl.create(:friendship, type: "Friend", user: @user, friend_id: @friend_user.id, confirmed: true)
+      create_confirmed_friendship(@user, @friend_user)
       expect(@user.friends_with?(@friend_user)).to eq(true)
     end
 
     it "should return false if user is not friends with passed user" do
-      expect(@user.friends_with?(@friend_user)).to eq(false)  
+      expect(@user.friends_with?(@friend_user)).to eq(false)
     end
 
     it "should return true if user is travel buddy with passed user" do
-      FactoryGirl.create(:friendship, user: @user, friend_id: @friend_user.id, confirmed: true)
+      create_confirmed_friendship(@user, @friend_user)
       expect(@user.friends_with?(@friend_user)).to eq(true)
     end
   end
