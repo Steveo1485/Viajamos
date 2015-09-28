@@ -1,4 +1,8 @@
 class Trip < ActiveRecord::Base
+  TIME_PERIODS = ["past", "future", "wishlist"]
+  CERTAINTIES = ["booked", "possible"]
+  PURPOSES = ["work", "leisure", "other"]
+
   belongs_to :user
 
   has_many :destinations, inverse_of: :trip
@@ -7,9 +11,9 @@ class Trip < ActiveRecord::Base
   accepts_nested_attributes_for :destinations, reject_if: proc { |attributes| attributes['location_id'].blank? }
 
   validates :user_id, numericality: true
-  validates :time_period, inclusion: { in: Proc.new{ Trip.time_period_options } }
-  validates :certainty, inclusion: { in: Proc.new{ Trip.certainty_options } }, if: Proc.new{ |trip| trip.time_period == 'future'}
-  validates :purpose, inclusion: { in: Proc.new{ Trip.purpose_options } }, allow_nil: true
+  validates :time_period, inclusion: { in: TIME_PERIODS }
+  validates :certainty, inclusion: { in: CERTAINTIES }
+  validates :purpose, inclusion: { in: PURPOSES }
   validates :start_date, presence: true, if: :booked?
   validates :end_date, presence: true, if: :booked?
 
@@ -17,21 +21,6 @@ class Trip < ActiveRecord::Base
   scope :past, -> { where(time_period: "past" ) }
   scope :upcoming, -> { where(time_period: "future") }
 
-  def self.time_period_options
-    ["past", "future", "wishlist"]
-  end
-
-  def self.certainty_options
-    ["booked", "likely", "possible"]
-  end
-
-  def self.purpose_options
-    ["work", "leisure", "other"]
-  end
-
-  def self.purpose_options_for_select
-    purpose_options.map { |option| [option.titleize, option] }
-  end
 
   def set_dates?
     start_date.present? && end_date.present?
@@ -50,7 +39,7 @@ class Trip < ActiveRecord::Base
   end
 
   def friend_overlaps
-    @friend_overlaps ||= destinations.map { |d| d.friend_overlaps }.flatten.map { |d| d.trip }.uniq
+    @friend_overlaps ||= Trip.where(user_id: user.friends.pluck(:id), start_date: start_date..end_date)
   end
 
   def any_overlaps?

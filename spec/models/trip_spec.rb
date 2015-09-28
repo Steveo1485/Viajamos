@@ -7,8 +7,19 @@ RSpec.describe Trip, :type => :model do
   it { should validate_numericality_of(:user_id) }
   it { should accept_nested_attributes_for(:destinations) }
 
+  it { should validate_inclusion_of(:time_period).in_array(Trip::TIME_PERIODS) }
+  it { should validate_inclusion_of(:certainty).in_array(Trip::CERTAINTIES) }
+  it { should validate_inclusion_of(:purpose).in_array(Trip::PURPOSES) }
+
   before :each do
     @trip = FactoryGirl.create(:trip_with_destinations)
+    @user = @trip.user
+  end
+
+  it 'should not be valid if booked and no end_date' do
+    trip = FactoryGirl.create(:trip)
+    trip.end_date = nil
+    expect(trip).to_not be_valid
   end
 
   context '#set_dates?' do
@@ -39,12 +50,16 @@ RSpec.describe Trip, :type => :model do
 
   context "#friend_overlaps" do
     before :each do
-      @friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
+      @friend = create_friend(@user)
+      random_trip = FactoryGirl.create(:trip_with_destinations)
+      friend_trip_outside_range = FactoryGirl.create(:trip_with_destinations,
+                                                     user: @friend,
+                                                     start_date: Date.today + 30.days,
+                                                     end_date: Date.today + 40.days)
     end
 
     it "should return overlap trips with friends" do
-      friend_trip = FactoryGirl.create(:trip, user: @friend)
-      friend_trip.destinations << FactoryGirl.create(:destination, location: @trip.destinations.first.location)
+      friend_trip = FactoryGirl.create(:trip_with_destinations, user: @friend)
       expect(@trip.friend_overlaps).to eq([friend_trip])
     end
 
@@ -55,12 +70,11 @@ RSpec.describe Trip, :type => :model do
 
   context "#any_overlaps?" do
     before :each do
-      @friend = FactoryGirl.create(:friendship, user: @trip.user, confirmed: true).friend_user
+      @friend = create_friend(@user)
     end
 
     it "should return true if any friend overlaps" do
-      friend_trip = FactoryGirl.create(:trip, user: @friend)
-      friend_trip.destinations << FactoryGirl.create(:destination, location: @trip.destinations.first.location)
+      FactoryGirl.create(:trip_with_destinations, user: @friend)
       expect(@trip.any_overlaps?).to eq(true)
     end
 
