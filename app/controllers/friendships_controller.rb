@@ -1,11 +1,10 @@
 class FriendshipsController < ApplicationController
-  before_filter :fetch_friendship, only: [:update, :destroy, :facebook_request]
+  before_filter :fetch_friendship, only: [:update, :destroy]
 
   def create
     @friendship = Friendship.new(user_id: current_user.id, type: "Friend")
     authorize(@friendship)
-    friend_user = @friendship.find_friend(params[:friend_email], params[:uid])
-    redirect_to planner_path, notice: "Sorry, unable to find find." and return unless @friendship.friend_id
+    @friendship.friend_id = User.find_by_email_or_uid(params[:friend_email], params[:uid]).try(:id)
     if @friendship.save
       FriendshipMailer.delay.friend_request(@friendship)
       redirect_to planner_path, notice: "Friend request sent!"

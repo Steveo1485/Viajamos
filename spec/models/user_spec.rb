@@ -13,6 +13,17 @@ RSpec.describe User, :type => :model do
     @friend_user = FactoryGirl.create(:user)
   end
 
+  context '::find_by_email_or_uid' do
+    it 'should find a user by email when matched' do
+      expect(User.find_by_email_or_uid(@user.email)).to eq(@user)
+    end
+
+    it 'should find a user by uid when matched' do
+      @user.update(uid: 1234)
+      expect(User.find_by_email_or_uid(nil, @user.uid)).to eq(@user)
+    end
+  end
+
   context "#name" do
     it "should return user's first and last name if available" do
       expect(@user.name).to eq("#{@user.first_name} #{@user.last_name}")

@@ -5,6 +5,7 @@ class Friendship < ActiveRecord::Base
   validates :user_id, numericality: true
   validates :friend_id, numericality: true
   validates :user_id, uniqueness: { scope: :friend_id }
+  validates :friend_id, uniqueness: { scope: :user_id }
 
   after_create :update_facebook_connections
 
@@ -13,6 +14,10 @@ class Friendship < ActiveRecord::Base
 
   def self.types
     ["Friend", "Blocked"]
+  end
+
+  def self.confirmed
+    where(confirmed: true)
   end
 
   def friend_user

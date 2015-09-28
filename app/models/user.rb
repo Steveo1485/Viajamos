@@ -23,6 +23,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.find_by_email_or_uid(email = nil, uid = nil)
+    found_user = User.find_by(email: email) if email.present?
+    found_user ||= User.find_by(uid: uid) if uid.present?
+    found_user ||= nil
+  end
+
   def name
     (first_name or last_name) ? [first_name, last_name].join(" ") : email
   end
@@ -36,7 +42,7 @@ class User < ActiveRecord::Base
   end
 
   def friends
-    User.where(id: friendships.where(type: "Friend", confirmed: true).pluck(:friend_id))
+    friendships.confirmed.map { |f| f.friend_user}
   end
 
   def friends_with?(user)
@@ -66,7 +72,6 @@ class User < ActiveRecord::Base
   def favorite_cities
     favorites = favorite_locations.map { |favorite_location| favorite_location.location.city }
     favorites = ["No favorite locations."] if favorites.empty?
-    favorites
   end
 
   def facebook_friends

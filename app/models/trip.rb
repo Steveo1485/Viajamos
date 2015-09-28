@@ -39,7 +39,7 @@ class Trip < ActiveRecord::Base
   end
 
   def friend_overlaps
-    @friend_overlaps ||= Trip.where(user_id: user.friends.pluck(:id), start_date: start_date..end_date)
+    @friend_overlaps ||= Trip.where(user_id: user.friends.select{ |u| u.id }, start_date: start_date..end_date)
   end
 
   def any_overlaps?
