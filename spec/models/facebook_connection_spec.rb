@@ -23,7 +23,7 @@ RSpec.describe FacebookConnection, :type => :model do
   end
 
   context "#reverse_connection" do
-    it "should create a reverse FacebookConnection" do
+    it "should return the reverse FacebookConnection" do
       reverse_connection = FactoryGirl.create(:facebook_connection,
                                               user_id: @connection.friend_user_id,
                                               friend_user_id: @connection.user_id )

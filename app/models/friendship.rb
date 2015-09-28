@@ -23,13 +23,6 @@ class Friendship < ActiveRecord::Base
     Friendship.where(user_id: self.friend_id, friend_id: self.user_id).first
   end
 
-  def find_friend(email, uid)
-    found_friend = nil
-    found_friend = User.where(email: email).first if email.present?
-    found_friend ||= User.where(uid: uid).first if uid.present?
-    self.friend_id = found_friend.id if found_friend
-  end
-
   private
 
   def update_facebook_connections

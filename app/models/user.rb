@@ -5,9 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :friendships, dependent: :destroy
   has_many :facebook_connections, dependent: :destroy
   has_many :favorite_locations
+  has_many :friendships, dependent: :destroy
   has_many :trips, dependent: :destroy
 
   belongs_to :home_location, class_name: "Location", foreign_key: :home_location_id
@@ -52,13 +52,11 @@ class User < ActiveRecord::Base
   end
 
   def city_count
-    locations = past_trip_location_ids + favorite_location_ids
-    locations.uniq.count
+    (past_trip_location_ids + favorite_location_ids).uniq.count
   end
 
   def country_count
-    country_codes = favorite_location_country_codes + past_trip_country_codes
-    country_codes.uniq.count
+    (favorite_location_country_codes + past_trip_country_codes).uniq.count
   end
 
   def world_domination
