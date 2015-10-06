@@ -1,19 +1,20 @@
 = form_for @trip do |f|
   = render "shared/form_errors", object: @trip
 
-
   .row
     .col-xs-12.col-sm-6
       .form-group
-        = f.label :start_date
+        = label_tag :start_date
         .date-select
-          = f.text_field(:start_date, placeholder: 'Select start date...', class: 'form-control datepicker')
+          = text_field_tag(:start_date, nil, placeholder: 'Select start date...', class: 'form-control datepicker')
+          = f.hidden_field(:start_date)
 
     .col-xs-12.col-sm-6
       .form-group
-        = f.label :end_date
+        = label_tag :end_date
         .date-select
-          = f.text_field(:end_date, placeholder: 'Select end date...', class: 'form-control datepicker')
+          = text_field_tag(:end_date, nil, placeholder: 'Select end date...', class: 'form-control datepicker')
+          = f.hidden_field(:end_date)
 
   .row
     .col-md-12
@@ -28,7 +29,7 @@
 
   .row
     .col-sm-6.form-goup
-      - Trip.time_period_options.each do |time_period_option|
+      - Trip::TIME_PERIODS.each do |time_period_option|
         .radio
           %label
             = f.radio_button :time_period, time_period_option
@@ -36,7 +37,7 @@
 
   .row
     .col-sm-6.form-group
-      - Trip.certainty_options.each do |certainty_option|
+      - Trip::CERTAINTIES.each do |certainty_option|
         .radio
           %label
             = f.radio_button :certainty, certainty_option
@@ -45,7 +46,7 @@
   .row
     .col-sm-12.form-group
       = f.label :purpose, "Purpose of trip"
-      = f.select :purpose, options_for_select(Trip.purpose_options_for_select, @trip.purpose), {prompt: "Select a reason..."}, class: "form-control"
+      = f.select :purpose, options_for_select(Trip::PURPOSES.map { |p| [p.capitalize, p] }, @trip.purpose), {prompt: "Select a reason..."}, class: "form-control"
 
   .row
     .col-sm-12.form-group

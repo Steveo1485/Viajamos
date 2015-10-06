@@ -55,7 +55,7 @@ class TripsController < ApplicationController
                                  :time_period,
                                  :start_date,
                                  :end_date,
-                                 destinations_attributes: [:id, :location_id, :day_offset])
+                                 destinations_attributes: [:id, :location_id])
   end
 
   def fetch_trip

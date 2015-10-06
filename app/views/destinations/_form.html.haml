@@ -4,7 +4,7 @@
 
     .destination-block
       .row
-        .col-sm-12.col-md-6.form-group
+        .col-sm-12.form-group
           = label_tag(:location_search, "Destination #{n + 1} - Location")
 
           %div{ng: {controller: "LocationSearchCtrl", init: "init('#trip_destinations_attributes_#{n}_location_id', '#{@trip.destinations[n].try(:location_id)}')"}}
@@ -23,7 +23,3 @@
                 %li{ng: {show: "searchTerms.length < 3"}} Please type more
                 %li{ng: {repeat: "result in results", click: "selectLocation($event, result)"}}
                   {{result.city}} {{result.state_code}} {{result.country_code}}
-
-        .col-sm-12.col-md-6.form-group
-          = ff.label(:start_day, "Destination #{n + 1} - Day of arrival")
-          = ff.text_field(:start_day, placeholder: 'Destination arrival...', class: 'datepicker form-control', disabled: n == 0 ? true : false)

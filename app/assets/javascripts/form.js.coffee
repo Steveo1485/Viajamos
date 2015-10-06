@@ -16,7 +16,10 @@ $ ->
 
   initDatepicker = ->
     $('input.datepicker').each ->
-      $(this).datepicker()
+      altFieldSelector = "#trip_#{$(this).attr('id')}"
+      $(this).datepicker
+        altField: altFieldSelector
+        altFormat: 'dd-mm-yy'
 
 
   if $("input[name='trip[time_period]']").length > 0

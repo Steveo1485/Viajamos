@@ -3,15 +3,13 @@
     .panel.panel-default
       .panel-body
         %span.panel-icons
-          = fa_icon("map-marker") 
+          = fa_icon("map-marker")
 
-          %p.tripdate= fa_icon("calendar") 
+          %p.tripdate= fa_icon("calendar")
 
         - trip.destinations.each do |destination|
           %span.panel-title
             = destination.location.city
-            %p.tripdate
-              = destination.start_date.strftime("%e %b, %Y")
 
           = fa_icon("chevron-right")
         %span.panel-title
@@ -26,7 +24,7 @@
           %span.label.positive= trip.purpose.try(:titleize)
         - if trip.comments.present?
           %span.comments
-            = fa_icon("quote-left") 
+            = fa_icon("quote-left")
             = trip.comments
 
         %span.label= facebook_feed_button("Share Trip", user_url(current_user), trip_facebook_feed_caption(trip))
