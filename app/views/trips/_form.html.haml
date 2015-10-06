@@ -24,21 +24,18 @@
       = link_to("Add another destination", "#", id: "add-destination")
 
   .row
-    .col-md-12
+    .col-md-6
       = f.label :trip_status
-
-  .row
-    .col-sm-6.form-goup
-      - Trip::TIME_PERIODS.each do |time_period_option|
-        .radio
+      .form-group
+        - Trip::TIME_PERIODS.each do |time_period_option|
           %label
             = f.radio_button :time_period, time_period_option
             = time_period_option.titleize
 
-  .row
-    .col-sm-6.form-group
-      - Trip::CERTAINTIES.each do |certainty_option|
-        .radio
+    .col-sm-6.certainty
+      = f.label :certainty
+      .form-group
+        - Trip::CERTAINTIES.each do |certainty_option|
           %label
             = f.radio_button :certainty, certainty_option
             = certainty_option.titleize
