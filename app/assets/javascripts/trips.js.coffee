@@ -9,7 +9,6 @@ $ ->
       scope = this
       scope.bindAddDestinationLink()
       scope.bindTripStartWithDestinationStart()
-      scope.bindTripTimePeriod()
 
     bindAddDestinationLink: ->
       $('#add-destination').click (e) ->
@@ -21,23 +20,6 @@ $ ->
     bindTripStartWithDestinationStart: ->
       $('#trip_start_date').change ->
         $('#trip_destinations_attributes_0_start_day').val($(this).val())
-
-
-    bindTripTimePeriod: ->
-      scope = this
-      $(".certainty").hide()
-      $("input[name='trip[time_period]']").change ->
-        if $("#trip_time_period_future:checked").length > 0
-          scope.displayTripCertaintyRadio()
-        else
-          scope.handleNonFutureTimePeriod()
-
-    displayTripCertaintyRadio: ->
-      $(".certainty").show()
-
-    handleNonFutureTimePeriod: ->
-      $("input[name='trip[certainty]']").removeAttr("checked")
-      $(".certainty").hide()
 
     activateDatePickers: ->
       $('input.datepicker').each ->
